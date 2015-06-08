@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Emergency Numbers</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            #number-list {
+                line-height: 200%;
+            }
+
+            #number-list li{
+                list-style: none;
+            }
+
+            #number-list div{
+                border-style: solid;
+                border-width: 2px;
+                border-color: #000;
+                -moz-border-radius: 10px;
+                -webkit-border-radius: 10px;
+                border-radius: 10px; /* future proofing */
+                -khtml-border-radius: 10px; /* for old Konqueror browsers */
+                list-style: none;
+                margin-bottom: 10px;
+                text-align: center;
+                -webkit-box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.35);
+                -moz-box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.35);
+                box-shadow:1px 1px 2px 1px rgba(0, 0, 0, 0.35);
+                font-size: 26px;
+            }
+            
+            #number-list img{
+                vertical-align: middle;
+                width:auto;
+            }
+        </style>
+    </head>
+    <body>
+        <ul id="number-list">
+            <li>
+                <a target="_parent" href="tel:118">
+                    <div><img src="../images/pronto_soccorso.jpg">Pronto soccorso - 118</div>
+                </a>
+            </li>
+            <li>
+                <a target="_parent" href="tel:112">
+                    <div><img  src="../images/carabinieri.jpg">Carabinieri - 112</div>
+                </a>
+            </li>
+            <li><a target="_parent" href="tel:113"><div><img src="../images/polizia.jpg">Polizia - 113</div></a></li>
+            <li><a target="_parent" href="tel:115"><div><img src="../images/vigili_fuoco.jpg">Vigili del fuoco - 115</div></a></li>
+            <li><a target="_parent" href="tel:117"><div><img src="../images/guardia_finanza.jpg">Guardia di finanza - 117</div></a></li>
+            <li><a target="_parent" href="tel:1515"><div><img src="../images/guardia_forestale.jpg">Guardia forestale - 1515</div></a></li>
+            <li><a target="_parent" href="tel:19696"><div><img src="../images/telefono_azzurro.jpg">Telefono azzurro - 19696</div></a></li>
+            <li><div><img src="../images/add.png">Aggiungi un nuovo numero ( Funzione non ancora disponibile )</div></li>
+        </ul>
+    </body>
+</html>

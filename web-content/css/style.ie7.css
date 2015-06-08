@@ -1,0 +1,89 @@
+.hwc-header, #hwc-header-bg, .hwc-layout-cell, .hwc-layout-wrapper, .hwc-footer, .hwc-nav, #hwc-hmenu-bg, .hwc-sheet,
+.clearfix {
+   zoom: expression(this.runtimeStyle.zoom="1", this.appendChild(document.createElement("br")).className="cleared");
+}
+
+.hwc-textblock > div {
+   display: block;
+   line-height: normal;
+   zoom: 1;
+}
+
+.hwc-header
+{
+   z-index: 1;
+   background-image: [headerimage];
+   background-position: [headerposition];
+}
+
+#hwc-header-bg 
+{
+   display: none;
+}
+
+.hwc-content-layout, .hwc-content-layout-row, .hwc-layout-cell 
+{
+   display: block;
+   zoom: 1;
+}
+.hwc-layout-cell
+{
+   position:relative;
+   float: left;
+   clear: right;
+}
+
+input[type="text"]
+{
+   margin:0 0 0 -3px;
+   zoom:expression(runtimeStyle.zoom = 1, parentNode.insertBefore(document.createElement('div'), this).appendChild(this));
+}
+
+* html input[type="text"]
+{
+   margin :0;
+}
+
+form.hwc-search>input[type="text"]
+{
+   margin:0 0 0 -3px;
+   zoom:expression(runtimeStyle.zoom = 1, parentNode.insertBefore(document.createElement('div'), this).appendChild(this));
+}
+
+form.hwc-search div>input[type="text"]
+{
+   width: 100%;
+}
+
+* html form.hwc-search>input[type="text"] 
+{
+   margin :0;
+}
+
+.hwc-postmetadataheader{
+   zoom:1;
+}
+
+.hwc-postheadericons span{
+   zoom: 1;
+}
+.hwc-postcontent {
+   height: 1%;
+}
+
+.hwc-postfootericons span{
+   zoom: 1;
+}
+.close-alt, .arrow-right-alt, .arrow-left-alt {
+   display: block !important;
+}
+.cw, .ccw {
+   display: none !important;
+}
+
+.hwc-content 
+{
+   width: auto;
+   float:none;
+}
+

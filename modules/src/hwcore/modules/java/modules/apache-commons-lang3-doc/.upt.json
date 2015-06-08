@@ -1,0 +1,13 @@
+{
+  "name": "hw2/modules/dep/apache-commons-lang3-doc",
+  "_cacheHeaders": {
+    "ETag": "\"534146c8-106715\"",
+    "Last-Modified": "Sun, 06 Apr 2014 12:21:28 GMT",
+    "Content-Length": "1074965",
+    "Content-Type": "application/java-archive"
+  },
+  "_release": "e-tag:534146c8-",
+  "_source": "http://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2-javadoc.jar",
+  "_target": "*",
+  "_originalSource": "http://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2-javadoc.jar"
+}

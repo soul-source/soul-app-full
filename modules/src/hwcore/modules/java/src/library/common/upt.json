@@ -1,0 +1,13 @@
+{
+    "name": "hwcore/modules/java/src/library/common",
+    "license": "http://www.hyperweb2.com/terms",
+    "dependencies": {
+        "hwcore/modules/dep/java/javax/servlet" : "http://www.java2s.com/Code/JarDownload/javax.servlet/javax.servlet-3.0.jar.zip"
+    },
+    "devDependencies": {
+    },
+    "_comment_keep": "ensure we keep the right git repository configurations",
+    "keep": [
+        ".git/config"
+    ]
+}

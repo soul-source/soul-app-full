@@ -1,0 +1,20 @@
+<script type="text/javascript" src="js/lib/jquery-1.7.min.js"></script>
+<!-- <script src="js/jquery.js"></script> -->
+<script src="js/script.js"></script>
+<script type="text/javascript" src="js/fancybox/jquery.fancybox.pack.js"></script>
+<script type="text/javascript" src="js/sidr/jquery.sidr.min.js"></script>
+
+        <script>
+			function loadPage(page) {
+				$("#dyn-content").load(page);
+			}
+		
+            // LOAD FANCYBOX
+            $(document).ready(function () {
+                $('.fancybox').fancybox();
+            });
+            // LOAD SIDR
+            $(document).ready(function () {
+                $('#simple-menu').sidr();
+            });
+        </script>

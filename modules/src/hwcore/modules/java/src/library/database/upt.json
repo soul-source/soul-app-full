@@ -1,0 +1,16 @@
+{
+    "name": "hwcore/modules/java/src/library/database",
+    "license": "http://www.hyperweb2.com/terms",
+    "dependencies": {
+        "%common" : "hw-core/java-library-common#*",
+        "hwcore/modules/dep/java/apache-commons-lang3" : "http://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2.jar",
+        "hwcore/modules/dep/java/swingx" : "https://java.net/projects/swingx/downloads/download/releases/swingx-all-1.6.4.jar"
+    },
+    "devDependencies": {
+        "hwcore/modules/dep/java/apache-commons-lang3-doc" : "http://repo1.maven.org/maven2/org/apache/commons/commons-lang3/3.3.2/commons-lang3-3.3.2-javadoc.jar"
+    },
+    "_comment_keep": "ensure we keep the right git repository configurations",
+    "keep": [
+        ".git/config"
+    ]
+}

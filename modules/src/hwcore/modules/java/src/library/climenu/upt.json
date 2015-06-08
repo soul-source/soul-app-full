@@ -1,0 +1,12 @@
+{
+    "name": "hwcore/modules/java/src/library/climenu",
+    "license": "http://www.hyperweb2.com/terms",
+    "dependencies": {
+    },
+    "devDependencies": {
+    },
+    "_comment_keep": "ensure we keep the right git repository configurations",
+    "keep": [
+        ".git/config"
+    ]
+}

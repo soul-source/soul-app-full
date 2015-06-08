@@ -1,0 +1,137 @@
+<div class="hwc-layout-wrapper">
+    <div>
+        <div>
+            <div class="hwc-postcontent-0 clearfix">
+                <div>
+                    <div>
+                        <div style="width: 100%; margin-top:40px" >
+                            <p>Dove sei?</p>
+                            <p>
+                                <input id="address" type="text"><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div style="width: 100%; margin-top:40px" >
+                            <p>Tipo Emergenza</p>
+                            <p>
+                                <input type="text" value="Incendio" disabled><br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div style="width: 100%; margin-top:40px" >
+                            <a href="javascript:void(0)" onclick="$('#hwc-report-other-options').fadeIn(200)"><p style="text-align: center;">
+                                    <span style="text-align: center;">+ Altre opzioni</span>
+                                    <br>
+                                </p>
+                            </a>
+                        </div>
+                    </div>
+                    <div id="hwc-report-other-options" style="display: none">
+
+                        <div style="margin-top:40px">
+                            <div style="width: auto" >
+                                <p>Descrizione</p>
+                                <p>
+                                    <textarea name="testo" rows="5" cols="40" style="width:auto"></textarea>
+                                    <br>
+                                </p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top:40px">
+                            <section>
+                                <p>Allega una foto</p>
+                                <br>
+                                <div class="upload hwc-button">
+                                    <span style="position:absolute; margin-top: 17px; margin-left: 48px">Carica</span>
+                                    <input id="take-picture" type="file" accept="image/*" name="Carica">
+                                </div>
+
+                                <p>
+                                    <br>
+                                    <img width="300" src="about:blank" alt="" id="show-picture">
+                                </p>
+
+                                <p id="error"></p>
+
+                            </section>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div style="width: 100%; margin-top:100px" >
+                            <p style="text-align: center;">
+                                <span style="font-size: 14px;">
+                                    &nbsp;
+                                    <a href="../soul/report/sent.html" title="Invia la segnalazione" class="hwc-button">
+                                        Invia
+                                    </a>
+                                    &nbsp;
+                                </span>
+                                <br>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    (function () {
+        var takePicture = document.querySelector("#take-picture"),
+            showPicture = document.querySelector("#show-picture");
+
+        if (takePicture && showPicture) {
+            // Set events
+            takePicture.onchange = function (event) {
+                // Get a reference to the taken picture or chosen file
+                var files = event.target.files,
+                    file;
+                if (files && files.length > 0) {
+                    file = files[0];
+                    try {
+                        // Get window.URL object
+                        var URL = window.URL || window.webkitURL;
+
+                        // Create ObjectURL
+                        var imgURL = URL.createObjectURL(file);
+
+                        // Set img src to ObjectURL
+                        showPicture.src = imgURL;
+
+                        // Revoke ObjectURL
+                        URL.revokeObjectURL(imgURL);
+                    }
+                    catch (e) {
+                        try {
+                            // Fallback if createObjectURL is not supported
+                            var fileReader = new FileReader();
+                            fileReader.onload = function (event) {
+                                showPicture.src = event.target.result;
+                            };
+                            fileReader.readAsDataURL(file);
+                        }
+                        catch (e) {
+                            //
+                            var error = document.querySelector("#error");
+                            if (error) {
+                                error.innerHTML = "Neither createObjectURL or FileReader are supported";
+                            }
+                        }
+                    }
+                }
+            };
+        }
+    })();
+</script>
+

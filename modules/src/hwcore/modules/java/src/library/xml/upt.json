@@ -1,0 +1,15 @@
+{
+  "name": "hwcore/modules/java/src/library/xml",
+  "license": "http://www.hyperweb2.com/terms",
+  "dependencies": {
+    "hwcore/modules/dep/java/jdom": "http://repo1.maven.org/maven2/org/jdom/jdom/1.1.3/jdom-1.1.3.jar"
+  },
+  "devDependencies": {
+    "hwcore/modules/dep/java/jdom-doc": "http://repo1.maven.org/maven2/org/jdom/jdom/1.1.3/jdom-1.1.3-javadoc.jar"
+  },
+  "_comment_keep": "ensure we keep the right git repository configurations",
+  "keep": [
+    ".git/config"
+  ],
+  "version": "0.0.1"
+}
