@@ -27,8 +27,8 @@ hwc.define([
              * @returns {undefined}
              */
             set: function (value) {
-                this.i.value = value || this.i.value;
-                this.s.set(this.i.name, this.i.value, this.i.expires, this.i.path, this.i.domain);
+                this.i.value = value === undefined ? this.i.value : value;
+                this.s.set(this.i.name, this.i.value, this.i.expires, this.i.path, this.i.domain, this.i.type);
             },
             /**
              * retrieve informations from document object
@@ -46,13 +46,16 @@ hwc.define([
         }),
         $.public.static({
             changeState: function (disable, type) {
-                this._i.disabled[type || 'all'] = disable;
+                this._s.disabled[type || 'all'] = disable;
+            },
+            getState: function (type) {
+                return this._.disabled[type || 'all'];
             },
             set: function (name, value, expires, path, domain, type) {
-                if (this._i.disabled[type]) {
-                    
+                if (this._s.disabled['all'] || this._s.disabled[type]) {
+                    return false;
                 }
-                
+
                 var cookie = name + "=" + escape(value) + ";";
 
                 if (expires) {
@@ -74,16 +77,25 @@ hwc.define([
                     cookie += "domain=" + domain + ";";
 
                 document.cookie = cookie;
+
+                return true;
             },
             get: function (name) {
-                var regexp = new RegExp("(?:^" + name + "|;\s*" + name + ")=(.*?)(?:;|$)", "g");
-                var result = regexp.exec(document.cookie);
-                return (result === null) ? null : result[1];
+                var value = "; " + document.cookie;
+                var parts = value.split("; " + name + "=");
+                if (parts.length == 2)
+                    return parts.pop().split(";").shift();
             },
             delete: function (name, path, domain) {
+                /*if (this._s.disabled['all'] || this._s.disabled[type]) {
+                 return false;
+                 }*/
+
                 // If the cookie exists
-                if (getCookie(name))
-                    createCookie(name, "", -1, path, domain);
+                if (this.s.get(name))
+                    this.s.set(name, "", -1, path, domain);
+
+                return true;
             },
             parse: function (cookie) {
                 cookie = cookie.split(', ');

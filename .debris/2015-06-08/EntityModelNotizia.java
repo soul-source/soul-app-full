@@ -20,14 +20,14 @@ public class EntityModelNotizia extends MyEntityModel {
             ID_UTENTE;
 
     protected EntityModelNotizia() {
-        super("Notizia"); // table
+        super("news"); // table
 
         this.createFields(
-                ID_NOTIZIA =  new HiddenField("idNotizia", this),
-                TITOLO = new VisualName("titolo", "Titolo", this),
-                ARTICOLO =  new VisualName("Articolo", "Articolo", this),
-                DATA_PUB = new RestrictedField("Data_pubblicazione", "Data Pubblicazione", this, PermissionsTypes.readOnly()),
-                ID_UTENTE = new HiddenField("idUtente", this)
+                ID_NOTIZIA =  new HiddenField("id_news", this),
+                TITOLO = new VisualName("title", "Titolo", this),
+                ARTICOLO =  new VisualName("article", "Articolo", this),
+                DATA_PUB = new RestrictedField("pubblication_date", "Data Pubblicazione", this, PermissionsTypes.readOnly()),
+                ID_UTENTE = new HiddenField("id_user", this)
         );
     }
 

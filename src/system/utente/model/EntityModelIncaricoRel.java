@@ -15,11 +15,11 @@ public class EntityModelIncaricoRel extends MyEntityModel {
             ID_UTENTE;
 
     protected EntityModelIncaricoRel() {
-        super("Puo avere");
+        super("role_rel");
 
         this.createFields(
-            ID_INCARICO = new RelField("Incarico_id", this, EntityModelIncarico.I().ID_INCARICO),
-            ID_UTENTE = new RelField("Utente_idUtente", this, EntityModelUtenteProfile.I().ID_UTENTE)
+            ID_INCARICO = new RelField("task_id", this, EntityModelIncarico.I().ID_INCARICO),
+            ID_UTENTE = new RelField("user_id_user", this, EntityModelUtenteProfile.I().ID_UTENTE)       
         );
     }
     

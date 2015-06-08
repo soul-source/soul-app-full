@@ -15,11 +15,11 @@ public class EntityModelTipo extends MyEntityModel {
             ENTI_COINVOLTE;
 
     protected EntityModelTipo() {
-        super("Tipo"); // table
+        super("emergency_type"); // table
 
         this.createFields(
-                ID_TIPO = new HiddenField("idTipo", this),
-                ENTI_COINVOLTE = new VisualName("Enti Coinvolte", "Enti Coinvolte", this)
+                ID_TIPO = new HiddenField("id_type", this),
+                ENTI_COINVOLTE = new VisualName("authorities_involved", "Enti Coinvolte", this)
         );
     }
 

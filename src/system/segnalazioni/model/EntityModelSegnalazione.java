@@ -26,10 +26,10 @@ public class EntityModelSegnalazione extends MyEntityModel {
             this.createFields(
                     // TODO QueryBuilder should be used instead of raw sql
                     NUMERI = new CalculatedField(
-                            "numeri",
+                            "number",
                             "Numeri d'emergenza",
                             this,
-                            "GROUP_CONCAT(`Relativo`.`numero` SEPARATOR ', ') AS numeri"
+                            "GROUP_CONCAT(`emergency_number_rel`.`number` SEPARATOR ', ') AS number"
                     )
             );
         }
@@ -49,16 +49,16 @@ public class EntityModelSegnalazione extends MyEntityModel {
             ID_SOTTOTIPO;
 
     protected EntityModelSegnalazione() {
-        super("Segnalazione"); // table
+        super("report"); // table
 
         this.createFields(
-                ID_SEGNALAZIONE = new HiddenField("idSegnalazione", this),
-                DESCRIZIONE = new VisualName("Descrizione", "Descrizione", this),
-                NUMERO_COMMENTI = new RestrictedField("Numero_commenti", "Numero Commenti", this, PermissionsTypes.readOnly()),
-                DATA_PUBBLICAZIONE = new RestrictedField("Data_pubblicazione", "Data pubblicazione", this, PermissionsTypes.readOnly()),
-                LUOGO = new VisualName("Luogo", "Luogo", this),
-                COORDINATE = new VisualName("Coordinate", "Coordinate", this),
-                ID_SOTTOTIPO = new RelField("idSottotipo", this, EntityModelSottotipo.WithRel.I().ID_SOTTOTIPO)
+                ID_SEGNALAZIONE = new HiddenField("id_report", this),
+                DESCRIZIONE = new VisualName("description", "Descrizione", this),
+                NUMERO_COMMENTI = new RestrictedField("comments_number", "Numero Commenti", this, PermissionsTypes.readOnly()),
+                DATA_PUBBLICAZIONE = new RestrictedField("publication_date", "Data pubblicazione", this, PermissionsTypes.readOnly()),
+                LUOGO = new VisualName("place", "Luogo", this),
+                COORDINATE = new VisualName("coordinates", "Coordinate", this),
+                ID_SOTTOTIPO = new RelField("id_subtype", this, EntityModelSottotipo.WithRel.I().ID_SOTTOTIPO)
         );
     }
 

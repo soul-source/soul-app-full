@@ -46,7 +46,7 @@ hwc.define([
     $.RSVP.on('rejected', function (e) {
         // print error only when exception has not been caught using promise methods
         if (!e.label || !e.label.indexOf("__caught__") === 0) {
-            console.log("Uncaught exception", e, e.detail.stack);
+            console.error("Uncaught exception", e, e.detail.stack);
         }
     });
 

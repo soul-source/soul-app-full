@@ -44,14 +44,6 @@ hwc.include([
     system.register("main", Main, {autoStart: true, selector: "body"});
 
     system.init();
-
-    $.Browser.JQ.ajax({
-        url: "RestApi?user=1",
-        type: "GET",
-        context: document.getElementById("test")
-        }).done(function (res) {
-
-        });
 });
 
 

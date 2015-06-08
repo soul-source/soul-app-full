@@ -42,19 +42,19 @@ public class EntityModelUtenteProfile extends MyEntityModel {
             PASSWORD;
 
     protected EntityModelUtenteProfile() {
-        super("Utente");
+        super("user");
 
         this.createFields(
-                ID_UTENTE = new HiddenField("idUtente", this),
+                ID_UTENTE = new HiddenField("id_user", this),
                 EMAIL = new VisualName("email", "Email", this),
-                DATA_DI_NASCITA = new VisualName("data_di_nascita", "Data di nascita", this),
-                NOME = new VisualName("nome", "Nome", this),
-                COGNOME = new VisualName("cognome", "Cognome", this),
-                COD_FISCALE = new VisualName("codice_fiscale", "Cod. Fiscale", this),
-                VIA = new VisualName("via", "Via", this),
-                CITTA = new VisualName("citta", "Città", this),
+                DATA_DI_NASCITA = new VisualName("born_date", "Data di nascita", this),
+                NOME = new VisualName("name", "Nome", this),
+                COGNOME = new VisualName("surname", "Cognome", this),
+                COD_FISCALE = new VisualName("tax_code", "Cod. Fiscale", this),
+                VIA = new VisualName("street", "Via", this),
+                CITTA = new VisualName("city", "Città", this),
                 CAP = new VisualName("cap", "Cap", this),
-                STATO = new VisualName("stato", "Stato", this),
+                STATO = new VisualName("country", "Stato", this),
                 PASSWORD = new VisualName("password", "Password", this)
         );
     }

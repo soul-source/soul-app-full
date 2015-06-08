@@ -2,6 +2,7 @@ hwc.define([
     'hwc!{PATH_JS_LIB}common/include.js'
 ], function () {
     $ = this;
+    
     $.Object = $.Class({members: [
             {
                 a: "public", n: "__destruct", v: function () {

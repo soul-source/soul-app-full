@@ -16,6 +16,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import system.main.controller.ControllerMain;
+import system.notizia.model.TableModelNotizieList;
 import system.utente.controller.ControllerUtente;
 import system.utente.model.TableModelUtente;
 
@@ -58,13 +59,20 @@ public class RestApi extends HttpServlet {
 
         response.setContentType("text/plain");
 
-        Enumeration<String> parameterNames = request.getParameterNames();
-
+        //Enumeration<String> parameterNames = request.getParameterNames();
         try {
-            TableModelUtente userData = ControllerUtente.createTable(false);
-            List<RecordSet> rs = userData.getTableData().getRecords();
+            String table = request.getParameter("table");
 
-            response.getWriter().write(new Gson().toJson(rs).toString());
+            List<RecordSet> rs = null;
+            switch (table) {
+                case "news":
+                    TableModelNotizieList newsList = new TableModelNotizieList();
+                    newsList.refreshList("");
+                    rs = newsList.getTableData().getRecords();
+                    break;
+            }
+
+            response.getWriter().write("{table:"+new Gson().toJson(rs)+"}");
         } catch (Exception e) {
             e.printStackTrace();
             response.getWriter().write(e.getMessage());

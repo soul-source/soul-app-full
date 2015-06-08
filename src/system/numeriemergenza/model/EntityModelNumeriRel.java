@@ -15,11 +15,11 @@ public class EntityModelNumeriRel extends MyEntityModel {
             ID_UTENTE;
 
     protected EntityModelNumeriRel() {
-        super("Relativo");
+        super("emergency_number_rel");
 
         this.createFields(
-            NUMERO = new RelField("numero", this, EntityModelNumeri.I().NUMERO),
-            ID_UTENTE = new RelField("sottotipo", this, EntityModelSottotipo.I().ID_SOTTOTIPO)
+            NUMERO = new RelField("number", this, EntityModelNumeri.I().NUMERO),
+            ID_UTENTE = new RelField("subtype", this, EntityModelSottotipo.I().ID_SOTTOTIPO)
         );
     }
     

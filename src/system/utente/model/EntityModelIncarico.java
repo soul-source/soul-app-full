@@ -16,11 +16,11 @@ public class EntityModelIncarico extends MyEntityModel {
             TIPO;
 
     protected EntityModelIncarico() {
-        super("Incarico");
+        super("role");
 
         this.createFields(
-            ID_INCARICO = new HiddenField("ID.Incarico", this),
-            TIPO = new VisualName("Tipo", "Tipo Incarico", this)
+            ID_INCARICO = new HiddenField("id_task", this),
+            TIPO = new VisualName("type", "Tipo Incarico", this)
         );
     }
     

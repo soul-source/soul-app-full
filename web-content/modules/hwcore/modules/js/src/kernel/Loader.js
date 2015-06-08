@@ -78,7 +78,7 @@ hwc.define([
         }
 
         return callback && _load(null, null, callback) || new $.Promise(_load)["catch"](function (e) {
-            console.log(e); // this is needed because Async lib is not loaded yet
+            console.error(e); // this is needed because Async lib is not loaded yet
         });
     };
 

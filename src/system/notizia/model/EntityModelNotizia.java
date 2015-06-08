@@ -26,7 +26,7 @@ public class EntityModelNotizia extends MyEntityModel {
                 ID_NOTIZIA =  new HiddenField("id_news", this),
                 TITOLO = new VisualName("title", "Titolo", this),
                 ARTICOLO =  new VisualName("article", "Articolo", this),
-                DATA_PUB = new RestrictedField("pubblication_date", "Data Pubblicazione", this, PermissionsTypes.readOnly()),
+                DATA_PUB = new RestrictedField("publication_date", "Data Pubblicazione", this, PermissionsTypes.readOnly()),
                 ID_UTENTE = new HiddenField("id_user", this)
         );
     }

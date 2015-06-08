@@ -1,0 +1,289 @@
+[{
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 1
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Maltempo, fumine colpisce il santuario di Mux"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "l maltempo che ha colpito l\u0027Europa del Nord non ha risparmiato una delle tappe-simbolo del cammino di Santiago di Compostela, il Santuario alla Vergine della Barca a Muxia, colpito da un fulmine è stato distrutto oggi dalle fiamme. «È bruciato», riportano siti online della stampa galiziana ricordando che si tratta di uno dei siti «più antichi e importanti della Galizia». Le fiamme - secondo le prime ricostruzioni della polizia di Muxia - sono scoppiate stamattina, giorno di Natale, distruggendo l\u0027altare ed il soffitto del Santuario risalente al periodo tra l\u0027XI e il XII secolo.\r\n\r\nSi ritiene che la causa dell\u0027incendio sia stato un fulmine che avrebbe colpito un trasformatore elettrico vicino alla costruzione. Il santuario è una delle tappe finali del lungo cammino di Santiago di Compostela, dove i pellegrini possono spingersi per vedere l\u0027oceano dopo aver toccato completato il percorso che dalla Francia e la Spagna, ma anche dall\u0027Italia, attraverso la via Francigena, li porta a Santiago.\r\n\r\nLe fiamme hanno impiegato poco tempo a fare il loro corso. Ora si sta facendo la conta dei danni che sembrano gravissimi: La pala dell?altare centrale è stata completamente distrutta dal fuoco. Anche gli altari laterali sono stati bruciati, anche se non nella loro interezza. Sono state risparmiati elementi di poco valore culturale come confessionali e banchi.\r\n\r\nSono intervenute per spegnere il fuoco squadre di vigili e della protezione civile della città e di località vicine. Il sindaco di Muxia Felix Porto ha dichiarato al quotidiano El Mundo che le fiamme hanno fatto la loro comparsa verso le 6:45 di stamane probabilmente a causa di un fulmine. «Le fiamme ? ha dichiarato ? hanno provocato dannni irreversibili. La costruzione del santuario è completamente distrutta. Le poche cose che si sono salvate sono un confessionale, qualche immagine e poco altro».\r\n\r\nPorto ha poi spiegato di aver avuto una telefonata da parte del presidente della Giunta Alberto Nunez Feijoo con con cui gli veniva comunicata la vicinanza delle istituzioni locali: «E? una giornata nera per tutta la regione ? ha dichiarato ? nessuno poteva aspettarsi che il santuario sarebbe stato distrutto in sole due ore».\r\n\r\nAnche Il ministro dell?istruzione e della cultura della Giunta della Galizia Jesús Vázquez si è fatto sentire, assicurando che raggiungerà il sito del disastro quanto prima per fare la valutazione dei danni. "
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Jan 5, 2014 7:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 1
+            }
+        }
+    }, {
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 2
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Camion va a fuoco\r\nPaura sull\u0027A20"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Un camion carico di legna è andato a fuoco mentre percorreva l\u0027A20, poco dopo i caselli di Villafranca. Tempestivo e decisivo l\u0027intervento di vigili del fuoco e polizia stradale\r\nCamion va a fuoco Paura sull\u0027A20\r\n\r\nTempestivo intervento dei vigili del fuoco e della polizia stradale, che hanno evitato che il principio d\u0027incendio ad un camion carico di legna avesse conseguenze gravi. Il fatto si è verificato sull\u0027A20, in direzione Messina, poco dopo i caselli di Villafranca. Il mezzo pesante è stato messo in sicurezza nell\u0027area di parcheggio Salice. Nessuna conseguenza per il conducente e per la circolazione veicolare.\r\n"
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Apr 16, 2014 7:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 1
+            }
+        }
+    }, {
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 3
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Milano, allagamenti e disagi"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Macchine che quasi galleggiano, stivali d\u0027emergenza e scarponi per affrontare il fango, traffico in tilt. Rabbia per quanto è accaduto ma anche un bel po\u0027 di ironia per sopportare meglio i disagi.\r\nDalla prima mattina, i milanesi hanno cominciato a raccontare sui social network la loro giornata alle prese con la pioggia e gli allagamenti seguiti all\u0027esondazione del Seveso avvenuta alle 2.50 della notte. Fotografie dall\u0027alto che mostrano auto impantanate, passerelle improvvisate per consentire il passaggio dei pedoni, strade ?guadate? a piedi nudi. Ecco una selezione delle testimonianze dal basso dalla Milano ?sommersa?. "
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Mar 12, 2014 7:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 6
+            }
+        }
+    }, {
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 4
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Tromba d?aria ieri a Montesilvano: ombrelloni"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Ieri mattina è stato segnalato e ripreso un ?dust devils? a Montesilvano, una sorta di tromba d?aria che si presenza in condizioni di bel tempo\r\n\r\nTromba d?aria ieri a Montesilvano: ombrelloni volati a chilometri di distanza 10/07/2014 ? Un fenomeno non troppo frequente è stato segnalato ieri sulla spiaggia di Montesilvano, Abruzzo, dove si è abbattuta una sorta di tromba d?aria a ciel sereno. Il fenomeno è conosciuto con il nome di Dust Devils, o ?diavolo di polvere?, e si manifesta nelle belle giornate di Sole, con quasi totale assenza di nubi a sviluppo verticale. A differenza dei tornado (o trombe d?aria), i dust devils non sono collegati a nessuna attività convettiva, si formano sempre in luoghi dove c?è molta sabbia o polvere, come i campeggi, i parcheggi, le spiagge o le campagne, ed in alcuni casi sono in grado di arrecare seri danni.\r\n\r\n\r\nIl dust devils è stato segnalato alle ore 11:30 di ieri sulla spiaggia di Montesilvano. Subito scattato il panico tra i bagnanti, la spiaggia era stata presa d?assalto dai vacanzieri, dopo che i primi ombrelloni sono iniziati a volare a decine di metri di altezza (alcuni sono stati ritrovati a diversi chilometri di distanza!). Si è rapidamente formato un turbine di sabbia alto quasi un chilometro, fortunatamente durato meno di un minuto. Nessun ferito, ma il dust devils ha raggiunto proporzioni davvero notevoli. I dust devils si formano con venti non particolarmente forti (in questo caso c?era il secco vento di Garbino, proveniente da Ovest-NordOvest) e sollevamento di aria calda dal suolo. I contrasti tra aria calda del terreno ed aria fresca proveniente dal mare hanno dato manforte alla genesi del dust devils.\r\n"
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Jun 22, 2014 7:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 6
+            }
+        }
+    }, {
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 5
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Maxi-tamponamento sulla ss16, due feriti"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "(ANSA) - MONOPOLI (BARI), 6 LUG - Un maxi-tamponamento si è verificato questa mattina sulla statale 16 all\u0027altezza di uno dei bivi per Monopoli. Otto i veicoli coinvolti e due le persone rimaste ferite, anche se in modo lieve. La serie di tamponamenti a catena ha causato per oltre un\u0027ora code e rallentamenti alla circolazione, mentre il traffico è stato temporaneamente deviato in direzione dell\u0027abitato di Monopoli. Sul posto sono intervenuti la Polizia sradale, i vigili del fuoco e personale del \u0027118\u0027."
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Jun 2, 2014 7:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 4
+            }
+        }
+    }, {
+        "records": {
+            "soul_dbnewsid_news": {
+                "fieldName": "id_news",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 6
+            },
+            "soul_dbnewstitle": {
+                "fieldName": "title",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Tempesta in Germania, bufera di sabbia e piog"
+            },
+            "soul_dbnewsarticle": {
+                "fieldName": "article",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Una violenta tempesta con venti fortissimi si è a abbattuta a Mainz, in Germania, durante il Love Family Park mettendo in fuga 17.000 persone\r\nUna bufera di vento e sabbia, con pioggia intensa si è abbattuta sulla cittadina tedesca di Mainz interessando in particolare l?area del Fair Park Mainz allestita per il festival musicale chiamato Love Family Park. Una giornata all?insegna della musica techno che ha richiamato 17.000 persone, forte della giornata soleggiata che però, a cominciare dal tardo pomeriggio, ha iniziato a cambiare. Il cielo si è fatto sempre più scuro finchè intorno alle 21 una violenta tempesta di pioggia e vento si è abbattuta sul festival obbligando gli organizzatori ad annullare l?evento e i 17.000 a mettersi in fuga.\r\nMa la tempesta è sopraggiunta in pochi minuti e così migliaia di persone si sono ritrovate nel bel mezzo di una bufera di venti e sabbia che li ha completamente circondati: sette persono sono rimaste ferite, colpite da oggetti volanti scagliati in aria dal forte vento. Non sono mancate molte critiche perchè, secondo molti dei presenti, gli organizzatori non avrebbero preavvisato dell?arrivo della tempesta con un margine di tempo sufficiente ad abbandonare l?area. Molte persone hanno realizzato video e foto del momento in cui la bufera è sopraggiunta, come quello che vi mostriamo.\r\n"
+            },
+            "soul_dbnewspublication_date": {
+                "fieldName": "publication_date",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": false,
+                "changed": false,
+                "val": "Feb 15, 2014 12:00:00 AM"
+            },
+            "soul_dbnewsid_user": {
+                "fieldName": "id_user",
+                "tableName": "news",
+                "catalogName": "soul_db",
+                "schemaName": "",
+                "primaryKey": true,
+                "changed": false,
+                "val": 4
+            }
+        }
+    }]

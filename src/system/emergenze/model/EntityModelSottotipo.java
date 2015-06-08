@@ -39,13 +39,13 @@ public class EntityModelSottotipo extends MyEntityModel {
             ID_TIPO;
 
     protected EntityModelSottotipo() {
-        super("Sottotipo"); // table
+        super("emergency_subtype"); // table
 
-        this.createFields(ID_SOTTOTIPO = new HiddenField("idSottotipo", this),
-                CAUSE = new VisualName("Cause", "Cause", this),
-                DESCRIZIONE = new VisualName("Descrizione", "Descrizione", this),
-                LIVELLO_PRIORITA = new VisualName("Livello_Priorita", "Livello Priorità", this),
-                ID_TIPO = new RelField("idTipo", this, EntityModelTipo.I().ID_TIPO)
+        this.createFields(ID_SOTTOTIPO = new HiddenField("id_subtype", this),
+                CAUSE = new VisualName("cause", "Cause", this),
+                DESCRIZIONE = new VisualName("description", "Descrizione", this),
+                LIVELLO_PRIORITA = new VisualName("priority_level", "Livello Priorità", this),
+                ID_TIPO = new RelField("id_type", this, EntityModelTipo.I().ID_TIPO)
         );
     }
 

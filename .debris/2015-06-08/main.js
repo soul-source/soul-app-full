@@ -50,8 +50,8 @@ hwc.include([
         type: "GET",
         context: document.getElementById("test")
         }).done(function (res) {
-            alert(res);
-     });
+
+        });
 });
 
 

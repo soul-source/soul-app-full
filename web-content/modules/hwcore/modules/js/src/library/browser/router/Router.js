@@ -7,7 +7,7 @@ hwc.define([
 ], function Router () {
     var $ = this;
 
-    return $.Router = $.class.extends($.Object)(
+    return $.Browser.Router = $.class.extends($.Object)(
         /**
          * Private variables
          */
@@ -103,7 +103,7 @@ hwc.define([
                 function pop (e) {
                     // update routeInfo and cast update trigger
                     if (that.i.getRouteInfo().getUri().href() != window.location.href)
-                        that.i.update(new $.Router.RouteInfo(window.location.href, isSpa));
+                        that.i.update(new $.Browser.Router.RouteInfo(window.location.href, isSpa));
                 }
 
                 $.Browser.EventHandler.replaceEventListner(window, "popstate", pop);
@@ -120,7 +120,7 @@ hwc.define([
             removeListner: function (obj) {
                 this._i.eventHandler.unbind(obj);
             },
-            setRouteByUrl: function (element, uri, reload) {
+            setRouteByUrl: function (element, uri, callback, reload) {
                 var that = this;
                 var isRoute = $.typeCompare(this.s.RouteInfo, uri, !reload);
 
@@ -137,7 +137,7 @@ hwc.define([
 
                 function navigate (evt) {
                     evt.preventDefault();
-                    that.i.navigateByUrl(uri, reload);
+                    that.i.navigateByUrl(uri, callback, reload);
                 }
 
                 if (!reload) {
@@ -154,20 +154,21 @@ hwc.define([
              * @param {type} reload
              * @returns {undefined}
              */
-            setRoute: function (element, opt, reload) {
+            setRoute: function (element, opt, callback, reload) {
                 var route = this._i.buildRoute(opt);
 
-                this.i.setRouteByUrl(element, route, reload);
+                this.i.setRouteByUrl(element, route, callback, reload);
             },
-            navigateByUrl: function (uri, reload) {
+            navigateByUrl: function (uri, callback, reload) {
                 var that = this;
                 // if not reload, then typecompare will throw an error if it's not a RouteInfo obj.
                 var isRoute = $.typeCompare(this.s.RouteInfo, uri, reload);
 
                 if (reload) {
                     window.location.assign(isRoute ? uri.getUri().toString() : uri);
+                    callback && callback();
                 } else {
-                    this.i.update(uri);
+                    this.i.update(uri, callback);
                 }
             },
             /**
@@ -179,18 +180,20 @@ hwc.define([
              * @param {type} reload
              * @returns {undefined}
              */
-            navigate: function (opt, reload) {
+            navigate: function (opt, callback, reload) {
                 var route = this._i.buildRoute(opt);
-                this.i.navigateByUrl(route, reload);
+                this.i.navigateByUrl(route, callback, reload);
             },
             jump: function (h) {
                 var top = document.getElementById(h).offsetTop;
                 window.scrollTo(0, top);
             },
-            update: function (routeInfo) {
+            update: function (routeInfo, callback) {
                 var that = this;
 
                 this._i.routeInfo = routeInfo;
+
+                callback && callback();
 
                 this._i.eventHandler.trigger("beforeUpdate")
                     .then(this._i.eventHandler.trigger("update"))
@@ -214,6 +217,7 @@ hwc.define([
         }),
         $.private({
             buildRoute: function (opt) {
+                opt = opt || {};
                 var route = this._i.routeInfo.clone();
                 opt.component && route.setComponent(opt.component);
                 opt.path && route.setComponent(opt.path);

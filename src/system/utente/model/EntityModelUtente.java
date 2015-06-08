@@ -21,8 +21,8 @@ public class EntityModelUtente extends EntityModelUtenteProfile {
         super();
 
         this.createFields(
-            LIVELLO_UTENTE = new VisualName("livello_utente", "Livello", this),
-            NUM_NOTIFICHE_NON_LETTE = new VisualName("numero_notifiche_non_lette", "N° notifiche non lette", this)
+            LIVELLO_UTENTE = new VisualName("user_level", "Livello", this),
+            NUM_NOTIFICHE_NON_LETTE = new VisualName("unread_notifications_number", "N° notifiche non lette", this)
         );
     }
     
