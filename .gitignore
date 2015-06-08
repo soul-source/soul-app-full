@@ -79,4 +79,5 @@ local.properties
 deskproj
 build
 !/nb/nbproject
+/.debris/
 

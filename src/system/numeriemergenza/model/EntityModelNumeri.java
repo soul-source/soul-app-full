@@ -18,11 +18,11 @@ public class EntityModelNumeri extends MyEntityModel {
             TITOLO;
 
     protected EntityModelNumeri() {
-        super("Numero Emergenza");
+        super("emergency_number");
 
         this.createFields(
-                NUMERO = new VisualName("numero", "Numero", this),
-                TITOLO = new VisualName("titolo", "Titolo", this)
+                NUMERO = new VisualName("number", "Numero", this),
+                TITOLO = new VisualName("title", "Titolo", this)
         );
     }
 
