@@ -6,11 +6,11 @@ package system.test.controller;
 
 import system.common.MyJFrameController;
 import system.main.controller.ControllerJFrameMain;
-import system.segnalazioni.model.EntityModelSegnalazione;
+import system.report.model.EntityModelSegnalazione;
 import system.test.model.HandlerTestQuery;
 import system.test.model.TableModelTest;
 import system.test.view.JFrameTest;
-import system.utente.model.EntityModelUtenteProfile;
+import system.user.model.EntityModelUtenteProfile;
 
 public class ControllerJFrameTest extends MyJFrameController {
 

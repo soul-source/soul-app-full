@@ -5,7 +5,7 @@
 package system.common;
 
 import hwcore.modules.java.src.library.common.MyObject;
-import system.utente.model.UserRS;
+import system.user.model.UserRS;
 
 public class SessionHandler extends MyObject {
 

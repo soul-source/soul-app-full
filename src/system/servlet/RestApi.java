@@ -16,9 +16,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import system.main.controller.ControllerMain;
-import system.notizia.model.TableModelNotizieList;
-import system.utente.controller.ControllerUtente;
-import system.utente.model.TableModelUtente;
+import system.news.model.TableModelNotizieList;
+import system.user.controller.ControllerUtente;
+import system.user.model.TableModelUtente;
 
 /**
  *
@@ -92,16 +92,22 @@ public class RestApi extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
+        
+        // DO CREATE/INSERT
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doDelete(req, resp); //To change body of generated methods, choose Tools | Templates.
+    
+        // DO DELETE
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
+    
+        // DO UPDATE
     }
 
     /**

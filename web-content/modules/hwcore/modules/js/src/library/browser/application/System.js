@@ -4,7 +4,7 @@ hwc.include([
     'hwc!{PATH_JS_LIB}application/index.js',
     'hwc!{PATH_JS_LIB}browser/router/index.js'
 ]).define(function () {
-    $ = this;
+    var $ = this;
 
     return $.Browser.System = $.public.class.extends($.System)(
         $.protected({

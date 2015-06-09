@@ -10,7 +10,7 @@ import system.common.PermissionsTypes;
 import system.common.SessionHandler;
 
 import system.main.controller.ControllerJFrameMain;
-import system.utente.model.EntityModelUtente;
+import system.user.model.EntityModelUtente;
 
 public class TableModelChatList extends MyTableModel {
 

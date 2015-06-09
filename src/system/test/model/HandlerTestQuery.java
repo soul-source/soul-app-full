@@ -7,8 +7,8 @@ package system.test.model;
 import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.TableData;
 import system.common.MyQueryHandler;
-import system.segnalazioni.model.EntityModelSegnalazione;
-import system.utente.model.EntityModelUtenteProfile;
+import system.report.model.EntityModelSegnalazione;
+import system.user.model.EntityModelUtenteProfile;
 
 public class HandlerTestQuery extends MyQueryHandler {
 

@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import system.main.controller.ControllerJDialogLogin;
 import system.main.controller.ControllerJFrameMain;
-import system.utente.controller.ControllerJFrameUtente;
+import system.user.controller.ControllerJFrameUtente;
 
 public class JDialogLogin extends javax.swing.JDialog {
 

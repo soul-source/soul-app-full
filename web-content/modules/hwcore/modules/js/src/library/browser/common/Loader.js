@@ -89,9 +89,9 @@ hwc.define([
                                         // resolve only when all elements
                                         // has been loaded
                                         if (size === 0) {
-                                            var insType = options.insType || 'replaceWith';
+                                            var insType = options.insType || 'html';
 
-                                            if (['prepend', 'append', 'replaceWith'].indexOf(insType) < 0)
+                                            if (['prepend', 'append', 'replaceWith', 'html'].indexOf(insType) < 0)
                                                 console.error(insType + " is not a valid inserting function");
 
                                             el[insType](responseText);

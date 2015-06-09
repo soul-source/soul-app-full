@@ -7,7 +7,7 @@ package system.main.controller;
 import system.common.MyController;
 import system.common.MyJFrameController;
 import system.main.view.JFrameMain;
-import system.notifiche.controller.ControllerJFrameNotifiche;
+import system.notification.controller.ControllerJFrameNotifiche;
 
 public class ControllerJFrameMain extends ControllerMain {
 

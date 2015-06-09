@@ -137,14 +137,16 @@ var Bootstrap = (function () {
                 } else {
                     switch (arguments.length) {
                         case 1:
-                            arguments[0]();
+                            arguments[0].call(this.__core);
                             break;
                         case 2:
                             var inc = arguments[0];
                             var def = arguments[1];
-
+                            var that = this;
                             this.__core.Loader.load(inc)
-                                .then(def);
+                                .then(function () {
+                                    def.call(that.__core);
+                                });
                             break;
                         default:
                             throw new SyntaxError("Invalid number of parameters");

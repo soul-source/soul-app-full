@@ -17,12 +17,12 @@ import system.chat.controller.ControllerJFrameChatList;
 import system.common.MyJFrameController;
 import system.main.controller.ControllerJDialogLogin;
 import system.main.controller.ControllerJFrameMain;
-import system.notifiche.controller.ControllerJFrameNotifiche;
-import system.notizia.controller.ControllerJFrameNotizieList;
-import system.numeriemergenza.controller.ControllerJFrameNumeri;
-import system.segnalazioni.controller.ControllerJFrameSegnalazioniList;
+import system.notification.controller.ControllerJFrameNotifiche;
+import system.news.controller.ControllerJFrameNotizieList;
+import system.emergencynumber.controller.ControllerJFrameNumeri;
+import system.report.controller.ControllerJFrameSegnalazioniList;
 import system.test.controller.ControllerJFrameTest;
-import system.utente.controller.ControllerJFrameUtente;
+import system.user.controller.ControllerJFrameUtente;
 
 /**
  *

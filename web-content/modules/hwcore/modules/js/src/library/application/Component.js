@@ -109,7 +109,7 @@ hwc.define([
                 if (typeof component === "string") {
                     return $.Browser.include(component)
                         .then(function (M) {
-                            var res = init(M[0], parent, childs, opt);
+                            var res = init(M, parent, childs, opt);
                             if (res === false)
                                 throw new Error("Passed object is not a Component");
 

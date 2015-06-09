@@ -6,9 +6,9 @@ package system.main.controller;
 
 import system.common.SessionHandler;
 import system.main.view.JDialogLogin;
-import system.utente.model.EntityModelUtente;
-import system.utente.model.HandlerUtenteQuery;
-import system.utente.model.UserRS;
+import system.user.model.EntityModelUtente;
+import system.user.model.HandlerUtenteQuery;
+import system.user.model.UserRS;
 
 public class ControllerJDialogLogin extends javax.swing.JDialog {
 

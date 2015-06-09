@@ -27,7 +27,7 @@ hwc.define([
                     }).done(function (res) {
                         //$.Browser.JQ("body").append(res);
                         $.Browser.Loader.load("soul/news-post.html").then(function (content) {
-                            content = content[0][0];
+                            content = content[0];
                             var cnt = 0;
                             try {
                                 res.table.forEach(function (e) {

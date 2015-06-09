@@ -1,0 +1,24 @@
+/*
+ *  * Copyright (C) 2007 - 2014 Hyperweb2 All rights reserved
+ *  * GNU General Public License version 3; see http://www.hyperweb2.com/terms/
+ */
+package system.comment.controller;
+
+import system.comment.model.TableModelCommenti;
+import system.comment.view.JFrameComments;
+import system.common.MyJFrameControllerChild;
+import system.report.controller.ControllerJFrameSegnalazione;
+
+public class ControllerJFrameComments extends MyJFrameControllerChild {
+
+    public ControllerJFrameComments(int idSegnalazione, ControllerJFrameSegnalazione owner) {
+        super(owner);
+        this.setTableModel(new TableModelCommenti(idSegnalazione,this));
+        this.initialize(new JFrameComments(this));
+    }
+
+    @Override
+    public ControllerJFrameSegnalazione getOwner() {
+        return (ControllerJFrameSegnalazione)super.getOwner();
+    }
+}

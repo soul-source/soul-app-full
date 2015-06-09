@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.Map;
 import system.common.MyController;
 import system.common.SessionHandler;
-import system.utente.model.UserRS;
+import system.user.model.UserRS;
 
 public class ControllerMain extends MyObject {
     protected Map<String, MyController> controllers;
