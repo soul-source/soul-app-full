@@ -48,6 +48,7 @@ hwc.include([
             }),
             $.public.static({
                 checkSession: function () {
+                    var that = this;
                     var defer = $.Async.defer();
 
                     var data = {
@@ -55,25 +56,24 @@ hwc.include([
                         token: $.Browser.Cookie.get("session")
                     };
 
-                    var kick = function () {
-                        $.Browser.Router.I().navigate({component: "home"}, function () {
-                            $.Browser.Cookie.delete("session", "/");
-                            $.Browser.Cookie.delete("user-id", "/");
-                            defer.resolve();
-                        });
-                    };
-
                     if (!data.id || !data.token) {
-                        kick();
+                        this.s.kick(defer.resolve);
                     } else {
                         $.Browser.JQ.post("RestApi?table=user&type=session", data).done(function (res) {
                             if (res === "false") {
-                                kick();
+                                that.s.kick(defer.resolve);
                             }
                         });
                     }
 
                     return defer.promise;
+                },
+                kick: function (callback) {
+                    $.Browser.Router.I().navigate({component: "home"}, function () {
+                        $.Browser.Cookie.delete("session", "/");
+                        $.Browser.Cookie.delete("user-id", "/");
+                        callback && callback();
+                    });
                 }
             })
             );

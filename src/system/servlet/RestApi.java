@@ -180,6 +180,13 @@ public class RestApi extends HttpServlet {
         super.doDelete(req, resp); //To change body of generated methods, choose Tools | Templates.
 
         // DO DELETE
+        String table = req.getParameter("table");
+
+        switch (table) {
+            case "user":
+                handleUser(request, response, type);
+                break;
+        }
     }
 
     @Override
