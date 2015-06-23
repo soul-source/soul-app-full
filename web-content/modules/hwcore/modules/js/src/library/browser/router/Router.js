@@ -16,7 +16,7 @@ hwc.define([
             routeInfo: null,
             isSpa: false,
             eventHandler: false,
-            prevRoute : null,
+            prevRoute: null,
         }),
         /**
          * Internal Class
@@ -48,12 +48,12 @@ hwc.define([
                         this._i.route.segmentCoded(0, component);
                     },
                     getPath: function () {
-                        var p= this._i.route.pathname().split("/");
+                        var p = this._i.route.pathname().split("/");
                         return p.slice(1).join("/");
                     },
                     setPath: function (path) {
                         var component = this.i.getComponent();
-                        this._i.route.pathname(component + "/" + path);
+                        this._i.route.pathname(component + (path ? "/" + path : ""));
                     },
                     getParams: function () {
                         return this._i.route.search(true);
@@ -272,17 +272,17 @@ hwc.define([
                 return this;
             },
             runCheckListner: function () {
-                var that=this;
+                var that = this;
                 /*
                  * back or forward browser events
                  */
-                $.Browser.EventHandler.setEventListner(window, "popstate", function() {
+                $.Browser.EventHandler.setEventListner(window, "popstate", function () {
                     that.i.pop();
                 });
                 /**
                  * hash change events
                  */
-                $.Browser.EventHandler.setEventListner(window, "hashchange", function() {
+                $.Browser.EventHandler.setEventListner(window, "hashchange", function () {
                     that.i.checkEvents();
                 });
 
@@ -321,8 +321,8 @@ hwc.define([
                 opt = opt || {};
                 var route = this._i.routeInfo.clone();
                 opt.component && route.setComponent(opt.component);
-                opt.path && route.setPath(opt.path);
-                opt.params && route.setParams(opt.params);
+                opt.path !== undefined && route.setPath(opt.path);
+                opt.params !== undefined && route.setParams(opt.params);
                 route.updateUri();
                 return route;
             }

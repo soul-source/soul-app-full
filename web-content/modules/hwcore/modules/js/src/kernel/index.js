@@ -58,6 +58,10 @@ var HwcBootstrap = (function () {
         obj.define = function (module) {
             return that.define(includes, module);
         };
+        
+        obj.defineFn = function (module) {
+            return that.defineFn(includes, module);
+        };
 
         return obj;
     };
@@ -79,19 +83,23 @@ var HwcBootstrap = (function () {
          * requirejs alias
          */
         define: function () {
-            // if hwc has not been initialized yet, we must defer the module loading
-            var scripts = document.getElementsByTagName('script');
-            var lastScript = scripts[scripts.length - 1];
+            /**
+             * if you have to target also browser that doesn't support 
+             * document.currentScript, please use the after-boot option or defineFn
+             * and include libraries using hwc.include
+             */
+            if (document.currentScript) {
+                if (!document.currentScript.src) {
+                    // this is the case of modules defined inside a <script> tag
+                    // without using a file
+                    this.defineFn.apply(this, arguments);
 
-            if (!lastScript.src) {
-                // this is the case of modules defined inside a <script> tag
-                // without using a file
-                this.defineFn.apply(this, arguments);
-
-                return;
-            } else if (!this.__rdefine) {
-                this.__pendingDefines.push(lastScript.src);
-                return;
+                    return;
+                } else if (!this.__rdefine) {
+                    // if hwc has not been initialized yet, we must defer the module loading
+                    this.__pendingDefines.push(document.currentScript.src);
+                    return;
+                }
             }
 
             var args;

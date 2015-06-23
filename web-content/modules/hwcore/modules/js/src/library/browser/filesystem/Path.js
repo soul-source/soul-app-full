@@ -15,18 +15,21 @@ hwc.define([
                 attributes: "static",
                 name: "fileExists",
                 val: function (url) {
-                    if (url) {
-                        try {
-                            var req = new XMLHttpRequest();
-                            req.open('GET', url, false);
-                            req.send();
-                            return req.status === 200;
-                        } catch (error) {
-                            return false;
+                    var defer = $.Async.defer();
+
+                    var req = new XMLHttpRequest();
+                    req.open('GET', url, true);
+                    req.onreadystatechange = function () {
+                        if (req.readyState == 4 ) {
+                            if (req.status==200)
+                                defer.resolve();
+                            else
+                                defer.reject();
                         }
-                    } else {
-                        return false;
-                    }
+                    };
+                    req.send();
+
+                    return defer.promise;
                 }
             }
         ]}
