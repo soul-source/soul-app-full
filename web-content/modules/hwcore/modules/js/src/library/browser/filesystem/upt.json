@@ -1,5 +1,5 @@
 {
-    "name": "hwcore/modulesjs/src/library/browser/filesystem",
+    "name": "hwcore/modules/js/src/library/browser/filesystem",
     "license": "http://www.hyperweb2.com/terms",
     "dependencies": {
         "%common": "hw-core/js-library-browser-common#*",

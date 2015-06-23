@@ -4,9 +4,9 @@ hwc.define([
     'hwc!{PATH_JS_LIB}application/include.js',
     'hwc!{PATH_JS_LIB}application/Component.js'
 ], function () {
-    $ = this;
+    var $ = this;
 
-    return $.System = $.public.class.extends($.Component)(
+    return $.System = $.public.class.extends($.Component).use($.Singleton)(
         $.public({
             /**
              * 

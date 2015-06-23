@@ -1,5 +1,5 @@
 {
-    "name": "hwcore/modulesjs/src/library/uri",
+    "name": "hwcore/modules/js/src/library/uri",
     "license": "http://www.hyperweb2.com/terms",
     "dependencies": {
         "%class": "hw-core/js-library-class#*"

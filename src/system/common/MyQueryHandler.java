@@ -50,6 +50,11 @@ public class MyQueryHandler extends QueryHandler {
         }
     }
 
+    /**
+     * Create new SqlQueryBuilder
+     *
+     * @return SqlQueryBuilder
+     */
     public static QueryBuilder getQb() {
         return new SqlQueryBuilder();
     }
@@ -82,15 +87,14 @@ public class MyQueryHandler extends QueryHandler {
                 .from().qbBuildName(this.model.getPath());
 
         LinkedHashMap<DbId, Entry<EntityModel, LinkedHashMap<DbId.Field, Entry>>> joinTables = this.model.getJoinTables();
-        Set<Map.Entry<DbId, Entry<EntityModel, LinkedHashMap<DbId.Field, Entry>>>> l=joinTables.entrySet();
+        Set<Map.Entry<DbId, Entry<EntityModel, LinkedHashMap<DbId.Field, Entry>>>> l = joinTables.entrySet();
         for (Map.Entry<DbId, Entry<EntityModel, LinkedHashMap<DbId.Field, Entry>>> joins : l) {
             qb.join(SqlQueryBuilder.SqlJoinTypes.INNER)
                     .qbBuildName(((EntityModel) joins.getValue().getKey()).getPath());
         }
-        
-        
-        boolean on=false;
-        int cnt=0;
+
+        boolean on = false;
+        int cnt = 0;
         for (Map.Entry<DbId, Entry<EntityModel, LinkedHashMap<DbId.Field, Entry>>> joins : l) {
             if (!((LinkedHashMap) joins.getValue().getValue()).isEmpty()) {
                 Collection<Entry> list = ((LinkedHashMap<DbId.Field, Entry>) joins.getValue().getValue()).values();
@@ -101,31 +105,26 @@ public class MyQueryHandler extends QueryHandler {
                         // XXX ugly workaround 
                         if (!on) {
                             qb.on();
-                            on=true;
+                            on = true;
                         }
-                        
-                        
+
                         qb.qbBuildName(((FieldModel) relation.getKey()).getPath())
                                 .qbCompare()
                                 .qbBuildName(((FieldModel) relation.getValue()).getPath());
-                        
-                        if (i < list.size() - 1 || cnt<l.size()-1) {
+
+                        if (i < list.size() - 1 || cnt < l.size() - 1) {
                             qb.and();
                         }
                     }
                 }
             }
-            
+
             cnt++;
         }
 
-
-        qb.qbMerge((QueryBuilder) If
-                .condition((Object) searchText)
-                .then(getQb().where(searchText))
-                .other(null)
-                .end()
-        );
+        if (searchText.length > 0) {
+            qb.where(searchText);
+        }
 
         if (additional != null && !additional.isEmpty()) {
             qb.qbAdd(" " + additional);
@@ -136,7 +135,7 @@ public class MyQueryHandler extends QueryHandler {
 
     @Override
     public TableData loadData(String search) {
-        return this.loadData(null,search);
+        return this.loadData(null, search);
     }
 
     public EntityModel getModel() {

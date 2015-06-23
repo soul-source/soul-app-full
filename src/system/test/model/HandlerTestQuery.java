@@ -7,8 +7,8 @@ package system.test.model;
 import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.TableData;
 import system.common.MyQueryHandler;
-import system.report.model.EntityModelSegnalazione;
-import system.user.model.EntityModelUtenteProfile;
+import system.report.model.EntityModelReport;
+import system.user.model.EntityModelUserProfile;
 
 public class HandlerTestQuery extends MyQueryHandler {
 
@@ -19,9 +19,9 @@ public class HandlerTestQuery extends MyQueryHandler {
     @Override
     public TableData loadData(String dummy) {
         String query = "";
-        if (getModel() instanceof EntityModelUtenteProfile.WithIncarico) {
+        if (getModel() instanceof EntityModelUserProfile.WithIncarico) {
             query = loadUtenti();
-        } else if (getModel() instanceof EntityModelSegnalazione.WithRel) {
+        } else if (getModel() instanceof EntityModelReport.WithRel) {
             query = loadSegnalazioni();
         }
 

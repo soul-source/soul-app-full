@@ -11,7 +11,27 @@
 			<div style="margin-top:100px;">
 				<img src="./images/no-avatar.jpg" class="hwc-default-img"> 
 				<br>
-				Attualmente sei online con un account ospite.
+				<form id="profile-form" action = "RestApi?table=user&type=profile" method = "POST">
+                                    <div style="float:left"><label for="name">Nome: </label></div>
+                                    <div><input type="text" id="name"/></div>
+                                    <div style="float:left"><label for="last-name">Cognome: </label></div>
+                                    <div><input type="text" id="last-name"/></div>
+                                    <div style="float:left"><label for="birthday">Data di Nascita: </label></div>
+                                    <div><input type="date" id="birthday"/></div>
+                                    <div style="float:left"><label for="city">Città: </label></div>
+                                    <div><input type="text" id="city"/></div>
+                                    <div style="float:left"><label for="street">Via: </label></div>
+                                    <div><input type="text" id="street"/></div>
+                                    <div style="float:left"><label for="tax_code">Codice Fiscale: </label></div>
+                                    <div><input type="text" id="tax_code"/></div>
+                                    <div style="float:left"><label for="cap">CAP: </label></div>
+                                    <div><input type="text" id="cap"/></div>
+                                    <div style="float:left"><label for="country">Nazione: </label></div>
+                                    <div><input type="text" id="country"/></div>
+                                     <div style="float:left"><label for="password">Password: </label></div>
+                                    <div><input type="password" id="password"/></div>
+                                    <div><input type="submit" id="change_profile" value="Modifica"/></div>
+                                </form>
 			</div>
 		</center>
 	</div>

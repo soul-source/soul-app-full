@@ -6,8 +6,8 @@ package system.main.controller;
 
 import system.common.SessionHandler;
 import system.main.view.JDialogLogin;
-import system.user.model.EntityModelUtente;
-import system.user.model.HandlerUtenteQuery;
+import system.user.model.EntityModelUser;
+import system.user.model.HandlerUserQuery;
 import system.user.model.UserRS;
 
 public class ControllerJDialogLogin extends javax.swing.JDialog {
@@ -20,7 +20,7 @@ public class ControllerJDialogLogin extends javax.swing.JDialog {
     }
 
     public boolean login(String email, String password) {
-        HandlerUtenteQuery handler = new HandlerUtenteQuery(EntityModelUtente.I());
+        HandlerUserQuery handler = new HandlerUserQuery(EntityModelUser.I());
         UserRS utente = handler.loadUtente(email, password);
         if (utente != null) {
             SessionHandler.I().setUser(utente);

@@ -1,8 +1,3 @@
-/*
- * Copyright (C) 2007 - 2014 Hyperweb2 All rights reserved.
- * GNU General Public License version 3; see www.hyperweb2.com/terms/
- */
-
 'use strict';
 
 hwc.include([
@@ -602,9 +597,11 @@ hwc.include([
 
                     var wrapper = function () {
                         var scope = {
-                            s: this.__stScope || __Object,
+                            s: (this && this.__stScope) || __Object,
                             _s: __staticMembers.priv
                         };
+
+                        scope.__caller = this;
 
                         // expose private variable to internal class function
                         if (!isStatic) {
@@ -618,12 +615,7 @@ hwc.include([
 
                         // as scope for __super we pass the base class environment
                         var sBind = isStatic ? __base : scope;
-                        Object.defineProperty(scope, "__super", {
-                            value: old ? old.bind(sBind) : null,
-                            writable: true,
-                            configurable: true,
-                            enumerable: true
-                        });
+                        scope.__super = old ? old.bind(sBind) : null;
 
                         Object.seal(scope); // this generates an error when we try to set something to scope object
 
@@ -686,7 +678,7 @@ hwc.include([
                             descriptor.use = [descriptor.use];
                         }
 
-                        if (!descriptor.use.length <= 0) {
+                        if (descriptor.use.length > 0) {
                             descriptor.use.forEach(function (t) {
                                 if (t.__getMembers) {
                                     // if it's a "Class"

@@ -14,6 +14,7 @@
     top: 0;
     cursor:default;
     overflow:hidden;
+    display: block;
 }
 table, ul.hwc-hmenu
 {
@@ -271,7 +272,6 @@ header, footer, article, nav, #hwc-hmenu-bg, .hwc-sheet, .hwc-hmenu a, .hwc-vmen
 
 header, footer, article, nav, #hwc-hmenu-bg, .hwc-sheet, .hwc-slidenavigator > a, .hwc-checkbox:before, .hwc-radiobutton:before
 {
-    display: block;
     -webkit-box-sizing: border-box;
     -moz-box-sizing: border-box;
     box-sizing: border-box;
@@ -530,6 +530,7 @@ li p, .hwc-postcontent li p, .hwc-blockcontent li p
 .hwc-postcontent .hwc-content-layout
 {
     border-collapse: collapse;
+    /* margin: 0 auto; */
 }
 
 .hwc-block

@@ -1,5 +1,5 @@
 {
-    "name": "hwcore/modulesjs/src/library/common",
+    "name": "hwcore/modules/js/src/library/common",
     "license": "http://www.hyperweb2.com/terms",
     "dependencies": {
         "%init": "hw-core/js-kernel#*",

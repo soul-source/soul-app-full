@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/browser/application",
+  "name": "hwcore/modules/js/src/library/browser/application",
   "dependencies": {
     "%common": "hw-core/js-library-browser-common#*",
     "%application": "hw-core/js-library-application#*",

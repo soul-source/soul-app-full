@@ -12,7 +12,7 @@ hwc.include([
         }),
         $.public({
             __construct: function (isSpa) {
-                this.i.router = new $.Browser.Router(document.location.href, isSpa);
+                this.i.router = $.Browser.Router.I(document.location.href, isSpa);
 
                 this.i.router.addListner(this.i);
 

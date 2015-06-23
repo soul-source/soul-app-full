@@ -21,7 +21,12 @@ hwc.define([
                 }
             },
             {
-                a: "public static", n: "replaceEventListner", v: function (element, event, handler, useCapture) {
+                a: "public static", n: "setEventListner", v: function (element, event, handler, useCapture) {
+                    if (typeof element=="string") {
+                        // get the native element
+                        element = $.Browser.JQ(element)[0];
+                    }
+                    
                     element.removeEventListener(event, handler);
                     element.addEventListener(event, handler, false);
                 }

@@ -76,8 +76,6 @@ public abstract class QueryBuilder implements IfIface {
 
     public abstract QueryBuilder into(String tableName);
 
-    public abstract QueryBuilder values(String... args);
-
     public abstract QueryBuilder values(Object... args);
 
     public abstract QueryBuilder in(String... args);

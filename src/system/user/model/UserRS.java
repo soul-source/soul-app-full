@@ -35,20 +35,29 @@ public class UserRS extends RecordSet {
      SHORTCUTS
      */
     public int getLevel() {
-        return !guest ? 
-                (Integer) getValue(EntityModelUtente.I().LIVELLO_UTENTE.getId())
+        return !guest
+                ? (Integer) getValue(EntityModelUser.I().LIVELLO_UTENTE.getId())
                 : -1;
     }
 
     public int getId() {
-        return !guest ? (Integer) getValue(EntityModelUtente.I().ID_UTENTE.getId())
+        return !guest ? (Integer) getValue(EntityModelUser.I().ID_UTENTE.getId())
                 : -1;
+    }
+
+    public String getSessionToken() {
+        Object o = getValue(EntityModelUser.I().SESSION_TOKEN.getId());
+        if (o == null) {
+            return null;
+        }
+
+        return o.toString();
     }
 
     public String getFullName() {
         return !guest
-                ? getValue(EntityModelUtente.I().NOME.getId())
-                + " " + getValue(EntityModelUtente.I().COGNOME.getId())
+                ? getValue(EntityModelUser.I().NOME.getId())
+                + " " + getValue(EntityModelUser.I().COGNOME.getId())
                 : "Guest " + this.hashCode();
     }
 }

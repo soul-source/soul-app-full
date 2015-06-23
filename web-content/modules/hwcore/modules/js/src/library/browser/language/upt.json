@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/browser/language",
+  "name": "hwcore/modules/js/src/library/browser/language",
   "license": "http://www.hyperweb2.com/terms",
   "dependencies": {
     "%common": "hw-core/js-library-browser-common#*"

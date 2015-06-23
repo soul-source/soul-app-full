@@ -46,14 +46,14 @@ hwc.define([
 
                     return $.Async.all(promises).then(function () {
                         that.i.build.apply(that, arguments);
-                        return true;
+                        return that.i;
                     });
                 }
 
-                return true;
+                return this.i;
             },
             update: function () {
-                this.i.state = this.s.stateType.INIT;
+                this.i.state = this.s.stateType.UPDATE;
                 this.i.eventHandler.trigger("update", arguments);
 
                 this.i.build.apply(this, arguments);
@@ -67,6 +67,9 @@ hwc.define([
                 //delete this.i.eventHandler;
 
                 this.__super();
+            },
+            getChild: function (id) {
+                return this.i.eventHandler.getChildById(id);
             },
             unbindChild: function (id) {
                 var obj = this.i.eventHandler.unbind(id);
@@ -93,6 +96,7 @@ hwc.define([
              * @returns {Boolean}
              */
             load: function (component, id, parent, childs, opt, args) {
+                opt = opt || {};
                 function init (M) {
                     if (M.__isClass && M.__isChildOf($.Component)) {
                         var m = new M(parent, childs, opt);
@@ -100,7 +104,8 @@ hwc.define([
                         if (parent)
                             parent.bindChild(id, m);
 
-                        return m.init.apply(m, args);
+                        var test=m.init.apply(m, args);
+                        return test;
                     }
 
                     return false;

@@ -1,47 +1,86 @@
+var SOUL = {};
+
 hwc.include([
     "hwc!{PATH_JS_LIB}browser/application/Component.js",
-    "hwc!{PATH_JS_LIB}browser/application/System.js"
+    "hwc!{PATH_JS_LIB}browser/application/System.js",
+    "hwc!{PATH_JS_LIB}browser/cookie/index.js"
 ]).define(function () {
     var $ = this;
 
-    var Main = $.class.extends($.Browser.Component)(
-        $.public({
-            __construct: function (parent, childs, opt) {
-                var template = new $.Browser.Template("soul/main.html", "css/main.css");
-                opt.template = template;
-                this.__super(parent, [{module: "js/nav.js", opt: {selector: "header"}}], opt);
-            },
-            update: function () {
-                this.__super();
-            },
-            init: function () {
-                this.__super();
-                // operazioni di inizializz.
-            },
-            build: function () {
-                var comp = this.i.getRouter().getRouteInfo().getComponent();
-                var page = comp || "home";
+    SOUL.Main = $.class.extends($.Browser.Component)(
+            $.public({
+                __construct: function (parent, childs, opt) {
+                    var template = new $.Browser.Template("soul/main.html", "css/main.css");
+                    opt.template = template;
+                    this.__super(parent, [{module: "js/nav.js", opt: {selector: "header"}}], opt);
+                },
+                update: function () {
+                    this.__super();
+                },
+                init: function () {
+                    this.__super().then(function () {
+                        // Load libs and scripts that should be executed
+                        // after all content load
+                        $.Browser.Loader.load([
+                            //"js/lib/jquery-1.7.min.js",
+                            "js/script.js"
+                        ]);
+                    });
+                },
+                build: function () {
+                    var comp = this.i.getRouter().getRouteInfo().getComponent();
+                    var page = comp || "home";
 
-                if (this._i.prevContent) {
-                    this.i.unbindChild("content");
+                    if (this._i.prevContent) {
+                        this.i.unbindChild("content");
+                    }
+
+                    $.Browser.Component.load("js/pages/" + page + ".js", "content", this.i, [], {selector: "#dyn-content"});
+                },
+                bindChild: function (id, child) {
+                    id == "content" && (this._i.prevContent = true);
+
+                    this.__super(id, child);
                 }
+            }),
+            $.private({
+                prevContent: null
+            }),
+            $.public.static({
+                checkSession: function () {
+                    var defer = $.Async.defer();
 
-                $.Browser.Component.load("js/pages/" + page + ".js", "content", this.i, [], {selector: "#dyn-content"});
-            },
-            bindChild: function (id, child) {
-                id == "content" && (this._i.prevContent = true);
+                    var data = {
+                        id: $.Browser.Cookie.get("user-id"),
+                        token: $.Browser.Cookie.get("session")
+                    };
 
-                this.__super(id, child);
-            }
-        }),
-        $.private({
-            prevContent: null
-        })
-        );
+                    var kick = function () {
+                        $.Browser.Router.I().navigate({component: "home"}, function () {
+                            $.Browser.Cookie.delete("session", "/");
+                            $.Browser.Cookie.delete("user-id", "/");
+                            defer.resolve();
+                        });
+                    };
+
+                    if (!data.id || !data.token) {
+                        kick();
+                    } else {
+                        $.Browser.JQ.post("RestApi?table=user&type=session", data).done(function (res) {
+                            if (res === "false") {
+                                kick();
+                            }
+                        });
+                    }
+
+                    return defer.promise;
+                }
+            })
+            );
 
     var system = new $.Browser.System(true);
 
-    system.register("main", Main, {autoStart: true, selector: "body"});
+    system.register("main", SOUL.Main, {autoStart: true, selector: "body"});
 
     system.init();
 });

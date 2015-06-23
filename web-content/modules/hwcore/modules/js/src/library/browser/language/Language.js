@@ -6,23 +6,25 @@
 'use strict';
 
 hwc.define([
-    "hwc!{PATH_JS_LIB}browser/language/include.js"
+    "hwc!{PATH_JS_LIB}browser/language/include.js",
+    "hwc!{PATH_JS_LIB}browser/router/index.js"
 ], function () {
     var $ = this;
-    $.Browser.Language = $.Class({members: [
+    $.Browser.Language = $.Class({base: $.Object, use: [$.Singleton], members: [
             {
-                attributes: "private static",
-                name: "langs",
-                val: {"en": "en-GB", "it": "it-IT"}
+                a: "private static", n: "langs", v: {"en": "en-GB", "it": "it-IT"}
+            },
+            {
+                a: "private", n: "lang", v: null
             },
             {
                 attributes: "public",
                 name: "__construct",
                 val: function () {
-                    this.lang = window.localStorage.getItem("lang") || "it";
-                    var lang = $.Browser.Uri.getInstance().getParam("lang");
-                    if (lang)
-                        this.lang = lang;
+                    this._i.lang = window.localStorage.getItem("lang") || "it";
+                    //var lang = $.Browser.Uri.getInstance().getParam("lang");
+                    //if (lang)
+                    //    this._i.lang = lang;
                 }
             },
             {
@@ -32,10 +34,11 @@ hwc.define([
                     if (!lang in this._s.langs)
                         return false;
 
-                    var old = this.lang;
-                    this.lang = lang;
+                    var old = this._i.lang;
+                    this._i.lang = lang;
 
-                    $.Browser.Uri.updateParam("lang", lang);
+                    $.Browser.Router.I().getRouteInfo().replaceParam("lang",lang);
+                    $.Browser.Router.I().update();
                     window.localStorage.setItem("lang", lang);
 
                     return old;
@@ -45,7 +48,7 @@ hwc.define([
                 attributes: "public",
                 name: "getLang",
                 val: function () {
-                    return this.lang;
+                    return this._i.lang;
                 }
             }
         ]}

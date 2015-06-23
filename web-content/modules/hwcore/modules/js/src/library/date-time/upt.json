@@ -1,5 +1,5 @@
 {
-    "name": "hwcore/modulesjs/src/library/date-time",
+    "name": "hwcore/modules/js/src/library/date-time",
     "license": "http://www.hyperweb2.com/terms",
     "dependencies": {
         "%class": "hw-core/js-library-class#*"

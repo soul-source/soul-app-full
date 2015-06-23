@@ -8,7 +8,7 @@ hwc.define([
              * Vars
              */
             {
-                a: ["private", "static"], n: "instances", v: new Array()
+                a: ["protected", "static"], n: "instances", v: new Array()
             },
             {
                 // Array object is very fexible, it can contains both associative values and numerical
@@ -34,6 +34,11 @@ hwc.define([
                         // if id is defined, then use this as array key
                         id && (this._i.triggers[id] = obj) || this._i.triggers.push(obj);
                     }
+                }
+            },
+            {
+                a: "public", n: "getChildById", v: function(id) {
+                    return this._i.triggers[id];
                 }
             },
             {
@@ -68,11 +73,11 @@ hwc.define([
             },
             {
                 a: ["public", "static"], n: "I", v: function (key, triggers) {
-                    if (typeof this._s.instances[key] === "undefined") {
-                        this._s.instances[key] = new $.Event(triggers);
+                    if (typeof this.s.instances[key] === "undefined") {
+                        this.s.instances[key] = new this.__caller(triggers);
                     }
 
-                    return this._s.instances[key];
+                    return this.s.instances[key];
                 }
             }
         ]}

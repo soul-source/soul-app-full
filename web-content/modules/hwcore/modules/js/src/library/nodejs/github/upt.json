@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/nodejs/github",
+  "name": "hwcore/modules/js/src/library/nodejs/github",
   "license": "http://www.hyperweb2.com/terms",
   "dependencies": {
     "%common": "hw-core/js-library-common#*"

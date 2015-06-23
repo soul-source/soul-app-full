@@ -29,7 +29,7 @@ if (!Function.prototype.bind) {
     };
 }
 
-var Bootstrap = (function () {
+var HwcBootstrap = (function () {
     var Obj = function _Bootstrap () {
     };
 
@@ -46,123 +46,124 @@ var Bootstrap = (function () {
     var autoAttr = "data-hwc-auto-init";
     var manualAttr = "data-hwc-manual-init";
 
-    var setGlobals = function (global, skipExtra) {
-//      global namespaced
+    var __include = function () {
+        var that = this;
+        var includes = arguments;
+        Array.isArray(arguments[0]) && (includes = arguments[0]);
 
-        var __include = function () {
-            var that = this;
-            var includes = arguments;
-            Array.isArray(arguments[0]) && (includes = arguments[0]);
-
-            var obj = function (module) {
-                return obj.define(module);
-            };
-
-            obj.define = function (module) {
-                return that.define(includes, module);
-            };
-
-            return obj;
+        var obj = function (module) {
+            return obj.define(module);
         };
 
-        global.hwc = {
-            // magic define
-            set exports (module) {
-                this.define([], module);
-            },
-            Module: function (def, args) {
-                this.module = def;
-                this.args = args;
-            },
-            __pendingDefines: [],
-            __pendingFunc: [],
-            include: __include,
-            require: __include, // just an alias of include for now
-            /**
-             * requirejs alias
-             */
-            define: function () {
-                // if hwc has not been initialized yet, we must defer the module loading
-                var scripts = document.getElementsByTagName('script');
-                var lastScript = scripts[scripts.length - 1];
+        obj.define = function (module) {
+            return that.define(includes, module);
+        };
 
-                if (!lastScript.src) {
-                    // this is the case of modules defined inside a <script> tag
-                    // without using a file
-                    this.defineFn.apply(this, arguments);
+        return obj;
+    };
 
-                    return;
-                } else if (!this.__rdefine) {
-                    this.__pendingDefines.push(lastScript.src);
-                    return;
-                }
+    var hwc = {
+        // magic define
+        set exports (module) {
+            this.define([], module);
+        },
+        Module: function (def, args) {
+            this.module = def;
+            this.args = args;
+        },
+        __pendingDefines: [],
+        __pendingFunc: [],
+        include: __include,
+        require: __include, // just an alias of include for now
+        /**
+         * requirejs alias
+         */
+        define: function () {
+            // if hwc has not been initialized yet, we must defer the module loading
+            var scripts = document.getElementsByTagName('script');
+            var lastScript = scripts[scripts.length - 1];
 
-                var args;
+            if (!lastScript.src) {
+                // this is the case of modules defined inside a <script> tag
+                // without using a file
+                this.defineFn.apply(this, arguments);
+
+                return;
+            } else if (!this.__rdefine) {
+                this.__pendingDefines.push(lastScript.src);
+                return;
+            }
+
+            var args;
+            switch (arguments.length) {
+                case 1:
+                    var def = arguments[0];
+
+                    var hwcModule = function () {
+                        return new hwc.Module(def, arguments);
+                    };
+                    hwcModule.__isHw2Module = true;
+
+                    args = [hwcModule];
+                    break;
+                case 2:
+                    var def = arguments[1];
+
+                    var hwcModule = function () {
+                        return new hwc.Module(def, arguments);
+                    };
+                    hwcModule.__isHw2Module = true;
+
+                    args = [arguments[0], hwcModule];
+                    break;
+                default:
+                    throw new SyntaxError("Invalid number of parameters");
+            }
+
+            this.__rdefine.apply(null, args);
+        },
+        getPendingDefines: function () {
+            return this.__pendingDefines;
+        },
+        getPendingFunc: function () {
+            return this.__pendingFunc;
+        },
+        defineFn: function () {
+            if (!this.__rdefine) {
+                this.__pendingFunc.push(arguments);
+            } else {
                 switch (arguments.length) {
                     case 1:
-                        var def = arguments[0];
-
-                        var hwcModule = function () {
-                            return new hwc.Module(def, arguments);
-                        };
-                        hwcModule.__isHw2Module = true;
-
-                        args = [hwcModule];
+                        arguments[0].call(this.__core);
                         break;
                     case 2:
+                        var inc = arguments[0];
                         var def = arguments[1];
-
-                        var hwcModule = function () {
-                            return new hwc.Module(def, arguments);
-                        };
-                        hwcModule.__isHw2Module = true;
-
-                        args = [arguments[0], hwcModule];
+                        var that = this;
+                        this.__core.Loader.load(inc)
+                            .then(function () {
+                                def.call(that.__core);
+                            });
                         break;
                     default:
                         throw new SyntaxError("Invalid number of parameters");
                 }
+            }
+        },
+        init: null,
+        /*
+         * Internal used
+         */
+        // will be defined next
+        __rdefine: null,
+        __core: null
+    };
 
-                this.__rdefine.apply(null, args);
-            },
-            getPendingDefines: function () {
-                return this.__pendingDefines;
-            },
-            getPendingFunc: function () {
-                return this.__pendingFunc;
-            },
-            defineFn: function () {
-                if (!this.__rdefine) {
-                    this.__pendingFunc.push(arguments);
-                } else {
-                    switch (arguments.length) {
-                        case 1:
-                            arguments[0].call(this.__core);
-                            break;
-                        case 2:
-                            var inc = arguments[0];
-                            var def = arguments[1];
-                            var that = this;
-                            this.__core.Loader.load(inc)
-                                .then(function () {
-                                    def.call(that.__core);
-                                });
-                            break;
-                        default:
-                            throw new SyntaxError("Invalid number of parameters");
-                    }
-                }
-            },
-            init: null,
-            /*
-             * Internal used
-             */
-            // will be defined next
-            __rdefine: null,
-            __core: null
-        };
+    var setGlobals = function (global, skipExtra) {
+//      global namespaced
 
-        hwc.defTests = hwc.define; // special use for tests
+        global.hwc = hwc;
+        global.hwc.defTests = global.hwc.define; // special use for tests
 
         if (!skipExtra) {
 //      in environments without module system
@@ -245,7 +246,7 @@ var Bootstrap = (function () {
             });
 
             req([defines.PATH_JS_KERNEL + "Core.js"], function (HWCore) {
-                HWCore.const = that.defines;
+                HWCore.const = window.hwc.const = that.defines;
                 HWCore.I(function () {
                     var $ = this;
                     // this allows to load all modules defined before hw-core initialization
@@ -321,7 +322,7 @@ var Bootstrap = (function () {
         setGlobals(global, true);
 
         var HWCore = requirejs(this.defines.PATH_JS_KERNEL + "Core.js");
-        HWCore.const = this.defines;
+        HWCore.const = global.hwc.const = this.defines;
         return HWCore.I; // export default instance of hw-core
     };
 
@@ -386,6 +387,4 @@ var Bootstrap = (function () {
  * 
  */
 
-var boot = new Bootstrap();
-
-boot.init();
+new HwcBootstrap().init();

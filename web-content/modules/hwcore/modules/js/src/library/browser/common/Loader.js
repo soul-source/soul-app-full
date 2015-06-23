@@ -76,8 +76,6 @@ hwc.define([
                                 var deferred = $.Async.defer();
                                 var cb = null;
 
-                                $.Browser.JQ.ajaxSetup({async: !options.sync});
-
                                 if ($.Var.isset(function () {
                                     return options.selector;
                                 })) {
@@ -104,6 +102,8 @@ hwc.define([
                                         deferred.resolve(arguments);
                                     };
                                 }
+
+                                $.Browser.JQ.ajaxSetup({async: !options.sync});
 
                                 $.Browser.JQ.ajax(src).done(cb);
 

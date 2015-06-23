@@ -7,14 +7,16 @@ hwc.define([
 ], function Router () {
     var $ = this;
 
-    return $.Browser.Router = $.class.extends($.Object)(
+    return $.Browser.Router = $.class.extends($.Object).use($.Singleton)(
         /**
          * Private variables
          */
         $.private({
+            events: [],
             routeInfo: null,
             isSpa: false,
-            eventHandler: false
+            eventHandler: false,
+            prevRoute : null,
         }),
         /**
          * Internal Class
@@ -46,10 +48,11 @@ hwc.define([
                         this._i.route.segmentCoded(0, component);
                     },
                     getPath: function () {
-                        return this._i.route.pathname().slice(1);
+                        var p= this._i.route.pathname().split("/");
+                        return p.slice(1).join("/");
                     },
                     setPath: function (path) {
-                        var component = this._i.getComponent();
+                        var component = this.i.getComponent();
                         this._i.route.pathname(component + "/" + path);
                     },
                     getParams: function () {
@@ -91,28 +94,27 @@ hwc.define([
          * Public members
          */
         $.public({
-            __construct: function (url, isSpa) {
+            __construct: function (url, isSpa, disableListner) {
                 var that = this;
                 this._i.isSpa = isSpa;
                 this._i.eventHandler = new $.EventHandler();
                 this._i.routeInfo = new this.s.RouteInfo(url, isSpa);
 
-                /*
-                 * back or forward browser events
-                 */
-                function pop (e) {
-                    // update routeInfo and cast update trigger
-                    if (that.i.getRouteInfo().getUri().href() != window.location.href)
-                        that.i.update(new $.Browser.Router.RouteInfo(window.location.href, isSpa));
+                if (!disableListner) {
+                    this.i.runCheckListner();
                 }
-
-                $.Browser.EventHandler.replaceEventListner(window, "popstate", pop);
             },
             getRouteInfo: function () {
                 return  this._i.routeInfo;
             },
+            getPrevRouteInfo: function () {
+                return  this._i.prevRoute;
+            },
             getRoute: function () {
                 return  this._i.routeInfo.getRoute();
+            },
+            isSpa: function () {
+                return this._i.isSpa;
             },
             addListner: function (obj) {
                 this._i.eventHandler.bind(obj);
@@ -141,7 +143,7 @@ hwc.define([
                 }
 
                 if (!reload) {
-                    $.Browser.EventHandler.replaceEventListner(element, "click", navigate);
+                    $.Browser.EventHandler.setEventListner(element, "click", navigate);
                 }
             },
             /**
@@ -165,8 +167,8 @@ hwc.define([
                 var isRoute = $.typeCompare(this.s.RouteInfo, uri, reload);
 
                 if (reload) {
-                    window.location.assign(isRoute ? uri.getUri().toString() : uri);
                     callback && callback();
+                    window.location.assign(isRoute ? uri.getUri().toString() : uri);
                 } else {
                     this.i.update(uri, callback);
                 }
@@ -188,10 +190,24 @@ hwc.define([
                 var top = document.getElementById(h).offsetTop;
                 window.scrollTo(0, top);
             },
+            /**
+             * Alias for history.back
+             */
+            goBack: function () {
+                window.history.back();
+            },
+            /**
+             * Alias for document.referrer;
+             * @returns {Node.referrer|String|Document.referrer|document.referrer}
+             */
+            getPreviousUrl: function () {
+                return document.referrer;
+            },
             update: function (routeInfo, callback) {
                 var that = this;
 
-                this._i.routeInfo = routeInfo;
+                this._i.prevRoute = this._i.routeInfo;
+                this._i.routeInfo = routeInfo || this._i.routeInfo;
 
                 callback && callback();
 
@@ -213,6 +229,91 @@ hwc.define([
                         window.history.pushState(that._i.routeInfo, "Title", url);
                     })
                     .then(this._i.eventHandler.trigger("afterUpdate"));
+            },
+            refresh: function (forceReload) {
+                (forceReload || this.i.isSpa()) &&
+                    window.location.reload() ||
+                    this.i.update();
+            },
+            /**
+             * 
+             * @param {type} re: regular expression for url
+             * @param {type} handler
+             * @returns {Router.RouterAnonym$4}
+             */
+            addEvent: function (re, handler) {
+                if (typeof re == 'function') {
+                    handler = re;
+                    re = '';
+                }
+
+                if (!this._i.events[re])
+                    this._i.events[re] = [];
+
+                this._i.events[re].push(handler);
+                return this;
+            },
+            removeEvent: function (param) {
+                if (typeof param === "function") {
+                    for (var re in this._i.events) {
+                        var i = this._i.events[re].indexOf(param);
+                        if (i >= 0) {
+                            this._i.events[re].splice(i, 1);
+                            return this;
+                        }
+                    }
+                } else {
+                    delete this._i.events[re];
+                    return this;
+                }
+            },
+            clearEvents: function () {
+                this._i.events = [];
+                return this;
+            },
+            runCheckListner: function () {
+                var that=this;
+                /*
+                 * back or forward browser events
+                 */
+                $.Browser.EventHandler.setEventListner(window, "popstate", function() {
+                    that.i.pop();
+                });
+                /**
+                 * hash change events
+                 */
+                $.Browser.EventHandler.setEventListner(window, "hashchange", function() {
+                    that.i.checkEvents();
+                });
+
+                /**
+                 * fist check
+                 */
+                this.i.checkEvents();
+            },
+            checkEvents: function (f) {
+                var fragment = f || this.i.getRouteInfo().getRoute().href();
+                for (var re in this._i.events) {
+                    var match = fragment.match(re);
+                    if (match) {
+                        match.shift();
+                        for (var i in this._i.events[re])
+                            this._i.events[re][i].apply({}, match);
+
+                        return match;
+                    }
+                }
+
+                return this;
+            },
+            pop: function (e) {
+                // update routeInfo and cast update trigger
+                if (this.i.getRouteInfo().getUri().href() != window.location.href) {
+                    // update route info
+                    this.i.update(new $.Browser.Router.RouteInfo(window.location.href, this.i.isSpa()));
+                    // then check for events
+                    this.i.checkEvents();
+                }
             }
         }),
         $.private({
@@ -220,8 +321,8 @@ hwc.define([
                 opt = opt || {};
                 var route = this._i.routeInfo.clone();
                 opt.component && route.setComponent(opt.component);
-                opt.path && route.setComponent(opt.path);
-                opt.params && route.setComponent(opt.params);
+                opt.path && route.setPath(opt.path);
+                opt.params && route.setParams(opt.params);
                 route.updateUri();
                 return route;
             }

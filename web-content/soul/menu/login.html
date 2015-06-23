@@ -1,0 +1,43 @@
+<div class="soul-login-div" id="soul-registration">
+    <div>
+        <label for="soul-reg-form">Registrazione:</label>
+    </div>
+    <form id="soul-reg-form" action="RestApi?table=user&type=reg" method="POST">
+        <div>
+            <input id="soul-reg-name" type="text" required placeholder="Nome">
+            <input id="soul-reg-last-name" type="text" required placeholder="Cognome">
+        </div>
+        <div>
+            <label for="soul-reg-birth-date">Data di nascita</label>
+            <input id="soul-reg-birth-date" type="date" required>
+        </div>
+        <div>
+            <input id="soul-reg-email" type="email" required placeholder="Email">
+        </div>
+        <div>
+            <input id="soul-reg-password" type="password" required placeholder="Password">
+        </div>
+        <div>
+            <input id="soul-reg-repeat-pass" type="password"  required placeholder="Conferma Password">
+        </div>
+
+        <input type="submit" id="soul-reg-send">
+    </form>
+</div>
+
+<div class="soul-login-div" id="soul-login">
+    <div>
+        <label for="soul-login-form">Logins</label>
+    </div>
+    <form id="soul-login-form" action="RestApi?table=user&type=login" method="POST">
+        <div>
+            <input id="soul-login-email" type="email" placeholder="Email">
+        </div>
+
+        <div>
+            <input id="soul-login-password" type="password" placeholder="Password">
+        </div>
+
+       <input type="submit" id="soul-login-send">
+    </form>
+</div>

@@ -5,7 +5,7 @@
 hwc.define([
     'hwc!{PATH_JS_LIB}common/include.js'
 ], function () {
-    $ = this;
+    var $ = this;
     $.ObjUtils = $.Class({members: [
             {
                 a: ["public", "static"], n: "merge", v: function (obj1, obj2) {
@@ -17,6 +17,16 @@ hwc.define([
                         obj3[attrname] = obj2[attrname];
                     }
                     return obj3;
+                }
+            },
+            {
+                a: ["public","static"], n: "instanceFactory", v: function(cl,args) {
+                    function dummy() {}
+                    
+                    dummy.prototype = cl.prototype;
+                    var obj = new dummy();
+                    cl.apply(obj, args);
+                    return obj;
                 }
             }
 

@@ -11,6 +11,7 @@ hwc.define([
     'hwc!{PATH_JS_LIB}common/Async.js',
     'hwc!{PATH_JS_LIB}common/Object.js',
     'hwc!{PATH_JS_LIB}common/ObjUtils.js',
+    'hwc!{PATH_JS_LIB}common/Singleton.js',
     'hwc!{PATH_JS_LIB}common/String.js',
     'hwc!{PATH_JS_LIB}common/Var.js'
 ],function () {

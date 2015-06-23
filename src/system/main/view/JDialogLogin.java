@@ -11,7 +11,7 @@ import java.awt.event.WindowEvent;
 import javax.swing.JOptionPane;
 import system.main.controller.ControllerJDialogLogin;
 import system.main.controller.ControllerJFrameMain;
-import system.user.controller.ControllerJFrameUtente;
+import system.user.controller.ControllerJFrameUser;
 
 public class JDialogLogin extends javax.swing.JDialog {
 
@@ -129,7 +129,7 @@ public class JDialogLogin extends javax.swing.JDialog {
     }//GEN-LAST:event_formKeyPressed
 
     private void jButtonRegisterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRegisterActionPerformed
-        new ControllerJFrameUtente(true);
+        new ControllerJFrameUser(true);
     }//GEN-LAST:event_jButtonRegisterActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

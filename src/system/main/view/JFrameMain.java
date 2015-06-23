@@ -17,12 +17,12 @@ import system.chat.controller.ControllerJFrameChatList;
 import system.common.MyJFrameController;
 import system.main.controller.ControllerJDialogLogin;
 import system.main.controller.ControllerJFrameMain;
-import system.notification.controller.ControllerJFrameNotifiche;
-import system.news.controller.ControllerJFrameNotizieList;
-import system.emergencynumber.controller.ControllerJFrameNumeri;
-import system.report.controller.ControllerJFrameSegnalazioniList;
+import system.notification.controller.ControllerJFrameNotifications;
+import system.news.controller.ControllerJFrameNewsList;
+import system.emergencynumber.controller.ControllerJFrameNumbers;
+import system.report.controller.ControllerJFrameReportsList;
 import system.test.controller.ControllerJFrameTest;
-import system.user.controller.ControllerJFrameUtente;
+import system.user.controller.ControllerJFrameUser;
 
 /**
  *
@@ -481,11 +481,11 @@ public class JFrameMain extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItemNumeriActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNumeriActionPerformed
-        frameOpen(ControllerJFrameNumeri.class);
+        frameOpen(ControllerJFrameNumbers.class);
 }//GEN-LAST:event_jMenuItemNumeriActionPerformed
 
     private void jMenuItemUtenteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemUtenteActionPerformed
-        frameOpen(ControllerJFrameUtente.class);
+        frameOpen(ControllerJFrameUser.class);
 }//GEN-LAST:event_jMenuItemUtenteActionPerformed
 
     private void jMenuItemChatActionPerformed1(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemChatActionPerformed1
@@ -493,7 +493,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemChatActionPerformed1
 
     private void jInternalFrameNumeriInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNumeriInternalFrameClosing
-        frameClose(ControllerJFrameNumeri.class);
+        frameClose(ControllerJFrameNumbers.class);
     }//GEN-LAST:event_jInternalFrameNumeriInternalFrameClosing
 
     private void jInternalFrameNumeriInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNumeriInternalFrameDeiconified
@@ -501,7 +501,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameNumeriInternalFrameDeiconified
 
     private void jInternalFrameNotizieInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotizieInternalFrameClosing
-        frameClose(ControllerJFrameNotizieList.class);
+        frameClose(ControllerJFrameNewsList.class);
     }//GEN-LAST:event_jInternalFrameNotizieInternalFrameClosing
 
     private void jInternalFrameNotizieInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotizieInternalFrameDeiconified
@@ -509,7 +509,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameNotizieInternalFrameDeiconified
 
     private void jInternalFrameNotificheInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotificheInternalFrameClosing
-        frameClose(ControllerJFrameNotifiche.class);
+        frameClose(ControllerJFrameNotifications.class);
     }//GEN-LAST:event_jInternalFrameNotificheInternalFrameClosing
 
     private void jInternalFrameNotificheInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotificheInternalFrameDeiconified
@@ -517,7 +517,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameNotificheInternalFrameDeiconified
 
     private void jMenuItemNotificheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotificheActionPerformed
-        frameOpen(ControllerJFrameNotifiche.class);
+        frameOpen(ControllerJFrameNotifications.class);
     }//GEN-LAST:event_jMenuItemNotificheActionPerformed
 
     private void jInternalFrameChatInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameChatInternalFrameDeiconified
@@ -529,7 +529,7 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameChatInternalFrameClosing
 
     private void jInternalFrameSegnalazioniInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameSegnalazioniInternalFrameClosing
-        frameClose(ControllerJFrameSegnalazioniList.class);
+        frameClose(ControllerJFrameReportsList.class);
     }//GEN-LAST:event_jInternalFrameSegnalazioniInternalFrameClosing
 
     private void jInternalFrameSegnalazioniInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameSegnalazioniInternalFrameDeiconified
@@ -537,11 +537,11 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameSegnalazioniInternalFrameDeiconified
 
     private void jMenuItemNotizieActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemNotizieActionPerformed
-        frameOpen(ControllerJFrameNotizieList.class);
+        frameOpen(ControllerJFrameNewsList.class);
     }//GEN-LAST:event_jMenuItemNotizieActionPerformed
 
     private void jInternalFrameNotizieInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotizieInternalFrameActivated
-        doFocus(ControllerJFrameNotizieList.class);
+        doFocus(ControllerJFrameNewsList.class);
     }//GEN-LAST:event_jInternalFrameNotizieInternalFrameActivated
 
     private void jInternalFrameChatInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameChatInternalFrameActivated
@@ -549,19 +549,19 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameChatInternalFrameActivated
 
     private void jInternalFrameNotificheInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNotificheInternalFrameActivated
-        doFocus(ControllerJFrameNotifiche.class);
+        doFocus(ControllerJFrameNotifications.class);
     }//GEN-LAST:event_jInternalFrameNotificheInternalFrameActivated
 
     private void jInternalFrameSegnalazioniInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameSegnalazioniInternalFrameActivated
-        doFocus(ControllerJFrameSegnalazioniList.class);
+        doFocus(ControllerJFrameReportsList.class);
     }//GEN-LAST:event_jInternalFrameSegnalazioniInternalFrameActivated
 
     private void jInternalFrameNumeriInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameNumeriInternalFrameActivated
-        doFocus(ControllerJFrameNumeri.class);
+        doFocus(ControllerJFrameNumbers.class);
     }//GEN-LAST:event_jInternalFrameNumeriInternalFrameActivated
 
     private void jInternalFrameUtenteInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameUtenteInternalFrameClosing
-        frameClose(ControllerJFrameUtente.class);
+        frameClose(ControllerJFrameUser.class);
     }//GEN-LAST:event_jInternalFrameUtenteInternalFrameClosing
 
     private void jInternalFrameUtenteInternalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameUtenteInternalFrameDeiconified
@@ -569,11 +569,11 @@ public class JFrameMain extends javax.swing.JFrame {
     }//GEN-LAST:event_jInternalFrameUtenteInternalFrameDeiconified
 
     private void jInternalFrameUtenteInternalFrameActivated(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameUtenteInternalFrameActivated
-        doFocus(ControllerJFrameNotifiche.class);
+        doFocus(ControllerJFrameNotifications.class);
     }//GEN-LAST:event_jInternalFrameUtenteInternalFrameActivated
 
     private void jMenuItemSegnalazioniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSegnalazioniActionPerformed
-        frameOpen(ControllerJFrameSegnalazioniList.class);
+        frameOpen(ControllerJFrameReportsList.class);
     }//GEN-LAST:event_jMenuItemSegnalazioniActionPerformed
 
     private void jInternalFrameConsoleInternalFrameClosing(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_jInternalFrameConsoleInternalFrameClosing

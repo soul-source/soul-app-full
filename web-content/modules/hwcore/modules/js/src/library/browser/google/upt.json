@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/browser/google",
+  "name": "hwcore/modules/js/src/library/browser/google",
   "license": "http://www.hyperweb2.com/terms",
   "dependencies": {},
   "devDependencies": {

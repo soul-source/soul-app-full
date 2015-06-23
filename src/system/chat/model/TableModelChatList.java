@@ -10,7 +10,7 @@ import system.common.PermissionsTypes;
 import system.common.SessionHandler;
 
 import system.main.controller.ControllerJFrameMain;
-import system.user.model.EntityModelUtente;
+import system.user.model.EntityModelUser;
 
 public class TableModelChatList extends MyTableModel {
 
@@ -22,7 +22,7 @@ public class TableModelChatList extends MyTableModel {
     public void refreshList() {
         super.refreshList(MyQueryHandler.getQb()
                 .qbBuildName(EntityModelMessaggio.I().ID_UTENTE.getPath())
-                .qbCompare(SessionHandler.I().getUser().getValue(EntityModelUtente.I().ID_UTENTE.getId()))
+                .qbCompare(SessionHandler.I().getUser().getValue(EntityModelUser.I().ID_UTENTE.getId()))
                 .limit(1, 0)
                 .toString()
         );

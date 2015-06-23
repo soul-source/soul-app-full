@@ -7,7 +7,7 @@ package system.main.controller;
 import system.common.MyController;
 import system.common.MyJFrameController;
 import system.main.view.JFrameMain;
-import system.notification.controller.ControllerJFrameNotifiche;
+import system.notification.controller.ControllerJFrameNotifications;
 
 public class ControllerJFrameMain extends ControllerMain {
 
@@ -20,7 +20,7 @@ public class ControllerJFrameMain extends ControllerMain {
         // start login screen
         frame = new JFrameMain();
 
-        this.setCtrl(new ControllerJFrameNotifiche());
+        this.setCtrl(new ControllerJFrameNotifications());
 
         frame.setVisible(true);
     }

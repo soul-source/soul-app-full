@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/browser/mvc",
+  "name": "hwcore/modules/js/src/library/browser/mvc",
   "license": "http://www.hyperweb2.com/terms",
   "dependencies": {},
   "devDependencies": {

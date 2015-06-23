@@ -7,7 +7,7 @@
 
 hwc.define([
     "hwc!{PATH_JS_LIB}browser/filesystem/include.js",
-    "hwc!{PATH_JS_LIB}common/Path.js"
+    "hwc!{PATH_JS_LIB}filesystem/Path.js"
 ], function () {
     var $ = this;
     $.Browser.Path = $.Class({base: $.Path, members: [

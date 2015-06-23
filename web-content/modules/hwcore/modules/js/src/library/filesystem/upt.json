@@ -1,5 +1,5 @@
 {
-    "name": "hwcore/modulesjs/src/library/filesystem",
+    "name": "hwcore/modules/js/src/library/filesystem",
     "license": "http://www.hyperweb2.com/terms",
     "dependencies": {
         "%class": "hw-core/js-library-class#*"

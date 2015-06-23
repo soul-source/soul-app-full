@@ -9,16 +9,20 @@ import com.google.gson.Gson;
 import hwcore.modules.java.src.library.common.SysConfig;
 import hwcore.modules.java.src.library.database.RecordSet;
 import java.io.IOException;
-import java.util.Enumeration;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import system.main.controller.ControllerMain;
-import system.news.model.TableModelNotizieList;
-import system.user.controller.ControllerUtente;
-import system.user.model.TableModelUtente;
+import system.news.model.TableModelNewsList;
+import system.user.model.EntityModelUser;
+import system.user.model.HandlerUserQuery;
+import system.user.model.TableModelUser;
+import system.user.model.UserRS;
 
 /**
  *
@@ -55,24 +59,34 @@ public class RestApi extends HttpServlet {
             throws ServletException, IOException {
         processRequest(request, response);
 
-        ControllerMain mainCtrl = ControllerMain.I();
+        ControllerMain.I(); // initialize system
 
         //Enumeration<String> parameterNames = request.getParameterNames();
         try {
             String table = request.getParameter("table");
 
-            List<RecordSet> rs = null;
+            ArrayList<RecordSet> rs = new ArrayList<>();
             switch (table) {
                 case "news":
-                    TableModelNotizieList newsList = new TableModelNotizieList();
+                    TableModelNewsList newsList = new TableModelNewsList();
                     newsList.refreshList("");
-                    rs = newsList.getTableData().getRecords();
+                    rs = new ArrayList<>(newsList.getTableData().getRecords());
+                    break;
+                case "user":
+                    HandlerUserQuery uQuery = new HandlerUserQuery(EntityModelUser.I());
+
+                    int id = Integer.parseInt(request.getParameter("user-id"));
+                    UserRS uRs=uQuery.loadUtente(id);
+                    Date d=(java.sql.Date)uRs.getValue(EntityModelUser.I().DATA_DI_NASCITA.getId());
+                    Long ms=d.getTime();
+                    uRs.setValue(EntityModelUser.I().DATA_DI_NASCITA.getId(), ms);
+                    rs.add(uRs);
                     break;
             }
 
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            String result=new Gson().toJson(rs);
+            String result = new Gson().toJson(rs);
             response.getWriter().write("{\"table\" : " + result + "}");
         } catch (Exception e) {
             e.printStackTrace();
@@ -92,21 +106,86 @@ public class RestApi extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processRequest(request, response);
-        
-        // DO CREATE/INSERT
+        // DO INSERT/CREATE
+
+        String table = request.getParameter("table");
+        String type = request.getParameter("type");
+
+        switch (table) {
+            case "user":
+                handleUser(request, response, type);
+                break;
+        }
+
+    }
+
+    private void handleUser(HttpServletRequest request, HttpServletResponse response, String type) throws IOException {
+        switch (type) {
+            case "session":
+                int sId = Integer.parseInt(request.getParameter("id"));
+                System.out.println(sId);
+                String sToken = request.getParameter("token");
+                HandlerUserQuery uQuery = new HandlerUserQuery(EntityModelUser.I());
+
+                UserRS uRs = uQuery.loadUtente(sId);
+                response.getWriter().write(
+                        Boolean.toString(sToken.equals(uRs.getSessionToken()))
+                );
+                break;
+            case "reg":
+                String regEmail = request.getParameter("email");
+                String regPassword = request.getParameter("pass");
+                String regName = request.getParameter("name");
+                String regLastName = request.getParameter("lastName");
+                String regBornDate = request.getParameter("bornDate");
+
+                new HandlerUserQuery(EntityModelUser.I())
+                        .regUser(regName, regLastName, regBornDate, regEmail, regPassword);
+
+                response.getWriter().write("Registrazione Effettuata!");
+                break;
+            case "login":
+                String loginEmail = request.getParameter("email");
+                String loginPassword = request.getParameter("pass");
+                String loginToken = request.getParameter("sessionTok");
+
+                int userId = new HandlerUserQuery(EntityModelUser.I())
+                        .loginUser(loginEmail, loginPassword, loginToken);
+
+                response.getWriter().write(Integer.toString(userId));
+                break;
+            case "profile":
+                String pId = request.getParameter("id");
+                String pPassword = request.getParameter("password");
+                String pName = request.getParameter("name");
+                String pLastName = request.getParameter("lastName");
+                String pBornDate = request.getParameter("birthDay");
+                String pCity = request.getParameter("city");
+                String pCap = request.getParameter("cap");
+                String pStreet = request.getParameter("street");
+                String pCountry = request.getParameter("country");
+                String pTaxCode = request.getParameter("taxCode");
+
+                new HandlerUserQuery(EntityModelUser.I())
+                        .updateUser(pId, pPassword, pName, pLastName, pBornDate,
+                                pCity, pCap, pStreet, pCountry, pTaxCode);
+
+                response.getWriter().write("Profilo aggiornato!");
+                break;
+        }
     }
 
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doDelete(req, resp); //To change body of generated methods, choose Tools | Templates.
-    
+
         // DO DELETE
     }
 
     @Override
     protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         super.doPut(req, resp); //To change body of generated methods, choose Tools | Templates.
-    
+
         // DO UPDATE
     }
 

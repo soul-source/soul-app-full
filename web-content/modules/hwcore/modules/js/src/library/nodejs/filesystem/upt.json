@@ -1,5 +1,5 @@
 {
-  "name": "hwcore/modulesjs/src/library/nodejs/filesystem",
+  "name": "hwcore/modules/js/src/library/nodejs/filesystem",
   "devDependencies": {
     "%tests": "hw-core/js-library-nodejs-filesystem#tests",
     "%doc": "hw-core/js-library-nodejs-filesystem#gh-pages"
