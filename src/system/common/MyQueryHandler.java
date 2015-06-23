@@ -123,7 +123,8 @@ public class MyQueryHandler extends QueryHandler {
         }
 
         if (searchText.length > 0) {
-            qb.where(searchText);
+            if (searchText.length!=1 || !searchText[0].isEmpty())
+                qb.where(searchText);
         }
 
         if (additional != null && !additional.isEmpty()) {

@@ -7,7 +7,8 @@
 
 hwc.define([
     'hwc!{PATH_JS_LIB}date-time/include.js',
-    'hwc!{PATH_JS_LIB}common/Time.js'
+    'hwc!{PATH_JS_LIB}date-time/Time.js',
+    'hwc!{PATH_JS_LIB}date-time/Date.js'
 ],function () {
     var $ = this;
 });
