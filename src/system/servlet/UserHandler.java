@@ -77,15 +77,13 @@ public class UserHandler {
                 String regLastName = req.getParameter("lastName");
                 String regBirthDate = req.getParameter("birthDate");
 
-                try {
-                    new HandlerUserQuery(EntityModelUser.I())
-                            .regUser(regName, regLastName, regBirthDate, regEmail, regPassword);
-                } catch (Exception e) {
-                    resp.getWriter().write("Dati errati");
+                if (!new HandlerUserQuery(EntityModelUser.I())
+                        .regUser(regName, regLastName, regBirthDate, regEmail, regPassword)) {
+                    resp.getWriter().write("false");
                     return;
                 }
 
-                resp.getWriter().write("Registrazione Effettuata!");
+                resp.getWriter().write("true");
                 break;
             case "login":
                 String loginEmail = req.getParameter("email");

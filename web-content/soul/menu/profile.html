@@ -1,40 +1,40 @@
 <!--<style>.hwc-content .hwc-postcontent-0 .layout-item-0 { border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px;border-top-color:#C7C7C7;border-right-color:#C7C7C7;border-bottom-color:#C7C7C7;border-left-color:#C7C7C7;  border-collapse: separate; border-radius: 8px;  }
-	.hwc-content .hwc-postcontent-0 .layout-item-1 { border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-width:3px;border-color:#34040D; padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px; border-radius: 8px;  }
-	.ie7 .hwc-post .hwc-layout-cell {border:none !important; padding:0 !important; }
-	.ie6 .hwc-post .hwc-layout-cell {border:none !important; padding:0 !important; }
+        .hwc-content .hwc-postcontent-0 .layout-item-1 { border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-width:3px;border-color:#34040D; padding-top: 10px;padding-right: 10px;padding-bottom: 10px;padding-left: 10px; border-radius: 8px;  }
+        .ie7 .hwc-post .hwc-layout-cell {border:none !important; padding:0 !important; }
+        .ie6 .hwc-post .hwc-layout-cell {border:none !important; padding:0 !important; }
 
 </style> -->
 
 <div class="hwc-layout-wrapper">
-	<div class="hwc-content-layout">
-		<center>
-			<div style="margin-top:100px;">
-				<img src="./images/no-avatar.jpg" class="hwc-default-img"> 
-				<br>
-				<form id="profile-form" action = "RestApi?table=user&type=update-profile" method = "POST">
-                                    <div style="float:left"><label for="name">Nome: </label></div>
-                                    <div><input type="text" id="name" required/></div>
-                                    <div style="float:left"><label for="last-name">Cognome: </label></div>
-                                    <div><input type="text" id="last-name" required/></div>
-                                    <div style="float:left"><label for="birthdate">Data di Nascita: </label></div>
-                                    <div><input type="date" id="birthdate" required/></div>
-                                    <div style="float:left"><label for="city">Città: </label></div>
-                                    <div><input type="text" id="city"/></div>
-                                    <div style="float:left"><label for="street">Via: </label></div>
-                                    <div><input type="text" id="street"/></div>
-                                    <div style="float:left"><label for="tax_code">Codice Fiscale: </label></div>
-                                    <div><input type="text" id="tax_code"/></div>
-                                    <div style="float:left"><label for="cap">CAP: </label></div>
-                                    <div><input type="text" id="cap"/></div>
-                                    <div style="float:left"><label for="country">Nazione: </label></div>
-                                    <div><input type="text" id="country"/></div>
-                                     <div style="float:left"><label for="password">Password: </label></div>
-                                    <div><input type="password" id="password" required /></div>
-                                    <div><input type="submit" id="change_profile" value="Modifica"/></div>
-                                    
-                                </form>
-                                <button id="profile-delete" >Cancella Profilo</button>
-			</div>
-		</center>
-	</div>
+    <div class="hwc-content-layout">
+        <center>
+            <div style="margin-top:100px;">
+                <img src="./images/no-avatar.jpg" class="hwc-default-img"> 
+                <br>
+                <form id="profile-form" action = "RestApi?table=user&type=update-profile" method = "POST">
+                    <div style="float:left"><label for="password">Password: </label></div>
+                    <div><input type="password" id="password" required /></div>
+                    <div style="float:left"><label for="name">Nome: </label></div>
+                    <div><input type="text" id="name" required/></div>
+                    <div style="float:left"><label for="last-name">Cognome: </label></div>
+                    <div><input type="text" id="last-name" required/></div>
+                    <div style="float:left"><label for="birthdate">Data di Nascita: </label></div>
+                    <div><input type="date" id="birthdate" required/></div>
+                    <div style="float:left"><label for="city">Città: </label></div>
+                    <div><input type="text" id="city"/></div>
+                    <div style="float:left"><label for="street">Via: </label></div>
+                    <div><input type="text" id="street"/></div>
+                    <div style="float:left"><label for="tax_code">Codice Fiscale: </label></div>
+                    <div><input type="text" id="tax_code"/></div>
+                    <div style="float:left"><label for="cap">CAP: </label></div>
+                    <div><input type="text" id="cap"/></div>
+                    <div style="float:left"><label for="country">Nazione: </label></div>
+                    <div><input type="text" id="country"/></div>
+                    <div><input type="submit" id="change_profile" value="Modifica"/></div>
+
+                </form>
+                <button id="profile-delete" >Cancella Profilo</button>
+            </div>
+        </center>
+    </div>
 </div>

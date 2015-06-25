@@ -48,8 +48,14 @@ hwc.define([
                         var posting = jq.post(url, data);
 
                         /* Alerts the results */
-                        posting.done(function (data) {
-                            alert(data);
+                        posting.done(function (res) {
+                            
+                            if(res === "false"){
+                                alert("Errore Registrazione");
+                                return;
+                            }
+                            
+                            alert("Registrazione effettuata!");
                             form.trigger("reset");
                         });
                     });

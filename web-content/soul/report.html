@@ -2,6 +2,7 @@
     <div>
         <div>
             <div class="hwc-postcontent-0 clearfix">
+                <form action="RestApi?table=report" method="POST" id="report-form">
                 <div>
                     <div>
                         <div style="width: 100%; margin-top:40px" >
@@ -17,7 +18,7 @@
                         <div style="width: 100%; margin-top:40px" >
                             <p>Tipo Emergenza</p>
                             <p>
-                                <input type="text" value="Incendio" disabled><br>
+                                <input id="report-type" type="text" value="Incendio" disabled><br>
                             </p>
                         </div>
                     </div>
@@ -38,7 +39,7 @@
                             <div style="width: auto" >
                                 <p>Descrizione</p>
                                 <p>
-                                    <textarea name="testo" rows="5" cols="40" style="width:auto"></textarea>
+                                    <textarea id="report-description" name="testo" rows="5" cols="40" style="width:auto"></textarea>
                                     <br>
                                 </p>
                             </div>
@@ -70,9 +71,7 @@
                             <p style="text-align: center;">
                                 <span style="font-size: 14px;">
                                     &nbsp;
-                                    <a href="../soul/report/sent.html" title="Invia la segnalazione" class="hwc-button">
-                                        Invia
-                                    </a>
+                                    <input type ="submit" value ="Invia" class="hwc-button" id="send-report">
                                     &nbsp;
                                 </span>
                                 <br>
@@ -80,6 +79,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
             </div>
         </div>
     </div>

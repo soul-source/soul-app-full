@@ -67,9 +67,7 @@ public class HandlerUserQuery extends MyQueryHandler {
                         ""
                 );
 
-        this.execute(qb.toString());
-
-        return true;
+        return this.executeNoRes(qb.toString());
     }
 
     public boolean deleteUser(int id) {
