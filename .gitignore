@@ -81,4 +81,5 @@ build
 !/nb/nbproject
 /nb/nbproject/private/*
 /.debris/
+is-system-modules.ffs_gui
 
