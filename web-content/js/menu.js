@@ -48,13 +48,13 @@ hwc.include([
 
                             //$.Browser.Router.I().setRouteByUrl("#user-exit", "http://www.google.it", function () {
                             $.Browser.Router.I().setRoute("#user-exit", {component: "home"}, function () {
-                                $.Browser.Cookie.delete("session", "/");
+                                $.Browser.Cookie.delete("session-token", "/");
                                 $.Browser.Cookie.delete("user-id", "/");
                             });
                         });
                     }
 
-                    if ($.Browser.Cookie.get("session")) {
+                    if ($.Browser.Cookie.get("session-token")) {
                         $.Browser.JQ("#user-menu-btn").html("Profilo");
                         $.Browser.Router.I().setRoute("#user-menu-btn", {component: "profile"});
                     } else {

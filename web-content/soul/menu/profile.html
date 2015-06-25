@@ -11,13 +11,13 @@
 			<div style="margin-top:100px;">
 				<img src="./images/no-avatar.jpg" class="hwc-default-img"> 
 				<br>
-				<form id="profile-form" action = "RestApi?table=user&type=profile" method = "POST">
+				<form id="profile-form" action = "RestApi?table=user&type=update-profile" method = "POST">
                                     <div style="float:left"><label for="name">Nome: </label></div>
-                                    <div><input type="text" id="name"/></div>
+                                    <div><input type="text" id="name" required/></div>
                                     <div style="float:left"><label for="last-name">Cognome: </label></div>
-                                    <div><input type="text" id="last-name"/></div>
-                                    <div style="float:left"><label for="birthday">Data di Nascita: </label></div>
-                                    <div><input type="date" id="birthday"/></div>
+                                    <div><input type="text" id="last-name" required/></div>
+                                    <div style="float:left"><label for="birthdate">Data di Nascita: </label></div>
+                                    <div><input type="date" id="birthdate" required/></div>
                                     <div style="float:left"><label for="city">Città: </label></div>
                                     <div><input type="text" id="city"/></div>
                                     <div style="float:left"><label for="street">Via: </label></div>
@@ -29,7 +29,7 @@
                                     <div style="float:left"><label for="country">Nazione: </label></div>
                                     <div><input type="text" id="country"/></div>
                                      <div style="float:left"><label for="password">Password: </label></div>
-                                    <div><input type="password" id="password"/></div>
+                                    <div><input type="password" id="password" required /></div>
                                     <div><input type="submit" id="change_profile" value="Modifica"/></div>
                                     
                                 </form>

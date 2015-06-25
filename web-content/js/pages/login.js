@@ -1,5 +1,5 @@
 hwc.define([
-    "hwc!{PATH_JS_LIB}browser/application/Component.js", 
+    "hwc!{PATH_JS_LIB}browser/application/Component.js",
     "hwc!{PATH_JS_LIB}browser/cookie/index.js"
 ], function () {
     var $ = this;
@@ -34,7 +34,7 @@ hwc.define([
                         var data = {
                             name: jq("#soul-reg-name").val(),
                             lastName: jq("#soul-reg-last-name").val(),
-                            bornDate: jq("#soul-reg-born-date").val(),
+                            birthDate: jq("#soul-reg-birth-date").val(),
                             email: jq("#soul-reg-email").val(),
                             pass: jq("#soul-reg-password").val()
                         };
@@ -53,7 +53,7 @@ hwc.define([
                             form.trigger("reset");
                         });
                     });
-                    
+
                     // FORM LOGIN
                     jq("#soul-login-form").submit(function (event) {
 
@@ -67,27 +67,26 @@ hwc.define([
 
                         var data = {
                             email: jq("#soul-login-email").val(),
-                            pass: jq("#soul-login-password").val()
+                            pass: jq("#soul-login-password").val() // we should encrypt pass before send
                         };
-                        
-                        
-                        data.sessionTok= data.email+new Date().getTime();
-                        
+
                         /* Send the data using post */
                         var posting = jq.post(url, data);
 
                         /* Alerts the results */
                         posting.done(function (res) {
                             //se il login è andato a buon fine salva il token nel cookie
-                            if(res > 0){
-                                $.Browser.Cookie.set("session", data.sessionTok, 365, "/");
-                                $.Browser.Cookie.set("user-id", res, 365, "/");
+                            if (res && res !== "false") {
+                                $.Browser.Cookie.set("session-token", res.token, 365, "/");
+                                $.Browser.Cookie.set("user-id", res.id, 365, "/");
                                 $.Browser.Router.I().navigate({component: "home"});
-                            } else{
+                            } else {
                                 alert("Login errato");
                             }
-                            
+
                             form.trigger("reset");
+                        }).fail(function (jqXHR, textStatus, errorThrown) {
+                            console.error(errorThrown);
                         });
                     });
                 });

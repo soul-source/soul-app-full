@@ -21,16 +21,20 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public UserRS loadUtente(String email, String password) {
-        return (UserRS) this.loadData(
-                null,
-                getQb().qbBuildName(EntityModelUser.I().EMAIL.getPath())
-                .qbCompare(email).toString(),
-                getQb().qbBuildName(EntityModelUser.I().PASSWORD.getPath())
-                .qbCompare(password).toString()
-        ).getRecords().get(0);
+        try {
+            return (UserRS) this.loadData(
+                    null,
+                    getQb().qbBuildName(EntityModelUser.I().EMAIL.getPath())
+                    .qbCompare(email).toString(),
+                    getQb().qbBuildName(EntityModelUser.I().PASSWORD.getPath())
+                    .qbCompare(password).toString()
+            ).getRecords().get(0);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
-    public boolean regUser(String name,String lastName, String bornDate, 
+    public boolean regUser(String name, String lastName, String bornDate,
             String email, String password) {
         EntityModelUser u = EntityModelUser.I();
         QueryBuilder qb = getQb();
@@ -67,51 +71,36 @@ public class HandlerUserQuery extends MyQueryHandler {
 
         return true;
     }
-    
-    public boolean deleteUser() {
-        return true;
-    }
-    
-    public boolean updateUser(String id, String password, String name, String lastName, String birthDay,
-            String city, String cap, String street, String country, String taxCode) {
-        String query = "UPDATE user SET "
-                + "password='"+password+"',"
-                + "name='"+name+"',"
-                + "last_name='"+lastName+"',"
-                + "birthdate='"+birthDay+"',"
-                + "city='"+city+"',"
-                + "tax_code='"+taxCode+"',"
-                + "cap='"+cap+"',"
-                + "street='"+street+"',"
-                + "country='"+country+"' "
-                + "WHERE id_user='"+id+"'";
-        
-        if (this.execute(query)!=null) {
+
+    public boolean deleteUser(int id) {
+        String query = "DELETE FROM user WHERE id_user= " + id;
+
+        if (this.execute(query) != null) {
             return true;
         }
-        
+
         return false;
-        
     }
 
-    public int loginUser(String email, String password, String token) {
-        try {
-            String query = "SELECT id_user,session_token FROM user WHERE email='"+email+"' AND password='"+password+"'";
-            ResultSet rs = this.execute(query);
-            
-            rs.next();
-            int id = rs.getInt("id_user");
-            if(id > 0){
-              String q = "UPDATE user SET session_token ='"+token+"' WHERE email='"+email+"'";
-              this.execute(q);
-              return id;
-            }
-                
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        return 0;
+    public boolean updateUser(int id, String password, String name, String lastName, String birthDay,
+            String city, String cap, String street, String country, String taxCode) {
+        String query = "UPDATE user SET "
+                + "password='" + password + "',"
+                + "name='" + name + "',"
+                + "last_name='" + lastName + "',"
+                + "birthdate='" + birthDay + "',"
+                + "city='" + city + "',"
+                + "tax_code='" + taxCode + "',"
+                + "cap='" + cap + "',"
+                + "street='" + street + "',"
+                + "country='" + country + "' "
+                + "WHERE id_user='" + id + "'";
+
+        return this.executeNoRes(query);
+    }
+
+    public void updateSession(int uId, String token) {
+        String q = "UPDATE user SET session_token ='" + token + "' WHERE id_user='" + uId + "'";
+        this.execute(q);
     }
 }
