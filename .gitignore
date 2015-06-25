@@ -73,7 +73,7 @@ local.properties
 # TeXlipse plugin
 .texlipse
 
-# IS
+# IS IGNORES
 
 /nb/*
 deskproj
