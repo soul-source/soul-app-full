@@ -5,18 +5,18 @@
 browser = function ($) {
     'use strict';
     var data = [
-        { str: navigator.userAgent, sub: 'Chrome', ver: 'Chrome', name: 'chrome' },
-        { str: navigator.vendor, sub: 'Apple', ver: 'Version', name: 'safari' },
-        { prop: window.opera, ver: 'Opera', name: 'opera' },
-        { str: navigator.userAgent, sub: 'Firefox', ver: 'Firefox', name: 'firefox' },
-        { str: navigator.userAgent, sub: 'MSIE', ver: 'MSIE', name: 'ie' }
+        {str: navigator.userAgent, sub: 'Chrome', ver: 'Chrome', name: 'chrome'},
+        {str: navigator.vendor, sub: 'Apple', ver: 'Version', name: 'safari'},
+        {prop: window.opera, ver: 'Opera', name: 'opera'},
+        {str: navigator.userAgent, sub: 'Firefox', ver: 'Firefox', name: 'firefox'},
+        {str: navigator.userAgent, sub: 'MSIE', ver: 'MSIE', name: 'ie'}
     ];
     var v = function (s, n) {
         var i = s.indexOf(data[n].ver);
         return (i !== -1) ? parseFloat(s.substring(i + data[n].ver.length + 1)) : 0;
     };
     var html = $('html');
-    var result = { name: 'unknown', version: 0 };
+    var result = {name: 'unknown', version: 0};
     for (var n = 0; n < data.length; n++) {
         result[data[n].name] = false;
         if ((data[n].str && (data[n].str.indexOf(data[n].sub) !== -1)) || data[n].prop) {
@@ -28,7 +28,7 @@ browser = function ($) {
         }
     }
     return result;
-} (jQuery);
+}(jQuery);
 
 jQuery(function ($) {
     'use strict';
@@ -148,7 +148,7 @@ jQuery(function ($) {
                         if (isPx) {
                             maxOffset = Math.max(maxOffset, parseInt(stopOffset, 10) || 0);
                         }
-                        stops.push({ offset: stopOffset, color: stopColor, opacity: stopOpacity, isPx: isPx });
+                        stops.push({offset: stopOffset, color: stopColor, opacity: stopOpacity, isPx: isPx});
                     }
                     var stopsXML = '';
                     var lastStop = null;
@@ -180,7 +180,7 @@ jQuery(function ($) {
                     var svgGradient = '<svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><linearGradient id="g" gradientUnits="objectBoundingBox" ' + direction + '>' + stopsXML + '</linearGradient><rect x="0" y="0" ' + size + ' fill="url(#g)" />' + last + '</svg>';
                     values[l] = values[l].replace('linear-gradient(' + g + ')', 'url(data:image/svg+xml,' + escape(svgGradient) + ')');
                 }
-                n.push({ s: s.rules[k].selectorText, v: 'background: ' + values.join(",") });
+                n.push({s: s.rules[k].selectorText, v: 'background: ' + values.join(",")});
             }
             for (k = 0; k < n.length; k++) {
                 s.addRule(n[k].s, n[k].v);
@@ -192,9 +192,10 @@ jQuery(function ($) {
 jQuery(function ($) {
     'use strict';
     // ie < 9 slider multiple background fix
-    if (!browser.ie || browser.version > 8) return;
-    
-    function split(str) {
+    if (!browser.ie || browser.version > 8)
+        return;
+
+    function split (str) {
         str = str.replace(/"/g, '').replace(/%20/g, '');
         return  str.split(/\s*,\s*/);
     }
@@ -211,11 +212,13 @@ jQuery(function ($) {
 jQuery(function ($) {
     "use strict";
     // ie8
-    if (!browser.ie || browser.version > 8) return;
+    if (!browser.ie || browser.version > 8)
+        return;
     $('.hwc-shapes').css('z-index', 1);
-    
+
     // ie7
-    if (!browser.ie || browser.version > 7) return;
+    if (!browser.ie || browser.version > 7)
+        return;
     var textblockTexts = $('.hwc-textblock > div');
     textblockTexts.each(function () {
         var tbText = $(this);
@@ -274,13 +277,16 @@ jQuery(function ($) {
 
 jQuery(function ($) {
     "use strict";
-    $(window).bind("resize", function () { navigatorResizeHandler($("html").hasClass("responsive")); });
+    $(window).bind("resize", function () {
+        navigatorResizeHandler($("html").hasClass("responsive"));
+    });
 });
 
 var navigatorResizeHandler = (function ($) {
     "use strict";
     return function (responsiveDesign) {
-        if (responsiveDesign) return;
+        if (responsiveDesign)
+            return;
         $(".hwc-slider").each(function () {
             var slider = $(this);
             var sliderWidth = slider.width();
@@ -297,9 +303,9 @@ var navigatorResizeHandler = (function ($) {
         });
     };
 })(jQuery);
-jQuery(function($) {
+jQuery(function ($) {
     "use strict";
-     $(window).bind("resize", function () {
+    $(window).bind("resize", function () {
         /*global responsiveDesign */
         "use strict";
         if (typeof responsiveDesign !== "undefined" && responsiveDesign.isResponsive)
@@ -320,12 +326,12 @@ jQuery(function ($) {
         var c = $('div.hwc-content');
         c.removeAttr('style');
 
-        $('#hwc-main').children().each(function() {
+        $('#hwc-main').children().each(function () {
             if ($(this).css('position') !== 'absolute') {
                 mh += $(this).outerHeight(true);
             }
         });
-        
+
         if (mh < bh) {
             var r = bh - mh;
             c.css('height', (c.outerHeight(true) + r) + 'px');
@@ -333,13 +339,16 @@ jQuery(function ($) {
     });
 
     if (browser.ie && browser.version < 8) {
-        $(window).bind('resize', function() {
+        $(window).bind('resize', function () {
             var c = $('div.hwc-content');
             var s = c.parent().children('.hwc-layout-cell:not(.hwc-content)');
             var w = 0;
             c.hide();
-            s.each(function() { w += $(this).outerWidth(true); });
-            c.w = c.parent().width(); c.css('width', c.w - w + 'px');
+            s.each(function () {
+                w += $(this).outerWidth(true);
+            });
+            c.w = c.parent().width();
+            c.css('width', c.w - w + 'px');
             c.show();
         });
     }
@@ -382,7 +391,7 @@ jQuery(function () {
     artButtonSetup("hwc-button");
 });
 
-jQuery(function($) {
+jQuery(function ($) {
     'use strict';
     $('input.hwc-search-button, form.hwc-search input[type="submit"]').attr('value', '');
 });
@@ -390,30 +399,30 @@ jQuery(function($) {
 var Control = (function ($) {
     'use strict';
     return (function () {
-        this.init = function(label, type, callback) {
-            var chAttr = label.find('input[type="' +type + '"]').attr('checked');
+        this.init = function (label, type, callback) {
+            var chAttr = label.find('input[type="' + type + '"]').attr('checked');
             if (chAttr === 'checked') {
-              label.addClass('hwc-checked');
+                label.addClass('hwc-checked');
             }
 
             label.mouseleave(function () {
-              $(this).removeClass('hovered').removeClass('active');
+                $(this).removeClass('hovered').removeClass('active');
             });
             label.mouseover(function () {
-              $(this).addClass('hovered').removeClass('active');
+                $(this).addClass('hovered').removeClass('active');
             });
             label.mousedown(function (event) {
-              if (event.which !== 1) {
-                  return;
-              }
-              $(this).addClass('active').removeClass('hovered');
+                if (event.which !== 1) {
+                    return;
+                }
+                $(this).addClass('active').removeClass('hovered');
             });
             label.mouseup(function (event) {
-              if (event.which !== 1) {
-                  return;
-              }
-              callback.apply(this);
-              $(this).removeClass('active').addClass('hovered');
+                if (event.which !== 1) {
+                    return;
+                }
+                callback.apply(this);
+                $(this).removeClass('active').addClass('hovered');
             });
         };
     });
@@ -438,7 +447,7 @@ var fixRssIconLineHeight = (function ($) {
 jQuery(function ($) {
     "use strict";
     var rssIcons = $(".hwc-rss-tag-icon");
-    if (rssIcons.length){
+    if (rssIcons.length) {
         fixRssIconLineHeight("hwc-rss-tag-icon");
         if (browser.ie && browser.version < 9) {
             rssIcons.each(function () {
@@ -455,7 +464,7 @@ var ThemeLightbox = (function ($) {
         var images = $(".hwc-lightbox");
         var current;
         this.init = function (ctrl) {
-            $(".hwc-lightbox").mouseup({ _ctrl: ctrl }, function (e) {
+            $(".hwc-lightbox").mouseup({_ctrl: ctrl}, function (e) {
                 if ((e.data._ctrl === true && !e.ctrlKey) || (e.which && e.which !== 1)) {
                     return;
                 }
@@ -467,10 +476,10 @@ var ThemeLightbox = (function ($) {
                 var imgContainer = $('.hwc-lightbox-wrapper');
                 if (imgContainer.length === 0) {
                     imgContainer = $('<div class="hwc-lightbox-wrapper">').css('line-height', $(window).height() + "px")
-                    .appendTo($("body"));
+                        .appendTo($("body"));
 
                     var closeBtn = $('<div class="close"><div class="cw"> </div><div class="ccw"> </div><div class="close-alt">&#10007;</div></div>')
-                .click(close);
+                        .click(close);
                     closeBtn.appendTo(imgContainer);
                     showArrows();
                 }
@@ -479,7 +488,7 @@ var ThemeLightbox = (function ($) {
             });
         };
 
-        function move(index) {
+        function move (index) {
             if (index < 0 || index >= images.length) {
                 return;
             }
@@ -523,26 +532,26 @@ var ThemeLightbox = (function ($) {
             });
         }
 
-        function showArrows() {
+        function showArrows () {
             if ($(".hwc-lightbox-wrapper .arrow").length === 0) {
                 $(".hwc-lightbox-wrapper").append(
                     $('<div class="arrow left"><div class="arrow-t ccw"> </div><div class="arrow-b cw"> </div><div class="arrow-left-alt">&#8592;</div></div>')
-                        .css("top", $(window).height() / 2 - 40)
-                        .click(function () {
-                            if (!$(this).hasClass("disabled")) {
-                                move(current - 1);
-                            }
-                        })
-                );
+                    .css("top", $(window).height() / 2 - 40)
+                    .click(function () {
+                        if (!$(this).hasClass("disabled")) {
+                            move(current - 1);
+                        }
+                    })
+                    );
                 $(".hwc-lightbox-wrapper").append(
                     $('<div class="arrow right"><div class="arrow-t cw"> </div><div class="arrow-b ccw"> </div><div class="arrow-right-alt">&#8594;</div></div>')
-                        .css("top", $(window).height() / 2 - 40)
-                        .click(function () {
-                            if (!$(this).hasClass("disabled")) {
-                                move(current + 1);
-                            }
-                        })
-                );
+                    .css("top", $(window).height() / 2 - 40)
+                    .click(function () {
+                        if (!$(this).hasClass("disabled")) {
+                            move(current + 1);
+                        }
+                    })
+                    );
             }
 
             if (current === 0) {
@@ -558,21 +567,21 @@ var ThemeLightbox = (function ($) {
             }
         }
 
-        function showError(enable) {
+        function showError (enable) {
             if (enable) {
                 $(".hwc-lightbox-wrapper").append($('<div class="lightbox-error">The requested content cannot be loaded.<br/>Please try again later.</div>')
-                        .css({ "top": $(window).height() / 2 - 60, "left": $(window).width() / 2 - 170 }));
+                    .css({"top": $(window).height() / 2 - 60, "left": $(window).width() / 2 - 170}));
             } else {
                 $(".hwc-lightbox-wrapper .lightbox-error").remove();
             }
         }
 
-        function showLoader(enable) {
+        function showLoader (enable) {
             if (!enable) {
                 $(".hwc-lightbox-wrapper .loading").remove();
             }
             else {
-                $('<div class="loading"> </div>').css({ "top": $(window).height() / 2 - 16, "left": $(window).width() / 2 - 16 }).appendTo($(".hwc-lightbox-wrapper"));
+                $('<div class="loading"> </div>').css({"top": $(window).height() / 2 - 16, "left": $(window).width() / 2 - 16}).appendTo($(".hwc-lightbox-wrapper"));
             }
         }
 
@@ -580,7 +589,7 @@ var ThemeLightbox = (function ($) {
             $(".hwc-lightbox-wrapper").remove();
         };
 
-        function bindMouse(img) {
+        function bindMouse (img) {
             img.bind('mousewheel DOMMouseScroll', function (e) {
                 var orgEvent = window.event || e.originalEvent;
                 var delta = (orgEvent.wheelDelta ? orgEvent.wheelDelta : orgEvent.detail * -1) > 0 ? 1 : -1;
@@ -595,7 +604,7 @@ var ThemeLightbox = (function ($) {
             });
         }
 
-        function getFullImgSrc(src) {
+        function getFullImgSrc (src) {
             var fileName = src.substring(0, src.lastIndexOf('.'));
             var ext = src.substring(src.lastIndexOf('.'));
             return fileName + "-large" + ext;
@@ -609,19 +618,19 @@ jQuery(function () {
     new ThemeLightbox().init();
 });
 
-(function($) {
+(function ($) {
     'use strict';
     // transition && transitionEnd && browser prefix
-    $.support.transition = (function() {
+    $.support.transition = (function () {
         var thisBody = document.body || document.documentElement,
             thisStyle = thisBody.style,
             support = thisStyle.transition !== undefined ||
-                thisStyle.WebkitTransition !== undefined ||
-                thisStyle.MozTransition !== undefined ||
-                thisStyle.MsTransition !== undefined ||
-                thisStyle.OTransition !== undefined;
+            thisStyle.WebkitTransition !== undefined ||
+            thisStyle.MozTransition !== undefined ||
+            thisStyle.MsTransition !== undefined ||
+            thisStyle.OTransition !== undefined;
         return support && {
-            event: (function() {
+            event: (function () {
                 var e = "transitionend";
                 if (browser.opera) {
                     var version = browser.version;
@@ -631,14 +640,14 @@ jQuery(function () {
                 }
                 return e;
             })(),
-            prefix: (function() {
+            prefix: (function () {
                 return ({
-                        opera: "-o-",
-                        firefox: "-moz-",
-                        chrome: "-webkit-",
-                        safari: "-webkit-",
-                        ie: "-ms-"
-                    }[browser.name]);
+                    opera: "-o-",
+                    firefox: "-moz-",
+                    chrome: "-webkit-",
+                    safari: "-webkit-",
+                    ie: "-ms-"
+                }[browser.name]);
             })()
         };
     })();
@@ -652,7 +661,7 @@ jQuery(function () {
         var multiplier = 1;
         var transitionDuration = "";
 
-        this.init = function(motionType, dir, duration) {
+        this.init = function (motionType, dir, duration) {
             direction = dir;
             motion = motionType;
             slides = [];
@@ -662,7 +671,7 @@ jQuery(function () {
             transitionDuration = duration;
         };
 
-        this.processSlide = function(element, modify) {
+        this.processSlide = function (element, modify) {
             this.updateSize(element, null);
             var pos = [];
 
@@ -674,7 +683,7 @@ jQuery(function () {
                 if (point.length > 1) {
                     var x = parseInt(point[0], 10);
                     var y = parseInt(point[1], 10);
-                    pos.push({ x: x, y: y });
+                    pos.push({x: x, y: y});
                 }
             });
 
@@ -683,11 +692,11 @@ jQuery(function () {
                 "sizes": element.css("background-size"),
                 "positions": pos
             });
-            
+
             if (modify)
                 element.css("background-image", "none");
         };
-        
+
         this.updateSize = function (element, initialSize) {
             width = element.outerWidth(false);
             height = element.outerHeight();
@@ -695,13 +704,13 @@ jQuery(function () {
                 multiplier = width / initialSize.width;
                 if (motion === "fade") {
                     $.each(element.children(), function (i) {
-                        $(this).css("background-position", getCssPositions(slides[i].positions, { x: 0, y: 0 }));
+                        $(this).css("background-position", getCssPositions(slides[i].positions, {x: 0, y: 0}));
                     });
                 }
             }
         };
 
-        this.setBackground = function(element, items) {
+        this.setBackground = function (element, items) {
             var bg = [];
             var sizes = [];
             $.each(items, function (i, o) {
@@ -715,9 +724,9 @@ jQuery(function () {
             });
         };
 
-        this.setPosition = function(element, items) {
+        this.setPosition = function (element, items) {
             var pos = [];
-            $.each(items, function(i, o) {
+            $.each(items, function (i, o) {
                 pos.push(o.positions);
             });
             element.css({
@@ -725,11 +734,11 @@ jQuery(function () {
             });
         };
 
-        this.current = function(index) {
+        this.current = function (index) {
             return slides[index] || null;
         };
 
-        this.next = function(index) {
+        this.next = function (index) {
             var next;
             if (direction === "next") {
                 next = (index + 1) % slides.length;
@@ -742,9 +751,9 @@ jQuery(function () {
             return slides[next];
         };
 
-        this.items = function(prev, next, move) {
-            var prevItem = { x: 0, y: 0 };
-            var nextItem = { x: 0, y: 0 };
+        this.items = function (prev, next, move) {
+            var prevItem = {x: 0, y: 0};
+            var nextItem = {x: 0, y: 0};
             var isDirectionNext = direction === "next";
             if (motion === "horizontal") {
                 nextItem.x = isDirectionNext ? width : -width;
@@ -761,14 +770,14 @@ jQuery(function () {
                     nextItem.y += isDirectionNext ? -height : height;
                 }
             }
-            var result = [ ];
+            var result = [];
             if (!!prev) {
-                result.push({ images: prev.images, positions: getCssPositions(prev.positions, prevItem), sizes: prev.sizes });
+                result.push({images: prev.images, positions: getCssPositions(prev.positions, prevItem), sizes: prev.sizes});
             }
             if (!!next) {
-                result.push({ images: next.images, positions: getCssPositions(next.positions, nextItem), sizes: next.sizes });
+                result.push({images: next.images, positions: getCssPositions(next.positions, nextItem), sizes: next.sizes});
             }
-            
+
             if (direction === "next") {
                 result.reverse();
             }
@@ -776,11 +785,11 @@ jQuery(function () {
             return result;
         };
 
-        this.transition = function(container, on) {
+        this.transition = function (container, on) {
             container.css($.support.transition.prefix + "transition", on ? transitionDuration + " ease-in-out background-position" : "");
         };
-        
-        function getCssPositions(positions, offset) {
+
+        function getCssPositions (positions, offset) {
             var result = [];
             if (positions === undefined) {
                 return "";
@@ -803,7 +812,7 @@ jQuery(function () {
         var last = false;
         var running = false;
 
-        this.settings = $.extend({ }, {
+        this.settings = $.extend({}, {
             "animation": "horizontal",
             "direction": "next",
             "speed": 600,
@@ -826,22 +835,28 @@ jQuery(function () {
 
             active = true;
 
-            if (moving) { this.stop(true); }
+            if (moving) {
+                this.stop(true);
+            }
 
             if (!nextItem.length) {
                 nextItem = element.find(".hwc-slide-item")[reset]();
-                if (!this.settings.repeat) { last = true; active = false; return; }
+                if (!this.settings.repeat) {
+                    last = true;
+                    active = false;
+                    return;
+                }
             }
 
             if ($.support.transition) {
                 nextItem.addClass(this.settings.direction);
                 tmp = nextItem.get(0).offsetHeight;
-                
+
                 activeItem.addClass(innerDirection);
                 nextItem.addClass(innerDirection);
-                
+
                 element.trigger("beforeSlide", children.length);
-                
+
                 element.one($.support.transition.event, function () {
                     nextItem.removeClass(slider.settings.direction)
                         .removeClass(innerDirection)
@@ -855,17 +870,19 @@ jQuery(function () {
                 });
             } else {
                 element.trigger("beforeSlide", children.length);
-                
+
                 activeItem.removeClass("active");
                 nextItem.addClass("active");
                 active = false;
-                
+
                 element.trigger("afterSlide", children.length);
             }
 
             this.navigate(nextItem);
 
-            if (moving) { this.start(); }
+            if (moving) {
+                this.start();
+            }
         };
 
         this.navigate = function (position) {
@@ -888,7 +905,7 @@ jQuery(function () {
                     slider.to(index);
                 });
             }
-            
+
             if (activeIndex === index) {
                 return;
             }
@@ -898,14 +915,20 @@ jQuery(function () {
 
         this.next = function () {
             if (!active) {
-                if (last) { this.stop(); return;  }
+                if (last) {
+                    this.stop();
+                    return;
+                }
                 this.move("next");
             }
         };
 
         this.prev = function () {
             if (!active) {
-                if (last) { this.stop(); return; }
+                if (last) {
+                    this.stop();
+                    return;
+                }
                 this.move("prev");
             }
         };
@@ -932,11 +955,11 @@ jQuery(function () {
         this.moving = function () {
             return active;
         };
-        
+
         this.navigate(children.filter(".active"));
 
         if (this.settings.clickevents) {
-            $(this.settings.navigator).on("click", "a", { slider: this }, function (event) {
+            $(this.settings.navigator).on("click", "a", {slider: this}, function (event) {
                 var activeIndex = children.index(children.filter(".active"));
                 var index = $(this).parent().children().index($(this));
                 if (activeIndex !== index) {
@@ -945,14 +968,18 @@ jQuery(function () {
                 event.preventDefault();
             });
         }
-        
+
         if (this.settings.hover) {
             var slider = this;
             element.add(this.settings.navigator)
-                   .add(element.siblings(".hwc-shapes")).hover(function () {
-                if (element.is(":visible") && !last) { slider.stop(true); }
+                .add(element.siblings(".hwc-shapes")).hover(function () {
+                if (element.is(":visible") && !last) {
+                    slider.stop(true);
+                }
             }, function () {
-                if (element.is(":visible") && !last) { slider.start(); }
+                if (element.is(":visible") && !last) {
+                    slider.start();
+                }
             });
         }
     };
@@ -967,7 +994,7 @@ jQuery(function () {
                 data = new Slider(element, options);
                 element.data("slider", data);
             }
-            
+
             if (typeof arg === "string" && data[arg]) {
                 data[arg]();
             } else if (data.settings.auto && element.is(":visible")) {
@@ -1001,7 +1028,7 @@ jQuery(window).bind("resize", (function ($) {
 
 jQuery(function ($) {
     "use strict";
-    $(window).trigger("resize"); 
+    $(window).trigger("resize");
 });
 jQuery(function ($) {
     "use strict";
@@ -1036,12 +1063,36 @@ var processHeaderMultipleBg = (function ($) {
     });
 })(jQuery);
 
-var exitFromSoul = function() {
-    //var app = !!window.cordova;
-    //if ( app ) {
-		window.close();
-        //navigator.app.exitApp();
-    //} else {
-        window.location.href = 'http://www.google.com';
-    //}
-};
+
+$(document).ready(function () {
+    // LOAD FANCYBOX
+    $('.fancybox').fancybox();
+
+    // LOAD SIDR
+    $('#simple-menu').sidr();
+
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    }
+    else {
+        $('#address').innerHTML = "Geolocation is not supported by this browser.";
+    }
+
+    function showPosition (position) {
+        location.latitude = position.coords.latitude;
+        location.longitude = position.coords.longitude;
+        var geocoder = new google.maps.Geocoder();
+        var latLng = new google.maps.LatLng(location.latitude, location.longitude);
+
+        if (geocoder) {
+            geocoder.geocode({'latLng': latLng}, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    console.log(results[0].formatted_address);
+                    $('#address').val(results[0].formatted_address);
+                }
+            });
+        }
+
+    }
+
+});
