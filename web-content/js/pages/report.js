@@ -1,6 +1,5 @@
 hwc.define([
-    "hwc!{PATH_JS_LIB}browser/application/Component.js",
-    "http://maps.google.com/maps/api/js?sensor=false"
+    "hwc!{PATH_JS_LIB}browser/application/Component.js"
 ], function () {
     var $ = this;
 
@@ -15,9 +14,10 @@ hwc.define([
                 this.__super();
             },
             init: function () {
+                var that = this;
                 this.__super().then(function () {
-                    this._i.preparePictureBtn();
-                    this._i.checkLocation();
+                    that._i.preparePictureBtn();
+                    that._i.checkLocation();
 
                     var jq = $.Browser.JQ();
                     $.Browser.EventHandler.setEventListner("#send-report", "click", function () {
@@ -54,18 +54,13 @@ hwc.define([
         }),
         $.private({
             checkLocation: function () {
-                $(document).ready(function () {
-                    // LOAD FANCYBOX
-                    $('.fancybox').fancybox();
-
-                    // LOAD SIDR
-                    $('#simple-menu').sidr();
-
+                var jq=$.Browser.JQ;
+                jq(document).ready(function () {
                     if (navigator.geolocation) {
                         navigator.geolocation.getCurrentPosition(showPosition);
                     }
                     else {
-                        $('#address').innerHTML = "Geolocation is not supported by this browser.";
+                        jq('#address').innerHTML = "Geolocation is not supported by this browser.";
                     }
 
                     function showPosition (position) {
@@ -78,7 +73,7 @@ hwc.define([
                             geocoder.geocode({'latLng': latLng}, function (results, status) {
                                 if (status == google.maps.GeocoderStatus.OK) {
                                     console.log(results[0].formatted_address);
-                                    $('#address').val(results[0].formatted_address);
+                                    jq('#address').val(results[0].formatted_address);
                                 }
                             });
                         }
