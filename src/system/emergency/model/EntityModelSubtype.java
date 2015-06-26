@@ -33,7 +33,7 @@ public class EntityModelSubtype extends MyEntityModel {
     }
 
     public FieldModel ID_SOTTOTIPO,
-            CAUSE,
+            NAME,
             DESCRIZIONE,
             LIVELLO_PRIORITA,
             ID_TIPO;
@@ -42,7 +42,7 @@ public class EntityModelSubtype extends MyEntityModel {
         super("emergency_subtype"); // table
 
         this.createFields(ID_SOTTOTIPO = new HiddenField("id_subtype", this),
-                CAUSE = new VisualName("cause", "Cause", this),
+                NAME = new VisualName("name", "Cause", this),
                 DESCRIZIONE = new VisualName("description", "Descrizione", this),
                 LIVELLO_PRIORITA = new VisualName("priority_level", "Livello Priorità", this),
                 ID_TIPO = new RelField("id_type", this, EntityModelType.I().ID_TIPO)

@@ -9,6 +9,8 @@
                             <p>Dove sei?</p>
                             <p>
                                 <input id="address" type="text"><br>
+                                <input id="address-lat" type="hidden">
+                                <input id="address-long" type="hidden">
                             </p>
                         </div>
                     </div>
@@ -18,7 +20,10 @@
                         <div style="width: 100%; margin-top:40px" >
                             <p>Tipo Emergenza</p>
                             <p>
-                                <input id="report-type" type="text" value="Incendio" disabled><br>
+                               <!--<input id="report-type" type="text" value="Incendio" disabled><br>-->
+                               <select id="report-type">
+                                   <option id="pd" value="pd">PD</option>
+                               </select>
                             </p>
                         </div>
                     </div>

@@ -4,9 +4,13 @@
  */
 package system.report.model;
 
+import hwcore.modules.java.src.library.database.RecordSet;
 import hwcore.modules.java.src.library.database.TableData;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
 import hwcore.modules.java.src.library.database.querybuilders.SqlQueryBuilder;
+import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.List;
 import system.common.MyQueryHandler;
 
 public class HandlerReportsQuery extends MyQueryHandler {
@@ -17,7 +21,7 @@ public class HandlerReportsQuery extends MyQueryHandler {
 
     @Override
     public TableData loadData(String location) {
-       
+
         QueryBuilder search = MyQueryHandler.getQb();
         if (!location.isEmpty()) {
             search = MyQueryHandler.getQb();
@@ -32,5 +36,13 @@ public class HandlerReportsQuery extends MyQueryHandler {
                 .qbOrderType(SqlQueryBuilder.SqlOrderType.DESC);
 
         return super.loadData(additional.toString(), search.toString());
+    }
+
+    public boolean insertReport(String address, String reportType, String reportDescription, String picture,
+            String geoloc, Date date) {
+
+        String query = "INSERT INTO report (coordinates, description, pubblication_date, place, id_subtype)"
+                + "VALUES(" + geoloc + "," + reportType + "," + reportDescription + "," + date + "," + address + ")";
+        return this.executeNoRes(query);
     }
 }

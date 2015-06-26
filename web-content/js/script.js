@@ -1062,37 +1062,3 @@ var processHeaderMultipleBg = (function ($) {
         header.css('background-position', "center top");
     });
 })(jQuery);
-
-
-$(document).ready(function () {
-    // LOAD FANCYBOX
-    $('.fancybox').fancybox();
-
-    // LOAD SIDR
-    $('#simple-menu').sidr();
-
-    if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-    }
-    else {
-        $('#address').innerHTML = "Geolocation is not supported by this browser.";
-    }
-
-    function showPosition (position) {
-        location.latitude = position.coords.latitude;
-        location.longitude = position.coords.longitude;
-        var geocoder = new google.maps.Geocoder();
-        var latLng = new google.maps.LatLng(location.latitude, location.longitude);
-
-        if (geocoder) {
-            geocoder.geocode({'latLng': latLng}, function (results, status) {
-                if (status == google.maps.GeocoderStatus.OK) {
-                    console.log(results[0].formatted_address);
-                    $('#address').val(results[0].formatted_address);
-                }
-            });
-        }
-
-    }
-
-});
