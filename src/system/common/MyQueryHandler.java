@@ -99,8 +99,8 @@ public class MyQueryHandler extends QueryHandler {
             if (!((LinkedHashMap) joins.getValue().getValue()).isEmpty()) {
                 Collection<Entry> list = ((LinkedHashMap<DbId.Field, Entry>) joins.getValue().getValue()).values();
                 Iterator<Entry> iterator = list.iterator();
+                Entry relation = iterator.next();
                 for (int i = 0; i < list.size(); i++) {
-                    Entry relation = iterator.next();
                     if (relation != null) {
                         // XXX ugly workaround 
                         if (!on) {
@@ -112,8 +112,17 @@ public class MyQueryHandler extends QueryHandler {
                                 .qbCompare()
                                 .qbBuildName(((FieldModel) relation.getValue()).getPath());
 
-                        if (i < list.size() - 1 || cnt < l.size() - 1) {
-                            qb.and();
+                        try {
+
+                            relation = iterator.next();
+
+                            if (i < list.size() - 1 || cnt < l.size() - 1) {
+                                if (relation != null) {
+                                    qb.and();
+                                }
+                            }
+                        } catch (Exception e) {
+                            relation = null;
                         }
                     }
                 }
@@ -123,8 +132,9 @@ public class MyQueryHandler extends QueryHandler {
         }
 
         if (searchText.length > 0) {
-            if (searchText.length!=1 || !searchText[0].isEmpty())
+            if (searchText.length != 1 || !searchText[0].isEmpty()) {
                 qb.where(searchText);
+            }
         }
 
         if (additional != null && !additional.isEmpty()) {

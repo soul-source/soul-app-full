@@ -2,6 +2,7 @@ package system.user.model;
 
 import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
@@ -34,7 +35,7 @@ public class HandlerUserQuery extends MyQueryHandler {
         }
     }
 
-    public boolean regUser(String name, String lastName, String bornDate,
+    public PreparedStatement regUser(String name, String lastName, String bornDate,
             String email, String password) {
         EntityModelUser u = EntityModelUser.I();
         QueryBuilder qb = getQb();
@@ -67,7 +68,7 @@ public class HandlerUserQuery extends MyQueryHandler {
                         ""
                 );
 
-        return this.executeNoRes(qb.toString());
+        return this.executeStatement(qb.toString());
     }
 
     public boolean deleteUser(int id) {
@@ -80,7 +81,7 @@ public class HandlerUserQuery extends MyQueryHandler {
         return false;
     }
 
-    public boolean updateUser(int id, String password, String name, String lastName, String birthDay,
+    public PreparedStatement updateUser(int id, String password, String name, String lastName, String birthDay,
             String city, String cap, String street, String country, String taxCode) {
         String query = "UPDATE user SET "
                 + "password='" + password + "',"
@@ -94,7 +95,7 @@ public class HandlerUserQuery extends MyQueryHandler {
                 + "country='" + country + "' "
                 + "WHERE id_user='" + id + "'";
 
-        return this.executeNoRes(query);
+        return this.executeStatement(query);
     }
 
     public void updateSession(int uId, String token) {

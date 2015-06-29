@@ -52,9 +52,9 @@ public class UserHandler {
                 String pCountry = req.getParameter("country");
                 String pTaxCode = req.getParameter("taxCode");
 
-                if (!new HandlerUserQuery(EntityModelUser.I())
+                if (new HandlerUserQuery(EntityModelUser.I())
                         .updateUser(pId, pPassword, pName, pLastName, pBirthDate,
-                                pCity, pCap, pStreet, pCountry, pTaxCode)) {
+                                pCity, pCap, pStreet, pCountry, pTaxCode)==null) {
                     resp.getWriter().write("false");
                     return;
                 }
@@ -77,8 +77,8 @@ public class UserHandler {
                 String regLastName = req.getParameter("lastName");
                 String regBirthDate = req.getParameter("birthDate");
 
-                if (!new HandlerUserQuery(EntityModelUser.I())
-                        .regUser(regName, regLastName, regBirthDate, regEmail, regPassword)) {
+                if (new HandlerUserQuery(EntityModelUser.I())
+                        .regUser(regName, regLastName, regBirthDate, regEmail, regPassword)==null) {
                     resp.getWriter().write("false");
                     return;
                 }

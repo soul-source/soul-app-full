@@ -1,8 +1,8 @@
-
 package system.servlet;
 
 import hwcore.modules.java.src.library.database.RecordSet;
 import java.io.IOException;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -15,30 +15,43 @@ import system.emergency.model.HandlerEmergencyQuery;
 import system.report.model.EntityModelReport;
 import system.report.model.HandlerReportsQuery;
 
-
 public class ReportHandler {
-    
-    public static void handleReportPost(HttpServletRequest req, HttpServletResponse resp, String type) 
-            throws IOException{
+
+    public static void handleReportPost(HttpServletRequest req, HttpServletResponse resp, String type)
+            throws IOException {
         String address = req.getParameter("address");
         String reportType = req.getParameter("reportType");
         String reportDescription = req.getParameter("reportDescription");
-        String picture =req.getParameter("picture");
-        String geoloc = req.getParameter("(addressLat"+"-"+"addressLong)");
+        String picture = req.getParameter("picture");
+        String geoloc = req.getParameter("addressLat") + "-" + req.getParameter("addressLong");
         Date dt = new Date();
         java.sql.Date sDate = new java.sql.Date(dt.getTime());
         //Date d = new ;
-        
+
         HandlerReportsQuery handle = new HandlerReportsQuery();
-        handle.insertReport(address,reportType,reportDescription,picture, geoloc, sDate);
-        
+        PreparedStatement ps = handle.insertReport(address, reportType, reportDescription, picture, geoloc, sDate);
+        if (ps != null) {
+            try {
+                ResultSet rs=ps.getGeneratedKeys();
+                if (rs.next()) {
+                    resp.getWriter().write(String.valueOf(rs.getInt(1)));
+                    return;
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(ReportHandler.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        resp.getWriter().write("false");
+
     }
-    
-    public static ArrayList<RecordSet> handleReportGet(HttpServletRequest req, HttpServletResponse resp, String type) 
-            throws IOException{
-        HandlerEmergencyQuery handle = new HandlerEmergencyQuery();
+
+    public static ArrayList<RecordSet> handleReportGet(HttpServletRequest req, HttpServletResponse resp, String type)
+            throws IOException {
+        HandlerReportsQuery handle = new HandlerReportsQuery();
+
+        String id=req.getParameter("id");
         
-        return new ArrayList<>(handle.selectHealthEmergency());
+        return new ArrayList<>(handle.selectReport(id));
     }
-    
+
 }

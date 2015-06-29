@@ -23,12 +23,12 @@ hwc.define([
                         //CARICA SUBTYPE
 
                         jq.ajax({
-                            url: "RestApi?table=report",
+                            url: "RestApi?table=emergency",
                             type: "GET",
                         }).done(function (res) {
                             jq.each(res.table, function (i, obj) {
                                 jq('#report-type').append(jq('<option>', {
-                                    value: i,
+                                    value: i+1,
                                     text: obj.records.soul_dbemergency_subtypename.val
                                 }));
                             });
@@ -36,9 +36,9 @@ hwc.define([
                         });
 
                         //INVIO SEGNALAZIONE 
-                    jq("#send-report").submit(function (event) {
-                        /* stop form from submitting normally */
-                        event.preventDefault();
+                        jq("#report-form").submit(function (event) {
+                            /* stop form from submitting normally */
+                            event.preventDefault();
 
                             /* get some values from elements on the page: */
                             var form = jq(this);
@@ -58,10 +58,12 @@ hwc.define([
                                 url: url,
                                 type: "POST",
                                 data: data
-                            }).done(function () {
+                            }).done(function (res) {
+                                if(res !== "false") {
+                                    var id=res;
+                                    $.Browser.Router.I().navigate({component: "report-info",path:id});
+                                }
                             });
-
-
                         })
 
                     });

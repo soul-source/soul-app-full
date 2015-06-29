@@ -1,7 +1,3 @@
-/*
- * Copyright (C) 2007 - 2014 Hyperweb2 All rights reserved.
- * GNU General Public License version 3; see www.hyperweb2.com/terms/
- */
 package system.report.model;
 
 import hwcore.modules.java.src.library.database.FieldModel;
@@ -13,31 +9,23 @@ import hwcore.modules.java.src.library.database.fielddecorators.VisualName;
 import system.common.MyEntityModel;
 import system.common.PermissionsTypes;
 import system.emergency.model.EntityModelSubtype;
+import system.emergencynumber.model.EntityModelNumbers;
+import system.emergencynumber.model.EntityModelNumbersRel;
 
 public class EntityModelReport extends MyEntityModel {
 
     public static class WithRel extends EntityModelReport {
 
-        public FieldModel NUMERI;
-
         public WithRel() {
             super();
-
-            this.createFields(
-                    // TODO QueryBuilder should be used instead of raw sql
-                    NUMERI = new CalculatedField(
-                            "number",
-                            "Numeri d'emergenza",
-                            this,
-                            "GROUP_CONCAT(`emergency_number_rel`.`number` SEPARATOR ', ') AS number"
-                    )
-            );
         }
 
         public static WithRel I() {
-            return (WithRel) I(WithRel.class).mergeFields(EntityModelSubtype.WithRel.I());
+            return (WithRel) I(WithRel.class).mergeFields(
+                    EntityModelSubtype.WithRel.I(),
+                    EntityModelNumbersRel.WithRel.I()
+            );
         }
-
     }
 
     public FieldModel ID_SEGNALAZIONE,

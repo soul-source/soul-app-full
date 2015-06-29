@@ -87,6 +87,9 @@ public class RestApi extends HttpServlet {
                         rs.add(uRS);
                     }
                     break;
+                case "emergency":
+                      rs=EmergencyHandler.handleEmergencyGet(req, resp, type);
+                    break;
                 case "report":
                       rs=ReportHandler.handleReportGet(req, resp, type);
                     break;
