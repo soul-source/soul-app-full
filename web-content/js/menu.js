@@ -25,7 +25,7 @@ hwc.include([
                     this.__super();
                     
                     var that=this;
-
+                    // Executed only when component is created
                     if (this.i.state === this.s.stateType.INIT) {
                         // restore global dollar for jquery
                         $.global.$ = $.Browser.JQ;
@@ -54,6 +54,7 @@ hwc.include([
                         });
                     }
 
+                    // executed on each update
                     if ($.Browser.Cookie.get("session-token")) {
                         $.Browser.JQ("#user-menu-btn").html("Profilo");
                         $.Browser.Router.I().setRoute("#user-menu-btn", {component: "profile"});

@@ -12,7 +12,10 @@ hwc.include([
             __construct: function (parent, childs, opt) {
                 var template = new $.Browser.Template("soul/main.html", "css/main.css");
                 opt.template = template;
-                this.__super(parent, [{module: "js/nav.js", opt: {selector: "header"}}], opt);
+                this.__super(parent, [
+                    {module: "js/nav.js", opt: {selector: "header"}},
+                    {module: "js/footer.js", opt: {selector: "footer"}}
+                ], opt);
             },
             update: function () {
                 this.__super();

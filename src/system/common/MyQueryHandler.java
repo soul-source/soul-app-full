@@ -99,32 +99,23 @@ public class MyQueryHandler extends QueryHandler {
             if (!((LinkedHashMap) joins.getValue().getValue()).isEmpty()) {
                 Collection<Entry> list = ((LinkedHashMap<DbId.Field, Entry>) joins.getValue().getValue()).values();
                 Iterator<Entry> iterator = list.iterator();
-                Entry relation = iterator.next();
+                Entry relation;
+
                 for (int i = 0; i < list.size(); i++) {
-                    if (relation != null) {
-                        // XXX ugly workaround 
-                        if (!on) {
-                            qb.on();
-                            on = true;
-                        }
-
-                        qb.qbBuildName(((FieldModel) relation.getKey()).getPath())
-                                .qbCompare()
-                                .qbBuildName(((FieldModel) relation.getValue()).getPath());
-
-                        try {
-
-                            relation = iterator.next();
-
-                            if (i < list.size() - 1 || cnt < l.size() - 1) {
-                                if (relation != null) {
-                                    qb.and();
-                                }
-                            }
-                        } catch (Exception e) {
-                            relation = null;
-                        }
+                    relation = iterator.next();
+                    if (i > 0 || cnt > 0) {
+                        qb.and();
                     }
+
+                    // XXX ugly workaround 
+                    if (!on) {
+                        qb.on();
+                        on = true;
+                    }
+
+                    qb.qbBuildName(((FieldModel) relation.getKey()).getPath())
+                            .qbCompare()
+                            .qbBuildName(((FieldModel) relation.getValue()).getPath());
                 }
             }
 

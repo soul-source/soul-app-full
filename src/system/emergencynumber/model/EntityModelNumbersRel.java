@@ -18,7 +18,7 @@ public class EntityModelNumbersRel extends MyEntityModel {
             this.createFields(
                     // TODO QueryBuilder should be used instead of raw sql
                     NUMERI = new CalculatedField(
-                            "number",
+                            "emergency_numbers",
                             "Numeri d'emergenza",
                             this,
                             "GROUP_CONCAT(CONCAT(`emergency_number`.`number`,'-',`emergency_number`.`title` ) SEPARATOR ', ') AS number"

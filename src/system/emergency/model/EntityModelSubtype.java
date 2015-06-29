@@ -16,7 +16,10 @@ public class EntityModelSubtype extends MyEntityModel {
         }
 
         public static WithRel I() {
-            return (WithRel) I(WithRel.class).mergeFields(EntityModelType.I());
+            return (WithRel) I(WithRel.class).mergeFields(
+                    EntityModelType.I(),
+                    EntityModelNumbersRel.WithRel.I()
+            );
         }
 
     }

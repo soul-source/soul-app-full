@@ -21,14 +21,23 @@ hwc.define([
                 }
             },
             {
-                a: "public static", n: "setEventListner", v: function (element, event, handler, useCapture) {
-                    if (typeof element=="string") {
+                a: "public static", n: "setEventListner", v: function (element, event, handler, storedOnElem, useCapture) {
+                    if (typeof element == "string") {
                         // get the native element
                         element = $.Browser.JQ(element)[0];
                     }
-                    
-                    element.removeEventListener(event, handler);
-                    element.addEventListener(event, handler, false);
+
+                    if (storedOnElem) {
+                        if (element.__hwcRouteHandler)
+                            element.removeEventListener(element, element.__hwcRouteHandler);
+
+                        element.__hwcRouteHandler = handler;
+                    } else {
+                        element.removeEventListener(event, handler);
+                    }
+
+
+                    element.addEventListener(event, handler, useCapture);
                 }
             }
         ]}

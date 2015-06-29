@@ -143,7 +143,7 @@ hwc.define([
                 }
 
                 if (!reload) {
-                    $.Browser.EventHandler.setEventListner(element, "click", navigate);
+                    $.Browser.EventHandler.setEventListner(element, "click", navigate, true);
                 }
             },
             /**

@@ -22,8 +22,7 @@ public class EntityModelReport extends MyEntityModel {
 
         public static WithRel I() {
             return (WithRel) I(WithRel.class).mergeFields(
-                    EntityModelSubtype.WithRel.I(),
-                    EntityModelNumbersRel.WithRel.I()
+                    EntityModelSubtype.WithRel.I()
             );
         }
     }
