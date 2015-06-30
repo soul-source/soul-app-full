@@ -86,4 +86,31 @@ public abstract class QueryHandler extends DbConnection {
 
         return null;
     }
+    
+    public PreparedStatement getStatement(String query) {
+        System.out.println(query);
+        try {
+            this.conn = this.startConn(propConn.getDatabase(), this.driver, this.connQuery);
+
+            return conn.prepareStatement(query,Statement.RETURN_GENERATED_KEYS);
+        } catch (SQLException ex) {
+            Logger logger = Logger.getLogger(QueryHandler.class.getName());
+            logger.log(Level.SEVERE, query);
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
+    
+    public PreparedStatement executeStatement(PreparedStatement p) {
+        try {
+            p.execute();
+            return p;
+        } catch (SQLException ex) {
+            Logger logger = Logger.getLogger(QueryHandler.class.getName());
+            logger.log(Level.SEVERE, null, ex);
+        }
+
+        return null;
+    }
 }
