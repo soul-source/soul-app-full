@@ -8,22 +8,13 @@ package system.servlet;
 import com.google.gson.Gson;
 import hwcore.modules.java.src.library.common.SysConfig;
 import hwcore.modules.java.src.library.database.RecordSet;
-import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
 import java.io.IOException;
-import java.sql.Date;
 import java.util.ArrayList;
 import javax.servlet.ServletException;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import system.common.MyQueryHandler;
 import system.main.controller.ControllerMain;
-import system.news.model.TableModelNewsList;
-import system.report.model.HandlerReportsQuery;
-import system.user.model.EntityModelUser;
-import system.user.model.HandlerUserQuery;
 import system.user.model.UserRS;
 
 /**

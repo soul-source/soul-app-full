@@ -15,10 +15,35 @@ hwc.define([
                 this.__super();
             },
             init: function () {
-                this.__super().then(function() {
-                    var rList=$.Browser.JQ("#report-list");
-                    rList.append($.Browser.DOMTools.cloneId("report"));
-                    rList.append($.Browser.DOMTools.cloneId("report"));
+                this.__super().then(function () {
+                    var jq = $.Browser.JQ;
+                    jq.ajax({
+                        url: "RestApi?table=report&type=list",
+                        type: "GET",
+                        contentType: "application/json; charset=UTF-8",
+                        dataType: "json",
+                        //context: document.getElementById("test")
+                    }).done(function (res) {
+                        console.log(res);
+
+                        /*$.Browser.JQ("#name").val(res.table[0].records.soul_dbusername.val);
+                         $.Browser.JQ("#last-name").val(res.table[0].records.soul_dbuserlast_name.val);
+                         var date = new Date(res.table[0].records.soul_dbuserbirthdate.val);
+                         $.Browser.JQ("#birthdate").val(
+                         date.getFullYear() + "-" + $.Date.zeroFill(date.getMonth() + 1) + "-" + $.Date.zeroFill(date.getDate())
+                         );
+                         $.Browser.JQ("#city").val(res.table[0].records.soul_dbusercity.val);
+                         $.Browser.JQ("#street").val(res.table[0].records.soul_dbuserstreet.val);
+                         $.Browser.JQ("#tax_code").val(res.table[0].records.soul_dbusertax_code.val);
+                         $.Browser.JQ("#cap").val(res.table[0].records.soul_dbusercap.val);
+                         $.Browser.JQ("#country").val(res.table[0].records.soul_dbusercountry.val);
+                         $.Browser.JQ("#password").val(res.table[0].records.soul_dbuserpassword.val);
+                         // res.table[0].records.soul_dbusername.val
+                         var rList=$.Browser.JQ("#report-list");
+                         
+                         rList.append($.Browser.DOMTools.cloneId("report"));
+                         rList.append($.Browser.DOMTools.cloneId("report"));*/
+                    });
                 });
             },
             build: function () {

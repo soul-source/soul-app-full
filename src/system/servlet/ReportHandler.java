@@ -32,7 +32,7 @@ public class ReportHandler {
         PreparedStatement ps = handle.insertReport(address, reportType, reportDescription, picture, geoloc, sDate);
         if (ps != null) {
             try {
-                ResultSet rs=ps.getGeneratedKeys();
+                ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
                     resp.getWriter().write(String.valueOf(rs.getInt(1)));
                     return;
@@ -47,11 +47,22 @@ public class ReportHandler {
 
     public static ArrayList<RecordSet> handleReportGet(HttpServletRequest req, HttpServletResponse resp, String type)
             throws IOException {
-        HandlerReportsQuery handle = new HandlerReportsQuery();
+        HandlerReportsQuery handle;
 
-        String id=req.getParameter("id");
-        
-        return new ArrayList<>(handle.selectReport(id));
+        switch (type) {
+            case "list":
+                handle = new HandlerReportsQuery();
+
+                return new ArrayList<>(handle.loadData("", "").getRecords());
+            case "single":
+                handle = new HandlerReportsQuery();
+
+                String id = req.getParameter("id");
+
+                return new ArrayList<>(handle.selectReport(id));
+        }
+
+        return null;
     }
 
 }
