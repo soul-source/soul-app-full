@@ -44,7 +44,12 @@ public class HandlerReportsQuery extends MyQueryHandler {
             String geoloc, Date date) {
 
         String query = "INSERT INTO report (coordinates, description, publication_date, place, id_subtype)"
-                + "VALUES('" + geoloc + "','" + reportDescription + "','" + date + "','" + address + "',"+reportType+")";
+                + "VALUES('" 
+                + geoloc + "','" 
+                + reportDescription + "','" 
+                + date + "','" 
+                + address + "',"
+                + reportType+")";
         return this.executeStatement(query);
     }
     

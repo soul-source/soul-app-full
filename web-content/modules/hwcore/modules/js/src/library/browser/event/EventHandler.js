@@ -1,8 +1,3 @@
-/*
- * Copyright (C) 2007 - 2014 Hyperweb2 All rights reserved.
- * GNU General Public License version 3; see www.hyperweb2.com/terms/
- */
-
 'use strict';
 
 hwc.define([
@@ -29,7 +24,7 @@ hwc.define([
 
                     if (storedOnElem) {
                         if (element.__hwcRouteHandler)
-                            element.removeEventListener(element, element.__hwcRouteHandler);
+                            element.removeEventListener(event, element.__hwcRouteHandler);
 
                         element.__hwcRouteHandler = handler;
                     } else {

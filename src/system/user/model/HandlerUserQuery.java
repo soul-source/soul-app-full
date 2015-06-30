@@ -3,10 +3,6 @@ package system.user.model;
 import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import system.common.MyQueryHandler;
 
 public class HandlerUserQuery extends MyQueryHandler {

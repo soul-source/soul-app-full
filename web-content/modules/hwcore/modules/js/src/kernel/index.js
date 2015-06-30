@@ -125,7 +125,7 @@ var HwcBootstrap = (function () {
                     var hwcModule = function () {
                         return new hwc.Module(def, arguments);
                     };
-                    hwcModule.__isHw2Module = true;
+                    hwcModule.__isHwcModule = true;
 
                     args = [hwcModule];
                     break;
@@ -135,7 +135,7 @@ var HwcBootstrap = (function () {
                     var hwcModule = function () {
                         return new hwc.Module(def, arguments);
                     };
-                    hwcModule.__isHw2Module = true;
+                    hwcModule.__isHwcModule = true;
 
                     args = [arguments[0], hwcModule];
                     break;
@@ -246,7 +246,7 @@ var HwcBootstrap = (function () {
         var currScript = this.getCurrentScriptTag() || {};
 
         var rootPath = currScript[rootPathAttr] ||
-            window["HW2PATH_ROOT"] ||
+            window["HWCPATH_ROOT"] ||
             function () {
                 var prefix = currScript.src ? that.dirName(currScript.src) + "/" : null;
                 return prefix + defRoot;
@@ -260,7 +260,7 @@ var HwcBootstrap = (function () {
         // or using global const , otherwise the init process must be done manually later
         // via hwc.init(myAfterScript);
         var afterScript = (currScript["getAttribute"] && currScript.getAttribute(abAttr))
-            || window["HW2_AFTERBOOT"] || false;
+            || window["HWC_AFTERBOOT"] || false;
 
         setGlobals(window);
 

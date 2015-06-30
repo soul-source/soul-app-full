@@ -170,7 +170,7 @@ hwc.define([
                     callback && callback();
                     window.location.assign(isRoute ? uri.getUri().toString() : uri);
                 } else {
-                    this.i.update(uri, callback);
+                    this.i.update(isRoute ? uri : new this.s.RouteInfo(uri, this.i.isSpa()), callback);
                 }
             },
             /**
@@ -239,7 +239,6 @@ hwc.define([
              * 
              * @param {type} re: regular expression for url
              * @param {type} handler
-             * @returns {Router.RouterAnonym$4}
              */
             addEvent: function (re, handler) {
                 if (typeof re == 'function') {
@@ -251,20 +250,21 @@ hwc.define([
                     this._i.events[re] = [];
 
                 this._i.events[re].push(handler);
-                return this;
             },
+            /**
+             * 
+             * @param {type} param can be the reference to event function or the regular expression string
+             */
             removeEvent: function (param) {
                 if (typeof param === "function") {
                     for (var re in this._i.events) {
                         var i = this._i.events[re].indexOf(param);
                         if (i >= 0) {
                             this._i.events[re].splice(i, 1);
-                            return this;
                         }
                     }
                 } else {
                     delete this._i.events[re];
-                    return this;
                 }
             },
             clearEvents: function () {
@@ -321,7 +321,8 @@ hwc.define([
                 opt = opt || {};
                 var route = this._i.routeInfo.clone();
                 opt.component && route.setComponent(opt.component);
-                opt.path !== undefined && route.setPath(opt.path);
+                //opt.path !== undefined && route.setPath(opt.path);
+                route.setPath(opt.path || ""); // path should be always resetted
                 opt.params !== undefined && route.setParams(opt.params);
                 route.updateUri();
                 return route;
