@@ -2124,7 +2124,7 @@ blockquote p,
 { 
     -webkit-filter: drop-shadow(2px 2px 2px #222);
     filter:         drop-shadow(2px 2px 2px #222);
-    /* height: 40px; */
+    height: 40px;
 }
 
 .hwc-header { 
