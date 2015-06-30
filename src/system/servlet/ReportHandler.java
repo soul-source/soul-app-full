@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletResponse;
 import system.emergency.model.HandlerEmergencyQuery;
 import system.report.model.EntityModelReport;
 import system.report.model.HandlerReportsQuery;
+import static system.servlet.UserHandler.getValidSession;
+import system.user.model.EntityModelUser;
+import system.user.model.HandlerUserQuery;
 
 public class ReportHandler {
 
@@ -26,7 +29,6 @@ public class ReportHandler {
         String geoloc = req.getParameter("addressLat") + "-" + req.getParameter("addressLong");
         Date dt = new Date();
         java.sql.Date sDate = new java.sql.Date(dt.getTime());
-        //Date d = new ;
 
         HandlerReportsQuery handle = new HandlerReportsQuery();
         PreparedStatement ps = handle.insertReport(address, reportType, reportDescription, picture, geoloc, sDate);
@@ -34,6 +36,14 @@ public class ReportHandler {
             try {
                 ResultSet rs = ps.getGeneratedKeys();
                 if (rs.next()) {
+
+                    UserHandler.UserSession us = getValidSession(req);
+                    if (us != null) {
+                        int pId = us.getUserId();
+                        HandlerUserQuery handleUser = new HandlerUserQuery(null);
+                        handleUser.insertReportRel(pId, rs.getInt(1));
+                    }
+
                     resp.getWriter().write(String.valueOf(rs.getInt(1)));
                     return;
                 }
@@ -41,6 +51,7 @@ public class ReportHandler {
                 Logger.getLogger(ReportHandler.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+
         resp.getWriter().write("false");
 
     }

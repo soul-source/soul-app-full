@@ -19,6 +19,19 @@ import system.user.model.EntityModelUser;
  *
  */
 public class EntityModelComments extends MyEntityModel {
+    
+    public static class WithRel extends EntityModelComments {
+
+        public WithRel() {
+            super();
+        }
+
+        public static WithRel I() {
+            return (WithRel) I(WithRel.class).mergeFields(
+                    EntityModelUser.I()
+            );
+        }
+    }
 
     public FieldModel ID_COMMENTO,
             DATA_INVIO,
@@ -33,7 +46,7 @@ public class EntityModelComments extends MyEntityModel {
                 DATA_INVIO = new RestrictedField("publication_date", "Data", this, PermissionsTypes.readOnly()),
                 MESSAGGIO = new VisualName("message", "Messaggio",this),
                 ID_UTENTE = new RelField("id_user", this,EntityModelUser.I().ID_UTENTE),
-                ID_SEGNALAZIONE = new RelField("id_report", this,EntityModelUser.I().ID_UTENTE)
+                ID_SEGNALAZIONE = new HiddenField("id_report", this/*,EntityModelUser.I().ID_UTENTE*/)
         );
     }
 

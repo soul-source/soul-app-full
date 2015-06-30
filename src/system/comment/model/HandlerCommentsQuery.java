@@ -6,6 +6,11 @@ package system.comment.model;
 
 import hwcore.modules.java.src.library.database.TableData;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
+import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import system.comment.controller.ControllerJFrameComments;
 import system.common.MyQueryHandler;
 import system.report.model.EntityModelReport;
@@ -21,6 +26,10 @@ public class HandlerCommentsQuery extends MyQueryHandler {
         this.ctrl = ctrl;
     }
 
+    public HandlerCommentsQuery() {
+        super(EntityModelComments.WithRel.I());
+    }
+
     @Override
     public void updateData(TableData tableData, String[] tablesToUpdate) {
         super.updateData(tableData, tablesToUpdate);
@@ -31,7 +40,7 @@ public class HandlerCommentsQuery extends MyQueryHandler {
     @Override
     public QueryBuilder buildDeleteQuery(TableData tableData, String[] tablesToUpdate) {
         QueryBuilder qb = super.buildDeleteQuery(tableData, tablesToUpdate);
-        qb=updateCommentsNum(qb,false);
+        qb = updateCommentsNum(qb, false);
 
         return qb;
     }
@@ -39,7 +48,7 @@ public class HandlerCommentsQuery extends MyQueryHandler {
     @Override
     public QueryBuilder buildInsertQuery(TableData tableData, String[] tablesToUpdate) {
         QueryBuilder qb = super.buildInsertQuery(tableData, tablesToUpdate);
-        qb=updateCommentsNum(qb,true);
+        qb = updateCommentsNum(qb, true);
 
         return qb;
     }
@@ -59,7 +68,26 @@ public class HandlerCommentsQuery extends MyQueryHandler {
                     .qbCompare(idSegnalazione)
                     .qbCloseQuery();
         }
-        
+
         return qb;
+    }
+
+    public PreparedStatement insertComment(String comment, String idReport, int idUser, Date date) {
+        String query = "INSERT INTO comment (publication_date, message, id_user, id_report)"
+                + "VALUES(?,?,?,?)";
+
+        PreparedStatement ps = this.getStatement(query);
+
+        try {
+            ps.setDate(1, date);
+            ps.setString(2, comment);
+            ps.setInt(3, idUser);
+            ps.setInt(4, Integer.parseInt(idReport));
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlerCommentsQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return this.executeStatement(ps);
+
     }
 }

@@ -231,7 +231,7 @@ hwc.define([
                     .then(this._i.eventHandler.trigger("afterUpdate"));
             },
             refresh: function (forceReload) {
-                (forceReload || this.i.isSpa()) &&
+                (forceReload || !this.i.isSpa()) &&
                     window.location.reload() ||
                     this.i.update();
             },

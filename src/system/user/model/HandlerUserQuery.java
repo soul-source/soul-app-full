@@ -3,6 +3,10 @@ package system.user.model;
 import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import system.comment.model.HandlerCommentsQuery;
 import system.common.MyQueryHandler;
 
 public class HandlerUserQuery extends MyQueryHandler {
@@ -97,5 +101,21 @@ public class HandlerUserQuery extends MyQueryHandler {
     public void updateSession(int uId, String token) {
         String q = "UPDATE user SET session_token ='" + token + "' WHERE id_user='" + uId + "'";
         this.execute(q);
+    }
+
+    public PreparedStatement  insertReportRel(int pId, int aInt) {
+        String query = "INSERT INTO user_report_rel (user_id_user, report_id_report)"
+                + "VALUES(?,?)";
+
+        PreparedStatement ps = this.getStatement(query);
+
+        try {
+            ps.setInt(1, pId);
+            ps.setInt(2, aInt);
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlerCommentsQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.executeStatement(ps);
+
     }
 }

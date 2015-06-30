@@ -206,7 +206,7 @@ public class UserHandler {
         return new UserSession(token, id);
     }
 
-    private static class UserSession {
+    public static class UserSession {
 
         private String sessionToken = null;
         private int userId = 0;

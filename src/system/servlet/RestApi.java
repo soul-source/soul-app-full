@@ -84,6 +84,9 @@ public class RestApi extends HttpServlet {
                 case "report":
                       rs=ReportHandler.handleReportGet(req, resp, type);
                     break;
+                case "comments":
+                      rs=CommentsHandler.handleCommentsGet(req, resp, type);
+                    break;
             }
 
             if (rs.size() <= 0) {
@@ -159,6 +162,9 @@ public class RestApi extends HttpServlet {
                 break;
             case "report":
                 ReportHandler.handleReportPost(req, resp, type);
+                break;
+            case "comment":
+                CommentsHandler.handlePostComment(req, resp, type);
                 break;
                 
         }
