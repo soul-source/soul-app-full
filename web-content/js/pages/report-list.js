@@ -26,6 +26,20 @@ hwc.define([
                     }).done(function (res) {
                         console.log(res);
 
+                        var div = jq("#report-1");
+                        res.table.forEach(function (v, idx) {
+
+                            var descr = div.find(".report-descr");
+                            descr.text(v.records.soul_dbemergency_subtypename.val);
+                            $.Browser.Router.I().setRoute(descr[0], {component: "report-info", path: v.records.soul_dbreportid_report.val})
+                            div.find(".report-zone").text(v.records.soul_dbreportplace.val);
+                            div.find(".report-priority").text(v.records.soul_dbemergency_subtypepriority_level.val);
+
+                            if (idx < res.table.length - 1) {
+                                div = $.Browser.DOMTools.cloneId("report");
+                                jq("#report-list").append(div);
+                            }
+                        });
                         /*$.Browser.JQ("#name").val(res.table[0].records.soul_dbusername.val);
                          $.Browser.JQ("#last-name").val(res.table[0].records.soul_dbuserlast_name.val);
                          var date = new Date(res.table[0].records.soul_dbuserbirthdate.val);
