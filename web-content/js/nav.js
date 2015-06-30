@@ -26,6 +26,9 @@ hwc.define([
                 },
                 build: function () {
                     this.__super();
+                    var search=$.Browser.JQ(".hwc-home-search-btn");
+                    var page = this.i.getRouter().getRouteInfo().getComponent();
+                    page !== "home" ? search.hide() : search.show();
                 }
             }));
 
