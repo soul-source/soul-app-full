@@ -11,8 +11,11 @@ import hwcore.modules.java.src.library.database.querybuilders.SqlQueryBuilder;
 import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import system.common.MyQueryHandler;
 
 public class HandlerReportsQuery extends MyQueryHandler {
@@ -44,18 +47,25 @@ public class HandlerReportsQuery extends MyQueryHandler {
             String geoloc, Date date) {
 
         String query = "INSERT INTO report (coordinates, description, publication_date, place, id_subtype)"
-                + "VALUES('" 
-                + geoloc + "','" 
-                + reportDescription + "','" 
-                + date + "','" 
-                + address + "',"
-                + reportType+")";
-        return this.executeStatement(query);
+                + "VALUES(?,?,?,?,?)";
+
+        PreparedStatement ps = this.getStatement(query);
+        try {
+            ps.setString(1, geoloc);
+            ps.setString(2, reportDescription);
+            ps.setDate(3, date);
+            ps.setString(4, address);
+            ps.setInt(5, Integer.parseInt(reportType));
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlerReportsQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+      
+        return this.executeStatement(ps);
     }
-    
+
     public List<RecordSet> selectReport(String id) {
-        String fName=MyQueryHandler.getQb().qbBuildName(EntityModelReport.I().ID_SEGNALAZIONE.getPath()).toString();
-        
-        return this.loadData("", fName+"="+id).getRecords();
+        String fName = MyQueryHandler.getQb().qbBuildName(EntityModelReport.I().ID_SEGNALAZIONE.getPath()).toString();
+
+        return this.loadData("", fName + "=" + id).getRecords();
     }
 }
