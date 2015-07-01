@@ -7,7 +7,7 @@
 
 hwc.define([
     'hwc!{PATH_JS_LIB}common/include.js'
-],function () {
+], function () {
     var $ = this;
     $.Var = $.Class({members: [
             {
@@ -19,9 +19,7 @@ hwc.define([
                  * NOTE: there is no performance penalty for using try..catch block if the property is set. 
                  * There is a performance impact if the property is unset.
                  */
-                attributes: ["public", "static"],
-                name: "isset",
-                val: function (fn) {
+                a: ["public", "static"], n: "isset", v: function (fn) {
                     var value;
                     try {
                         value = fn();
@@ -30,6 +28,11 @@ hwc.define([
                     } finally {
                         return value !== undefined;
                     }
+                }
+            },
+            {
+                a: ["public", "static"], n: "isNumeric", v: function (n) {
+                    return !isNaN(parseFloat(n)) && isFinite(n);
                 }
             }
         ]}
