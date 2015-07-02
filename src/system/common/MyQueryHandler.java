@@ -117,9 +117,9 @@ public class MyQueryHandler extends QueryHandler {
                             .qbCompare()
                             .qbBuildName(((FieldModel) relation.getValue()).getPath());
                 }
-            }
 
-            cnt++;
+                cnt++;
+            }
         }
 
         if (searchText.length > 0) {
