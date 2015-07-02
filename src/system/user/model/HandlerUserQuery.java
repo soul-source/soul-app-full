@@ -4,6 +4,11 @@ import hwcore.modules.java.src.library.database.EntityModel;
 import hwcore.modules.java.src.library.database.querybuilders.QueryBuilder;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import system.comment.model.HandlerCommentsQuery;
@@ -36,39 +41,31 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public PreparedStatement regUser(String name, String lastName, String bornDate,
-            String email, String password) {
-        EntityModelUser u = EntityModelUser.I();
-        QueryBuilder qb = getQb();
-        qb.insert()
-                .into(u.getTableName())
-                .qbAdd("(")
-                .qbBuildName(u.NOME.getPath()).qbSep()
-                .qbBuildName(u.COGNOME.getPath()).qbSep()
-                .qbBuildName(u.DATA_DI_NASCITA.getPath()).qbSep()
-                .qbBuildName(u.EMAIL.getPath()).qbSep()
-                .qbBuildName(u.PASSWORD.getPath()).qbSep()
-                // default
-                .qbBuildName(u.CITTA.getPath()).qbSep()
-                .qbBuildName(u.STATO.getPath()).qbSep()
-                .qbBuildName(u.VIA.getPath()).qbSep()
-                .qbBuildName(u.CAP.getPath()).qbSep()
-                .qbBuildName(u.COD_FISCALE.getPath())
-                .qbAdd(")")
-                .values(
-                        name,
-                        lastName,
-                        bornDate,
-                        email,
-                        password,
-                        // empty fields
-                        "",
-                        "",
-                        "",
-                        0,
-                        ""
-                );
-
-        return this.executeStatement(qb.toString());
+            String email, String password) throws ParseException {
+           String query = "INSERT INTO user(email, birthdate, name, last_name, tax_code, "
+                    + "street, city, cap, country, unread_notifications_number, password)"+
+                    "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+            PreparedStatement ps = getStatement(query);
+        try {
+            ps.setString(1, email);
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            java.sql.Date dbDate = new java.sql.Date(df.parse(bornDate).getTime());
+            ps.setDate(2, dbDate);
+            ps.setString(3, name);
+            ps.setString(4, lastName);
+            ps.setString(5, "");
+            ps.setString(6, "");
+            ps.setString(7, "");
+            ps.setInt(8, 0);
+            ps.setString(9, "Italia");
+            ps.setInt(10, 0);
+            ps.setString(11, password);
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.executeStatement(ps);
     }
 
     public boolean deleteUser(int id) {
@@ -82,20 +79,38 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public PreparedStatement updateUser(int id, String password, String name, String lastName, String birthDay,
-            String city, String cap, String street, String country, String taxCode) {
-        String query = "UPDATE user SET "
-                + "password='" + password + "',"
-                + "name='" + name + "',"
-                + "last_name='" + lastName + "',"
-                + "birthdate='" + birthDay + "',"
-                + "city='" + city + "',"
-                + "tax_code='" + taxCode + "',"
-                + "cap='" + cap + "',"
-                + "street='" + street + "',"
-                + "country='" + country + "' "
-                + "WHERE id_user='" + id + "'";
-
-        return this.executeStatement(query);
+            String city, String cap, String street, String country, String taxCode) throws ParseException {
+        
+          String query = "UPDATE user SET "
+                    + "password=?,"
+                    + "name=?,"
+                    + "last_name=?,"
+                    + "birthdate=?,"
+                    + "city=?,"
+                    + "tax_code=?,"
+                    + "cap=?,"
+                    + "street=?,"
+                    + "country=? "
+                    + "WHERE id_user='" + id + "'";
+            
+            PreparedStatement ps = this.getStatement(query);
+        try {
+            DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            //Date date = df.parse(birthDay);
+            java.sql.Date dbDate = new java.sql.Date(df.parse(birthDay).getTime());
+            ps.setString(1, password);
+            ps.setString(2, name);
+            ps.setString(3, lastName);
+            ps.setDate(4, dbDate);
+            ps.setString(5, city);
+            ps.setString(6, taxCode);
+            ps.setInt(7, Integer.parseInt(cap));
+            ps.setString(8, street);
+            ps.setString(9, country);
+        } catch (SQLException ex) {
+            Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return this.executeStatement(ps);
     }
 
     public void updateSession(int uId, String token) {
