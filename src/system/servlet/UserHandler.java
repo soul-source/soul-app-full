@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.sql.Date;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.http.Cookie;
@@ -32,7 +33,7 @@ public class UserHandler {
         return uRs;
     }
 
-    public static void handleUserPut(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException {
+    public static void handleUserPut(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException{
         switch (type) {
             case "update-profile":
                 UserSession us = getValidSession(req);
@@ -64,7 +65,7 @@ public class UserHandler {
         }
     }
 
-    public static void handleUserPost(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException {
+    public static void handleUserPost(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException{
         switch (type) {
             case "session":
                 boolean isValid = getValidSession(req) != null;
