@@ -58,9 +58,10 @@ hwc.define([
                         url: "RestApi?table=report&type=user-info&id=" + id,
                         type: "GET",
                     }).done(function (res) {
-                        console.log("User-info",res);
-
-                        //$.Browser.JQ("#report-descr").text(res.table[0].records.soul_dbreportdescription.val);
+                        if(res ==="false")
+                        $.Browser.JQ("#user-info").text("Ospite")
+                        else
+                        $.Browser.JQ("#user-info").text(res.table[0].records.soul_dbusername.val +" "+res.table[0].records.soul_dbuserlast_name.val);
                     });
 
                      /*
