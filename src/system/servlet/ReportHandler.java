@@ -59,6 +59,7 @@ public class ReportHandler {
     public static ArrayList<RecordSet> handleReportGet(HttpServletRequest req, HttpServletResponse resp, String type)
             throws IOException {
         HandlerReportsQuery handle;
+        String id;
 
         switch (type) {
             case "list":
@@ -68,7 +69,13 @@ public class ReportHandler {
             case "single":
                 handle = new HandlerReportsQuery(EntityModelReport.WithRel.I());
 
-                String id = req.getParameter("id");
+                id = req.getParameter("id");
+
+                return new ArrayList<>(handle.selectReport(id));
+            case "user-info":
+                handle = new HandlerReportsQuery(EntityModelReport.WithUserInfo.I());
+
+                id = req.getParameter("id");
 
                 return new ArrayList<>(handle.selectReport(id));
         }

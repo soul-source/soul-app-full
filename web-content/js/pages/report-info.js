@@ -20,7 +20,10 @@ hwc.define([
                     var jq = $.Browser.JQ;
                     var uId = $.Browser.Cookie.get("user-id");
                     var id = $.Browser.Router.I().getRouteInfo().getPath();
-
+                    
+                    /**
+                     *  GET REPORT INFO
+                     */
                     jq.ajax({
                         url: "RestApi?table=report&type=single&id=" + id,
                         type: "GET",
@@ -47,7 +50,22 @@ hwc.define([
                         $.Browser.JQ("#zone").text(res.table[0].records.soul_dbreportplace.val);
                         $.Browser.JQ("#priority").text(res.table[0].records.soul_dbemergency_subtypepriority_level.val);
                     });
+                    
+                    /**
+                     * GET USER INFO
+                     */
+                    jq.ajax({
+                        url: "RestApi?table=report&type=user-info&id=" + id,
+                        type: "GET",
+                    }).done(function (res) {
+                        console.log("User-info",res);
 
+                        //$.Browser.JQ("#report-descr").text(res.table[0].records.soul_dbreportdescription.val);
+                    });
+
+                     /*
+                      * GET COMMENTS LIST
+                      */
                     jq.ajax({
                         url: "RestApi?table=comments&type=list&id=" + id,
                         type: "GET",

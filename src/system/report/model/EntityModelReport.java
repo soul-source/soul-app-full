@@ -8,6 +8,8 @@ import hwcore.modules.java.src.library.database.fielddecorators.VisualName;
 import system.common.MyEntityModel;
 import system.common.PermissionsTypes;
 import system.emergency.model.EntityModelSubtype;
+import system.user.model.EntityModelUserProfile;
+import system.user.model.EntityModelUserReportRel;
 
 public class EntityModelReport extends MyEntityModel {
 
@@ -20,6 +22,19 @@ public class EntityModelReport extends MyEntityModel {
         public static WithRel I() {
             return (WithRel) I(WithRel.class).mergeFields(
                     EntityModelSubtype.WithRel.I()
+            );
+        }
+    }
+    
+    public static class WithUserInfo extends EntityModelReport {
+
+        public WithUserInfo() {
+            super();
+        }
+
+        public static WithUserInfo I() {
+            return (WithUserInfo) I(WithUserInfo.class).mergeFields(
+                    EntityModelUserProfile.WithReport.I()
             );
         }
     }
