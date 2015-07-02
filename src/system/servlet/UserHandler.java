@@ -54,7 +54,7 @@ public class UserHandler {
 
                 if (new HandlerUserQuery(EntityModelUser.I())
                         .updateUser(pId, pPassword, pName, pLastName, pBirthDate,
-                                pCity, pCap, pStreet, pCountry, pTaxCode)==null) {
+                                pCity, pCap, pStreet, pCountry, pTaxCode) == null) {
                     resp.getWriter().write("false");
                     return;
                 }
@@ -78,7 +78,7 @@ public class UserHandler {
                 String regBirthDate = req.getParameter("birthDate");
 
                 if (new HandlerUserQuery(EntityModelUser.I())
-                        .regUser(regName, regLastName, regBirthDate, regEmail, regPassword)==null) {
+                        .regUser(regName, regLastName, regBirthDate, regEmail, regPassword) == null) {
                     resp.getWriter().write("false");
                     return;
                 }
@@ -140,6 +140,9 @@ public class UserHandler {
             HandlerUserQuery uQuery = new HandlerUserQuery(EntityModelUser.I());
 
             UserRS uRs = uQuery.loadUtente(id);
+            if (uRs == null) {
+                return false;
+            }
 
             boolean ok = token.equals(uRs.getSessionToken());
 

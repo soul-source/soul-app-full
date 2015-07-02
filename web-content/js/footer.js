@@ -22,7 +22,7 @@ hwc.define([
             },
             build: function () {
                 this.__super();
-                var page = this.i.getRouter().getRouteInfo().getComponent();
+                var page = this.i.getRouter().getRouteInfo().getComponent() || "home";
                 var footer = $.Browser.JQ(".hwc-footer-inner");
                 page === "home" ? footer.hide() : footer.show();
             }

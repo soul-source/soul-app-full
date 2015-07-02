@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package system.user.model;
 
 import hwcore.modules.java.src.library.database.FieldModel;
 import hwcore.modules.java.src.library.database.fielddecorators.*;
 import system.common.MyEntityModel;
+import system.report.model.EntityModelReport;
 
 public class EntityModelUserProfile extends MyEntityModel {
 
@@ -25,6 +21,20 @@ public class EntityModelUserProfile extends MyEntityModel {
 
         public static WithIncarico I() {
             return (WithIncarico) I(WithIncarico.class).mergeFields(EntityModelRoleRel.I());
+        }
+
+    }
+
+    public static class WithReport extends EntityModelUserProfile {
+
+        public FieldModel TIPO;
+
+        public WithReport() {
+            super();
+        }
+
+        public static WithReport I() {
+            return (WithReport) I(WithReport.class).mergeFields(EntityModelUserReportRel.I());
         }
 
     }

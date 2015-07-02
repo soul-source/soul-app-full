@@ -26,7 +26,7 @@ hwc.define([
                     }).done(function (res) {
                         console.log(res);
 
-                        var div = jq("#report-1");
+                        var div = jq("#report-element-1");
                         res.table.forEach(function (v, idx) {
 
                             var descr = div.find(".report-descr");
@@ -36,7 +36,7 @@ hwc.define([
                             div.find(".report-priority").text(v.records.soul_dbemergency_subtypepriority_level.val);
 
                             if (idx < res.table.length - 1) {
-                                div = $.Browser.DOMTools.cloneId("report");
+                                div = $.Browser.DOMTools.cloneId("report-element");
                                 jq("#report-list").append(div);
                             }
                         });

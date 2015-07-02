@@ -30,7 +30,7 @@ public class ReportHandler {
         Date dt = new Date();
         java.sql.Date sDate = new java.sql.Date(dt.getTime());
 
-        HandlerReportsQuery handle = new HandlerReportsQuery();
+        HandlerReportsQuery handle = new HandlerReportsQuery(EntityModelReport.WithRel.I());
         PreparedStatement ps = handle.insertReport(address, reportType, reportDescription, picture, geoloc, sDate);
         if (ps != null) {
             try {
@@ -62,11 +62,11 @@ public class ReportHandler {
 
         switch (type) {
             case "list":
-                handle = new HandlerReportsQuery();
+                handle = new HandlerReportsQuery(EntityModelReport.WithOnlyEmergency.I());
 
                 return new ArrayList<>(handle.loadData("", "").getRecords());
             case "single":
-                handle = new HandlerReportsQuery();
+                handle = new HandlerReportsQuery(EntityModelReport.WithRel.I());
 
                 String id = req.getParameter("id");
 

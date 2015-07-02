@@ -21,9 +21,15 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public UserRS loadUtente(int id) {
-        return (UserRS) this.loadData(
-                getQb().qbBuildName(EntityModelUser.I().ID_UTENTE.getPath()).qbCompare(id).toString()
-        ).getRecords().get(0);
+        try {
+            return (UserRS) this.loadData(
+                    getQb().qbBuildName(EntityModelUser.I().ID_UTENTE.getPath()).qbCompare(id).toString()
+            ).getRecords().get(0);
+        } catch (Exception e) {
+            System.out.println("No user");
+        }
+
+        return null;
     }
 
     public UserRS loadUtente(String email, String password) {
@@ -41,11 +47,11 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public PreparedStatement regUser(String name, String lastName, String bornDate,
-            String email, String password) throws ParseException {
-           String query = "INSERT INTO user(email, birthdate, name, last_name, tax_code, "
-                    + "street, city, cap, country, unread_notifications_number, password)"+
-                    "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
-            PreparedStatement ps = getStatement(query);
+            String email, String password) {
+        String query = "INSERT INTO user(email, birthdate, name, last_name, tax_code, "
+                + "street, city, cap, country, unread_notifications_number, password)"
+                + "VALUES(?,?,?,?,?,?,?,?,?,?,?)";
+        PreparedStatement ps = getStatement(query);
         try {
             ps.setString(1, email);
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
@@ -60,9 +66,10 @@ public class HandlerUserQuery extends MyQueryHandler {
             ps.setString(9, "Italia");
             ps.setInt(10, 0);
             ps.setString(11, password);
-            
-            
+
         } catch (SQLException ex) {
+            Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
             Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this.executeStatement(ps);
@@ -79,21 +86,21 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public PreparedStatement updateUser(int id, String password, String name, String lastName, String birthDay,
-            String city, String cap, String street, String country, String taxCode) throws ParseException {
-        
-          String query = "UPDATE user SET "
-                    + "password=?,"
-                    + "name=?,"
-                    + "last_name=?,"
-                    + "birthdate=?,"
-                    + "city=?,"
-                    + "tax_code=?,"
-                    + "cap=?,"
-                    + "street=?,"
-                    + "country=? "
-                    + "WHERE id_user='" + id + "'";
-            
-            PreparedStatement ps = this.getStatement(query);
+            String city, String cap, String street, String country, String taxCode) {
+
+        String query = "UPDATE user SET "
+                + "password=?,"
+                + "name=?,"
+                + "last_name=?,"
+                + "birthdate=?,"
+                + "city=?,"
+                + "tax_code=?,"
+                + "cap=?,"
+                + "street=?,"
+                + "country=? "
+                + "WHERE id_user='" + id + "'";
+
+        PreparedStatement ps = this.getStatement(query);
         try {
             DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
             //Date date = df.parse(birthDay);
@@ -109,6 +116,8 @@ public class HandlerUserQuery extends MyQueryHandler {
             ps.setString(9, country);
         } catch (SQLException ex) {
             Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ParseException ex) {
+            Logger.getLogger(HandlerUserQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
         return this.executeStatement(ps);
     }
@@ -118,7 +127,7 @@ public class HandlerUserQuery extends MyQueryHandler {
         this.execute(q);
     }
 
-    public PreparedStatement  insertReportRel(int pId, int aInt) {
+    public PreparedStatement insertReportRel(int pId, int aInt) {
         String query = "INSERT INTO user_report_rel (user_id_user, report_id_report)"
                 + "VALUES(?,?)";
 

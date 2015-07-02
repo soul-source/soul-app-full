@@ -12,7 +12,7 @@ public class ControllerJFrameReportsList extends MyJFrameController implements M
     private ControllerJFrameReport childCtrl;
 
     public ControllerJFrameReportsList() {
-        super(new HandlerReportsQuery(),PermissionsTypes.readOnly());
+        super(new HandlerReportsQuery(EntityModelReport.WithRel.I()),PermissionsTypes.readOnly());
         this.initialize(new JFrameReportsList(
                 this,
                 ControllerJFrameMain.I().getMainFrame().jInternalFrameSegnalazioni)

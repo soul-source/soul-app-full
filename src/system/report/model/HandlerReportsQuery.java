@@ -20,8 +20,8 @@ import system.common.MyQueryHandler;
 
 public class HandlerReportsQuery extends MyQueryHandler {
 
-    public HandlerReportsQuery() {
-        super(EntityModelReport.WithRel.I());
+    public HandlerReportsQuery(EntityModelReport e) {
+        super(e);
     }
 
     @Override

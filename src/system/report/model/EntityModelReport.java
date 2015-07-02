@@ -1,7 +1,6 @@
 package system.report.model;
 
 import hwcore.modules.java.src.library.database.FieldModel;
-import hwcore.modules.java.src.library.database.fielddecorators.CalculatedField;
 import hwcore.modules.java.src.library.database.fielddecorators.HiddenField;
 import hwcore.modules.java.src.library.database.fielddecorators.RelField;
 import hwcore.modules.java.src.library.database.fielddecorators.RestrictedField;
@@ -9,8 +8,6 @@ import hwcore.modules.java.src.library.database.fielddecorators.VisualName;
 import system.common.MyEntityModel;
 import system.common.PermissionsTypes;
 import system.emergency.model.EntityModelSubtype;
-import system.emergencynumber.model.EntityModelNumbers;
-import system.emergencynumber.model.EntityModelNumbersRel;
 
 public class EntityModelReport extends MyEntityModel {
 
@@ -23,6 +20,19 @@ public class EntityModelReport extends MyEntityModel {
         public static WithRel I() {
             return (WithRel) I(WithRel.class).mergeFields(
                     EntityModelSubtype.WithRel.I()
+            );
+        }
+    }
+
+    public static class WithOnlyEmergency extends EntityModelReport {
+
+        public WithOnlyEmergency() {
+            super();
+        }
+
+        public static WithOnlyEmergency I() {
+            return (WithOnlyEmergency) I(WithOnlyEmergency.class).mergeFields(
+                    EntityModelSubtype.I()
             );
         }
     }
