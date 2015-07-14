@@ -79,5 +79,5 @@ local.properties
 deskproj
 build
 /.debris/
-is-system-modules.ffs_gui
+modules-is-system.ffs_gui
 
