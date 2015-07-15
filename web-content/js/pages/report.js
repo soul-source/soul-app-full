@@ -61,7 +61,7 @@ hwc.define([
                             }).done(function (res) {
                                 if(res !== "false") {
                                     var id=res;
-                                    $.Browser.Router.I().navigate({component: "report-info",path:id});
+                                    $.Browser.Router.I().navigate({component: "report-info",path:id,params: {state:1}});
                                 }
                             });
                         })

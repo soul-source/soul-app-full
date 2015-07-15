@@ -11,6 +11,10 @@ hwc.define([
                 opt.template = template;
                 this.__super(parent, [], opt);
             },
+            __destruct: function () {
+                // remove params
+                $.Browser.Router.I().getRouteInfo().removeParam("state")
+            },
             update: function () {
                 this.__super();
             },
@@ -20,7 +24,11 @@ hwc.define([
                     var jq = $.Browser.JQ;
                     var uId = $.Browser.Cookie.get("user-id");
                     var id = $.Browser.Router.I().getRouteInfo().getPath();
-                    
+
+                    if ($.Browser.Router.I().getRouteInfo().getParams().state == 1) {
+                        jq("#report-header-info").show();
+                    }
+
                     /**
                      *  GET REPORT INFO
                      */
@@ -50,7 +58,7 @@ hwc.define([
                         $.Browser.JQ("#zone").text(res.table[0].records.soul_dbreportplace.val);
                         $.Browser.JQ("#priority").text(res.table[0].records.soul_dbemergency_subtypepriority_level.val);
                     });
-                    
+
                     /**
                      * GET USER INFO
                      */
@@ -58,15 +66,15 @@ hwc.define([
                         url: "RestApi?table=report&type=user-info&id=" + id,
                         type: "GET",
                     }).done(function (res) {
-                        if(res ==="false")
-                        $.Browser.JQ("#user-info").text("Ospite")
+                        if (res === "false")
+                            $.Browser.JQ("#user-info").text("Ospite")
                         else
-                        $.Browser.JQ("#user-info").text(res.table[0].records.soul_dbusername.val +" "+res.table[0].records.soul_dbuserlast_name.val);
+                            $.Browser.JQ("#user-info").text(res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
                     });
 
-                     /*
-                      * GET COMMENTS LIST
-                      */
+                    /*
+                     * GET COMMENTS LIST
+                     */
                     jq.ajax({
                         url: "RestApi?table=comments&type=list&id=" + id,
                         type: "GET",
