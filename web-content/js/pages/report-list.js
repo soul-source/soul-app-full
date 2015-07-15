@@ -24,7 +24,7 @@ hwc.define([
                         dataType: "json",
                         //context: document.getElementById("test")
                     }).done(function (res) {
-                        console.log(res);
+                        //console.log(res);
 
                         var div = jq("#report-element-1");
                         res.table.forEach(function (v, idx) {

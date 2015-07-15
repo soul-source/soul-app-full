@@ -15,7 +15,7 @@ import system.common.MyQueryHandler;
 public class HandlerNewsQuery extends MyQueryHandler {
 
     public HandlerNewsQuery() {
-        super(EntityModelNews.I());
+        super(EntityModelNews.WithRel.I());
     }
 
     public TableData loadData(Date start, Date end) {

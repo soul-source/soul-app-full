@@ -25,11 +25,14 @@ hwc.define([
                         dataType: "json",
                         //context: document.getElementById("test")
                     }).done(function (res) {
+                        console.log(res);
                         //$.Browser.JQ("body").append(res);
+      
                         $.Browser.Loader.load("soul/news-post.html").then(function (content) {
                             content = content[0];
                             var cnt = 0;
                             try {
+                                console.log(res);
                                 res.table.forEach(function (e) {
                                     $.Browser.JQ("#news-container").append(
                                             '<div id="news-post-' + cnt + '">' + content + '</div>'
@@ -44,6 +47,8 @@ hwc.define([
                                     );
                                     cnt++;
                                 });
+                                 $.Browser.JQ(content[0]);
+                            $.Browser.JQ("#auth-name").text("pd");
                             } catch (e) {
                                 console.log(e.stack);
                             }

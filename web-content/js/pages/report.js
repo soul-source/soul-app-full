@@ -93,7 +93,7 @@ hwc.define([
                             if (geocoder) {
                                 geocoder.geocode({'latLng': latLng}, function (results, status) {
                                     if (status == google.maps.GeocoderStatus.OK) {
-                                        console.log(results[0].formatted_address);
+                                        //console.log(results[0].formatted_address);
                                         jq('#address').val(results[0].formatted_address);
                                         jq('#address-lat').val(position.coords.latitude);
                                         jq('#address-long').val(position.coords.longitude);

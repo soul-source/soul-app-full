@@ -3,3 +3,25 @@
     width: 400px;
     /* padding: 5px 5px 5px 5px; */
 }
+
+#soul-reg-form input,
+#soul-login-form input {
+    margin-bottom:10px;
+}
+
+.soul-reg-div label,
+.soul-login-div label {
+    margin-bottom: 16px !important;
+}
+
+#soul-reg-form {
+    margin-bottom: 30px !important;
+}
+
+.soul-login-div {
+    padding-left:20px;
+}
+
+#dyn-content {
+    padding-top: 40px;
+}
