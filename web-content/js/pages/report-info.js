@@ -67,9 +67,10 @@ hwc.define([
                         type: "GET",
                     }).done(function (res) {
                         if (res === "false")
-                            $.Browser.JQ("#user-info").text("Ospite")
+                            $.Browser.JQ("#user-info").text("Nome:Ospite")
                         else
                             $.Browser.JQ("#user-info").text(res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
+
                     });
 
                     /*
