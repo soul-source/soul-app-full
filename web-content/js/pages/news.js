@@ -40,7 +40,7 @@ hwc.define([
                                             );
                                     
                                     $.Browser.JQ("#news-post-" + cnt + " .hwc-news-content").replaceWith(
-                                            decodeURI(e.records.soul_dbnewsarticle.val)
+                                            e.records.soul_dbnewsarticle.val
                                     );
                                     cnt++;
                                 });
