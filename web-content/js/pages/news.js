@@ -26,13 +26,11 @@ hwc.define([
                         //context: document.getElementById("test")
                     }).done(function (res) {
                         console.log(res);
-                        //$.Browser.JQ("body").append(res);
-      
+
                         $.Browser.Loader.load("soul/news-post.html").then(function (content) {
                             content = content[0];
                             var cnt = 0;
                             try {
-                                console.log(res);
                                 res.table.forEach(function (e) {
                                     $.Browser.JQ("#news-container").append(
                                             '<div id="news-post-' + cnt + '">' + content + '</div>'
@@ -45,10 +43,13 @@ hwc.define([
                                     $.Browser.JQ("#news-post-" + cnt + " .hwc-news-content").replaceWith(
                                             e.records.soul_dbnewsarticle.val
                                     );
+
+                                    $.Browser.JQ("#news-post-" + cnt + " #auth-name").replaceWith(
+                                            e.records.soul_dbusername.val+" "+e.records.soul_dbuserlast_name.val
+                                    );
+
                                     cnt++;
                                 });
-                                 $.Browser.JQ(content[0]);
-                            $.Browser.JQ("#auth-name").text("pd");
                             } catch (e) {
                                 console.log(e.stack);
                             }
