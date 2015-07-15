@@ -59,7 +59,9 @@ hwc.define([
                                 type: "POST",
                                 data: data
                             }).done(function (res) {
-                                if(res !== "false") {
+                                if(isNaN(res)) {
+                                    alert("E' avvenuto un errore!");
+                                } else {
                                     var id=res;
                                     $.Browser.Router.I().navigate({component: "report-info",path:id,params: {state:1}});
                                 }
