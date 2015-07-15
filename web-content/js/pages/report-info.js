@@ -81,6 +81,7 @@ hwc.define([
                         type: "GET",
                     }).done(function (res) {
                         if (res === "false")
+                            $.Browser.JQ("#comment-1").text("Nessun commento");
                             return null;
 
                         var y = $.Browser.JQ("#comment-1");
