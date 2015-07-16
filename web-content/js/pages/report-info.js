@@ -81,10 +81,12 @@ hwc.define([
                         url: "RestApi?table=comments&type=list&id=" + id,
                         type: "GET"
                     }).done(function (res) {
-                        if (res === "false")
-                            $.Browser.JQ("#comment-1").text("Nessun commento");
+                        if (res === "false") {
+                            $.Browser.JQ("#comment-list").append("Nessun commento");
                             return null;
+                        }
 
+                        $.Browser.JQ("#comment-1").show();
                         var y = $.Browser.JQ("#comment-1");
                         res.table.forEach(function (v, idx) {
                             var b = y.find("b");
