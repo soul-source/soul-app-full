@@ -67,9 +67,9 @@ hwc.define([
                         type: "GET",
                     }).done(function (res) {
                         if (res === "false")
-                            $.Browser.JQ("#user-info").text("Nome:Ospite")
+                            $.Browser.JQ("#user-info").text("Utente: Ospite")
                         else
-                            $.Browser.JQ("#user-info").text(res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
+                            $.Browser.JQ("#user-info").text("Utente: "+res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
 
                     });
 
@@ -78,7 +78,7 @@ hwc.define([
                      */
                     jq.ajax({
                         url: "RestApi?table=comments&type=list&id=" + id,
-                        type: "GET",
+                        type: "GET"
                     }).done(function (res) {
                         if (res === "false")
                             $.Browser.JQ("#comment-1").text("Nessun commento");
@@ -126,7 +126,7 @@ hwc.define([
                                 $.Browser.Router.I().refresh();
                             }
                         });
-                    })
+                    });
 
                 });
 

@@ -24,13 +24,14 @@ hwc.define([
                         dataType: "json",
                         //context: document.getElementById("test")
                     }).done(function (res) {
-                        //console.log(res);
+                        console.log(res);
 
                         var div = jq("#report-element-1");
                         res.table.forEach(function (v, idx) {
 
                             var descr = div.find(".report-descr");
-                            descr.text(v.records.soul_dbemergency_subtypename.val);
+                            var d=v.records.soul_dbreportdescription.val;
+                            descr.text(v.records.soul_dbemergency_subtypename.val+ (d ? " - "+d.substring(0,10)+"..." : ""));
                             $.Browser.Router.I().setRoute(descr[0], {component: "report-info", path: v.records.soul_dbreportid_report.val})
                             div.find(".report-zone").text(v.records.soul_dbreportplace.val);
                             div.find(".report-priority").text(v.records.soul_dbemergency_subtypepriority_level.val);
