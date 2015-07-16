@@ -19,11 +19,11 @@ public class PropConnection {
     public PropConnection() {
         prop = new Properties();
 
+        String path=FileSystem.getWorkingPath()+"properties/connection.properties";
         try {
-            String path=FileSystem.getWorkingPath()+"properties/connection.properties";
             prop.load(new FileInputStream(new File(path)));
         } catch (IOException ioe) {
-            JOptionPane.showMessageDialog(null, "Configuration file not found", "Warning", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null, "Configuration file not found on path: "+path, "Warning", JOptionPane.WARNING_MESSAGE);
             System.exit(0);
         }
     }

@@ -90,4 +90,12 @@ public class HandlerCommentsQuery extends MyQueryHandler {
         return this.executeStatement(ps);
 
     }
+    
+    public PreparedStatement deleteComment(int id) {
+        String query = "DELETE FROM comment WHERE id_comment="+id;
+
+        PreparedStatement ps = this.getStatement(query);
+
+        return this.executeStatement(ps);
+    }
 }
