@@ -45,13 +45,15 @@ hwc.define([
                         var form = jq(this);
                         var url = form.attr('action');
 
+                        var picData = jq('#show-picture').attr('src');
+
                         var data = {
                             address: jq("#address").val(),
                             addressLat: jq("#address-lat").val(),
                             addressLong: jq("#address-long").val(),
                             reportType: jq("#report-type").val(),
                             reportDescription: jq("#report-description").val(),
-                            picture: jq("#take-picture").val(),
+                            picture: picData || null
                         };
 
 
@@ -78,50 +80,19 @@ hwc.define([
         }),
         $.private({
             imgUpload: function () {
-                var takePicture = document.querySelector("#take-picture"),
-                    showPicture = document.querySelector("#show-picture");
+                var jq = $.Browser.JQ;
 
-                if (takePicture && showPicture) {
-                    // Set events
-                    takePicture.onchange = function (event) {
-                        // Get a reference to the taken picture or chosen file
-                        var files = event.target.files,
-                            file;
-                        if (files && files.length > 0) {
-                            file = files[0];
-                            try {
-                                // Get window.URL object
-                                var URL = window.URL || window.webkitURL;
+                imageIsLoaded = function (e) {
+                    jq('#show-picture').attr('src', e.target.result);
+                };
 
-                                // Create ObjectURL
-                                var imgURL = URL.createObjectURL(file);
-
-                                // Set img src to ObjectURL
-                                showPicture.src = imgURL;
-
-                                // Revoke ObjectURL
-                                URL.revokeObjectURL(imgURL);
-                            }
-                            catch (e) {
-                                try {
-                                    // Fallback if createObjectURL is not supported
-                                    var fileReader = new FileReader();
-                                    fileReader.onload = function (event) {
-                                        showPicture.src = event.target.result;
-                                    };
-                                    fileReader.readAsDataURL(file);
-                                }
-                                catch (e) {
-                                    //
-                                    var error = document.querySelector("#error");
-                                    if (error) {
-                                        error.innerHTML = "Neither createObjectURL or FileReader are supported";
-                                    }
-                                }
-                            }
-                        }
-                    };
-                }
+                jq("#take-picture").change(function () {
+                    if (this.files && this.files[0]) {
+                        var reader = new FileReader();
+                        reader.onload = imageIsLoaded;
+                        reader.readAsDataURL(this.files[0]);
+                    }
+                });
             },
             checkLocation: function () {
                 var jq = $.Browser.JQ;

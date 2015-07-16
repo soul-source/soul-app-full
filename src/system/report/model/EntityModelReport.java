@@ -58,7 +58,8 @@ public class EntityModelReport extends MyEntityModel {
             NUMERO_COMMENTI,
             DATA_PUBBLICAZIONE,
             LUOGO,
-            ID_SOTTOTIPO;
+            ID_SOTTOTIPO,
+            IMAGE;
 
     protected EntityModelReport() {
         super("report"); // table
@@ -69,7 +70,8 @@ public class EntityModelReport extends MyEntityModel {
                 DATA_PUBBLICAZIONE = new RestrictedField("publication_date", "Data pubblicazione", this, PermissionsTypes.readOnly()),
                 LUOGO = new VisualName("place", "Luogo", this),
                 COORDINATE = new VisualName("coordinates", "Coordinate", this),
-                ID_SOTTOTIPO = new RelField("id_subtype", this, EntityModelSubtype.WithRel.I().ID_SOTTOTIPO)
+                ID_SOTTOTIPO = new RelField("id_subtype", this, EntityModelSubtype.WithRel.I().ID_SOTTOTIPO),
+                IMAGE = new HiddenField("image", this)
         );
     }
 

@@ -34,7 +34,7 @@ hwc.define([
                      */
                     jq.ajax({
                         url: "RestApi?table=report&type=single&id=" + id,
-                        type: "GET",
+                        type: "GET"
                     }).done(function (res) {
                         console.log(res);
                         $.Browser.JQ("#emergency-subtype-name").text(res.table[0].records.soul_dbemergency_subtypename.val);
@@ -54,6 +54,7 @@ hwc.define([
                             }
                         });
 
+                        $.Browser.JQ("#hwc-report-img").attr("src",res.table[0].records.soul_dbreportimage.val);
                         $.Browser.JQ("#report-descr").text(res.table[0].records.soul_dbreportdescription.val);
                         $.Browser.JQ("#zone").text(res.table[0].records.soul_dbreportplace.val);
                         $.Browser.JQ("#priority").text(res.table[0].records.soul_dbemergency_subtypepriority_level.val);
@@ -64,7 +65,7 @@ hwc.define([
                      */
                     jq.ajax({
                         url: "RestApi?table=report&type=user-info&id=" + id,
-                        type: "GET",
+                        type: "GET"
                     }).done(function (res) {
                         if (res === "false")
                             $.Browser.JQ("#user-info").text("Utente: Ospite")

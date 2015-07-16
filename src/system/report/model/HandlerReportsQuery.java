@@ -46,8 +46,8 @@ public class HandlerReportsQuery extends MyQueryHandler {
     public PreparedStatement insertReport(String address, String reportType, String reportDescription, String picture,
             String geoloc, Date date) {
 
-        String query = "INSERT INTO report (coordinates, description, publication_date, place, id_subtype)"
-                + "VALUES(?,?,?,?,?)";
+        String query = "INSERT INTO report (coordinates, description, publication_date, place, id_subtype, image)"
+                + "VALUES(?,?,?,?,?,?)";
 
         PreparedStatement ps = this.getStatement(query);
         try {
@@ -56,6 +56,7 @@ public class HandlerReportsQuery extends MyQueryHandler {
             ps.setDate(3, date);
             ps.setString(4, address);
             ps.setInt(5, Integer.parseInt(reportType));
+            ps.setString(6, picture);
         } catch (SQLException ex) {
             Logger.getLogger(HandlerReportsQuery.class.getName()).log(Level.SEVERE, null, ex);
         }
