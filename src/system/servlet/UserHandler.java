@@ -33,7 +33,7 @@ public class UserHandler {
         return uRs;
     }
 
-    public static void handleUserPut(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException{
+    public static void handleUserPut(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException {
         switch (type) {
             case "update-profile":
                 UserSession us = getValidSession(req);
@@ -65,7 +65,7 @@ public class UserHandler {
         }
     }
 
-    public static void handleUserPost(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException{
+    public static void handleUserPost(HttpServletRequest req, HttpServletResponse resp, String type) throws IOException {
         switch (type) {
             case "session":
                 boolean isValid = getValidSession(req) != null;
@@ -124,7 +124,10 @@ public class UserHandler {
         }
 
         HandlerUserQuery uQuery = new HandlerUserQuery(EntityModelUser.I());
-        uQuery.deleteUser(us.getUserId());
+        if (!uQuery.deleteUser(us.getUserId())) {
+            resp.getWriter().write("false");
+        }
+
     }
 
     public static UserSession getValidSession(HttpServletRequest req) {

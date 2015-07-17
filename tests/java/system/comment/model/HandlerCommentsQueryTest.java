@@ -88,7 +88,7 @@ public class HandlerCommentsQueryTest {
         System.out.println("loadComment");
         HandlerCommentsQuery handle = new HandlerCommentsQuery();
 
-        String id = "1";
+        String id = "25";
         ArrayList<RecordSet> res = new ArrayList<>(handle.loadData("`comment`.`id_report`=" + id).getRecords());
         assertTrue(!res.isEmpty());
     }

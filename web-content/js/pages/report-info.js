@@ -54,7 +54,9 @@ hwc.define([
                             }
                         });
 
-                        $.Browser.JQ("#hwc-report-img").attr("src",res.table[0].records.soul_dbreportimage.val);
+                        if (res.table[0].records.soul_dbreportimage.val)
+                            $.Browser.JQ("#hwc-report-img").attr("src", res.table[0].records.soul_dbreportimage.val);
+
                         $.Browser.JQ("#report-descr").text(res.table[0].records.soul_dbreportdescription.val);
                         $.Browser.JQ("#zone").text(res.table[0].records.soul_dbreportplace.val);
                         $.Browser.JQ("#priority").text(res.table[0].records.soul_dbemergency_subtypepriority_level.val);
@@ -70,7 +72,7 @@ hwc.define([
                         if (res === "false")
                             $.Browser.JQ("#user-info").text("Utente: Ospite")
                         else
-                            $.Browser.JQ("#user-info").text("Utente: "+res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
+                            $.Browser.JQ("#user-info").text("Utente: " + res.table[0].records.soul_dbusername.val + " " + res.table[0].records.soul_dbuserlast_name.val);
 
                     });
 
@@ -110,12 +112,16 @@ hwc.define([
                         /* stop form from submitting normally */
                         event.preventDefault();
 
+                        var comment = jq("#new-comment").val();
+                        if (!comment)
+                            return;
+
                         /* get some values from elements on the page: */
                         var form = jq(this);
                         var url = form.attr('action');
 
                         var data = {
-                            comment: jq("#new-comment").val(),
+                            comment: comment,
                             idReport: id
                         };
 

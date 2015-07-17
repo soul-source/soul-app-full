@@ -24,6 +24,7 @@ hwc.define([
                     var id = $.Browser.Cookie.get("user-id");
                     var jq = $.Browser.JQ;
 
+                    // CANCELLAZIONE UTENTE
                     $.Browser.EventHandler.setEventListner("#profile-delete", "click", function () {
 
                         var reply = confirm("Vuoi davvero cancellare il tuo account?");
@@ -37,7 +38,12 @@ hwc.define([
                                 headers: {
                                     "X-HTTP-Method-Override": "DELETE"
                                 }
-                            }).done(function () {
+                            }).done(function (res) {
+                                if (res === "false") {
+                                    alert("E' avvenuto un errore, contattare l'amministratore");
+                                    return;
+                                }
+
                                 SOUL.Main.kick();
                             });
                         }

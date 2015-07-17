@@ -71,9 +71,11 @@ public class HandlerUserQuery extends MyQueryHandler {
     }
 
     public boolean deleteUser(int id) {
-        String query = "DELETE FROM user WHERE id_user= " + id;
+        String query = "DELETE FROM user_report_rel WHERE user_id_user=" + id+";"
+               + "DELETE FROM comment WHERE id_user=" + id+";"
+               + "DELETE FROM user WHERE id_user= " + id+";";
 
-        if (this.execute(query) != null) {
+        if (this.executeStatement(query) != null) {
             return true;
         }
 
