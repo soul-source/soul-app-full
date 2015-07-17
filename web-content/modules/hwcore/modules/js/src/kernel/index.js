@@ -20,28 +20,29 @@ if (!Array.prototype.indexOf) {
 }
 
 if (!Function.prototype.bind) {
-  Function.prototype.bind = function(oThis) {
-    if (typeof this !== 'function') {
-      // closest thing possible to the ECMAScript 5
-      // internal IsCallable function
-      throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
-    }
+    Function.prototype.bind = function (oThis) {
+        if (typeof this !== 'function') {
+            // closest thing possible to the ECMAScript 5
+            // internal IsCallable function
+            throw new TypeError('Function.prototype.bind - what is trying to be bound is not callable');
+        }
 
-    var aArgs   = Array.prototype.slice.call(arguments, 1),
-        fToBind = this,
-        fNOP    = function() {},
-        fBound  = function() {
-          return fToBind.apply(this instanceof fNOP && oThis
-                 ? this
-                 : oThis,
-                 aArgs.concat(Array.prototype.slice.call(arguments)));
-        };
+        var aArgs = Array.prototype.slice.call(arguments, 1),
+            fToBind = this,
+            fNOP = function () {
+            },
+            fBound = function () {
+                return fToBind.apply(this instanceof fNOP && oThis
+                    ? this
+                    : oThis,
+                    aArgs.concat(Array.prototype.slice.call(arguments)));
+            };
 
-    fNOP.prototype = this.prototype;
-    fBound.prototype = new fNOP();
+        fNOP.prototype = this.prototype;
+        fBound.prototype = new fNOP();
 
-    return fBound;
-  };
+        return fBound;
+    };
 }
 
 var HwcBootstrap = (function () {
@@ -51,14 +52,19 @@ var HwcBootstrap = (function () {
     var pub = Obj.prototype;
     var pub_static = Obj;
 
-    var defRoot = "../../../../../";   // private static
+    // private static
+    var defCore = "../../../../";
+    var defRoot = defRoot + "../";
     /**
      * 
      * Data attributes
      */
     var abAttr = "data-hwc-after-boot"; // after boot attribute name
     var rootPathAttr = "data-hwc-path-root";
+    var corePathAttr = "data-hwc-path-core";
+    // attribute to auto-initialize hwcore 
     var autoAttr = "data-hwc-auto-init";
+    // using this attribute instead you must call hwc.init function manually
     var manualAttr = "data-hwc-manual-init";
 
     var __include = function () {
@@ -73,7 +79,7 @@ var HwcBootstrap = (function () {
         obj.define = function (module) {
             return that.define(includes, module);
         };
-        
+
         obj.defineFn = function (module) {
             return that.defineFn(includes, module);
         };
@@ -103,7 +109,7 @@ var HwcBootstrap = (function () {
              * document.currentScript, please use the after-boot option or defineFn
              * and include libraries using hwc.include
              */
-            if (document.currentScript) {
+            if (this.isInBrowser() && document.currentScript) {
                 if (!document.currentScript.src) {
                     // this is the case of modules defined inside a <script> tag
                     // without using a file
@@ -152,7 +158,7 @@ var HwcBootstrap = (function () {
             return this.__pendingFunc;
         },
         defineFn: function () {
-            if (!this.__rdefine) {
+            if (!this.__core || !this.__core.Loader) {
                 this.__pendingFunc.push(arguments);
             } else {
                 switch (arguments.length) {
@@ -165,7 +171,7 @@ var HwcBootstrap = (function () {
                         var that = this;
                         this.__core.Loader.load(inc)
                             .then(function () {
-                                def.call(that.__core);
+                                def.apply(that.__core, arguments);
                             });
                         break;
                     default:
@@ -173,7 +179,21 @@ var HwcBootstrap = (function () {
                 }
             }
         },
-        init: null,
+        I: function () {
+            return this.__core.I();
+        },
+        getCoreClass: function () {
+            return this.__core;
+        },
+        isInBrowser: function () {
+            return typeof window !== "undefined";
+        },
+        /**
+         * will be override on node and when manually init
+         */
+        init: function () {
+            console.error("Cannot init! Is Core automatically initialized?");
+        },
         /*
          * Internal used
          */
@@ -199,10 +219,9 @@ var HwcBootstrap = (function () {
         }
     };
 
-
-    pub.setPaths = function (root) {
+    pub.setPaths = function (root, core) {
         this.defines.PATH_ROOT = root;
-        this.defines.PATH_CORE = root + "hwcore/";
+        this.defines.PATH_CORE = core || root + "hwcore/";
         this.defines.PATH_JS_SRC = this.defines.PATH_CORE + "modules/js/src/";
         this.defines.PATH_JS_KERNEL = this.defines.PATH_JS_SRC + "kernel/";
         this.defines.PATH_JS_LIB = this.defines.PATH_JS_SRC + "library/";
@@ -245,16 +264,23 @@ var HwcBootstrap = (function () {
 
         var currScript = this.getCurrentScriptTag() || {};
 
+        var corePath = currScript[corePathAttr] ||
+            window["HWCPATH_CORE"] ||
+            function () {
+                var prefix = currScript.src ? that.dirName(currScript.src) + "/" : "";
+                return prefix + defCore;
+            }();
+
+        corePath = this.qualifyURL(corePath);
+        corePath.slice(-1) != "/" && (corePath += "/"); // set last char
+
         var rootPath = currScript[rootPathAttr] ||
             window["HWCPATH_ROOT"] ||
-            function () {
-                var prefix = currScript.src ? that.dirName(currScript.src) + "/" : null;
-                return prefix + defRoot;
-            }();
+            (currScript.src ? that.dirName(currScript.src) + "/" + defRoot : corePath + "../");
 
         rootPath = this.qualifyURL(rootPath);
 
-        this.setPaths(rootPath);
+        this.setPaths(rootPath, corePath);
 
         // afterScript can be defined by script custom data attribute ( priority and suggested )
         // or using global const , otherwise the init process must be done manually later
@@ -287,17 +313,15 @@ var HwcBootstrap = (function () {
                         } catch (e) {
                             console.log(e.stack);
                         }
-                    }).then(function () {
-                        // run pending functions
-                        var defs = $.global.hwc.getPendingFunc();
-                        defs.forEach(function (args) {
-                            $.global.hwc.defineFn.apply($.global.hwc, args);
-                        });
                     });
                 });
             });
         }
 
+        /**
+         * 
+         * @param {function|string} afterScript : can be a path, a function name or a function
+         */
         var init = function (afterScript) {
             var script = document.createElement("script");
             script.type = "text/javascript";
@@ -323,17 +347,27 @@ var HwcBootstrap = (function () {
         if (!currScript[manualAttr]) {
             init(afterScript);
         } else {
-            window.hwc.init = init;
+            /**
+             * 
+             * @param {function|string} afterScript : can be a path, a function name or a function
+             * @returns window.hwc
+             */
+            window.hwc.init = function (afterScript) {
+                init(afterScript);
+                return window.hwc;
+            };
         }
     };
 
     pub.initNode = function () {
         var path = require("path");
         var rootPath = path.join(__dirname, defRoot);
+        var corePath = path.join(__dirname, defCore);
         // convert from relative to absolute
         rootPath = path.resolve(rootPath) + "/";
+        corePath = path.resolve(corePath) + "/";
 
-        this.setPaths(rootPath);
+        this.setPaths(rootPath, corePath);
 
         var requirejs = require(this.defines.PATH_CORE + 'modules/js/modules/requirejs/r/index.js').config({
             //Pass the top-level main.js/index.js require
@@ -346,12 +380,18 @@ var HwcBootstrap = (function () {
 
         var HWCore = requirejs(this.defines.PATH_JS_KERNEL + "Core.js");
         HWCore.const = global.hwc.const = this.defines;
-        return HWCore.I; // export default instance of hw-core
+        // export global hwc namespace
+        // you can use .I() to instantiate then
+        global.hwc.init = function (callback) {
+            HWCore.I(callback);
+            return global.hwc;
+        };
+        return global.hwc;
     };
 
     pub.init = function () {
         this.defines = {};
-        this.defines.IN_BROWSER = typeof window !== "undefined";
+        this.defines.IN_BROWSER = hwc.isInBrowser();
 
         if (this.defines.IN_BROWSER) {
             this.initBrowser();
